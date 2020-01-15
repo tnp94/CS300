@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage[margin=1in]{geometry}
+\usepackage{underscore}
+
+\titleformat{\section}
+{\huge \bfseries}
+{}
+{0em}
+{}[\titlerule]
+
+\titleformat{\subsection}
+{\LARGE \bfseries}
+{}
+{0em}
+{}
+
+\titleformat{\subsubsection}
+{\Large \bfseries}
+{$\bullet\;$}
+{0em}
+{}
+
+\renewcommand{\maketitle}{
+   \begin{center}
+      {\Huge \bfseries Test Plan}
+   \end{center}
+}
+
+\newlist{steps}{enumerate}{1}
+\setlist[steps, 1]{label = \underline{\hspace{2em}} Step \arabic*:}
+
+\setlength{\parindent}{0em}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+\subsection{Purpose and Scope}
+\subsection{Target Audience}
+\subsection{Terms and Definitions}
+
+\section{Test Plan Description}
+\subsection{Scope of Testing}
+\subsection{Testing Schedule}
+\subsection{Release Criteria}
+
+\section{Unit Testing}
+\subsection{Strategy}
+
+\section{Smoke Testing}
+\subsection{test 1}
+\subsection{test 2}
+\subsection{test 3}
+
+\section{System Testing}
+\subsection{test 1}
+\subsection{test 2}
+\subsection{test 3}
+
+\end{document}

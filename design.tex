@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage[margin=1in]{geometry}
+\usepackage{underscore}
+
+\titleformat{\section}
+{\huge \bfseries}
+{}
+{0em}
+{}[\titlerule]
+
+\titleformat{\subsection}
+{\LARGE \bfseries}
+{}
+{0em}
+{}
+
+\titleformat{\subsubsection}
+{\Large \bfseries}
+{$\bullet\;$}
+{0em}
+{}
+
+\renewcommand{\maketitle}{
+   \begin{center}
+      {\Huge \bfseries Design Document}
+   \end{center}
+}
+
+\newlist{steps}{enumerate}{1}
+\setlist[steps, 1]{label = \underline{\hspace{2em}} Step \arabic*:}
+
+\setlength{\parindent}{0em}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+\subsection{Purpose and Scope}
+\subsection{Target Audience}
+\subsection{Terms and Definitions}
+
+\section{Design Considerations}
+\subsection{Constraints and Dependencies}
+\subsection{Methodology}
+
+\section{System Overview}
+
+\section{System Architecture}
+Description of systems and subsystems.
+
+\section{Detailed System Design}
+
+\end{document}
