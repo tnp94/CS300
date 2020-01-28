@@ -13,13 +13,19 @@
 
 \titleformat{\subsection}
 {\LARGE \bfseries}
-{\thesubsection\ }
+{	\thesubsection\ }
 {0em}
 {}
 
 \titleformat{\subsubsection}
 {\Large \bfseries}
-{\thesubsubsection\ }
+{		\thesubsubsection\ }
+{0em}
+{}
+
+\titleformat{\part}
+{\Large \bfseries}
+{\bullet\ }
 {0em}
 {}
 
@@ -46,75 +52,204 @@ This document outlines the requirements for the ChocAn data processing software.
 The purpose of this document is to inform stakeholders of the plan of progression of the ChocAn data processing software. It will also address the functional and non-functional requirements and deliverables.
 
 \subsection{Target Audience}
-The target audience for this document are the stake holders of the product. Anyone holding interest in the use or development of the ChocAn software can use this document to view the proposed process.
+The target audience for this document are the stake holders of the product. Anyone holding an interest in the use or development of the ChocAn software can use this document to view the proposed process.
 
 \subsection{Terms and Definitions}
-Define any terms or acronyms you will be using in the remainder of this document
+This section contains terms or acronyms that are included throughout this document
+ChocAn - Chocoholics Anonymous
+Member - A subscriber to ChocAn who utilizes services from a provider
+Provider - Health care professional who provides services to ChocAn members
+Terminal - Computer interface that users interact with
+Interactive mode - A mode where the software allows operators to add, delete, or update members or providers
+Electronic Funds Transfer (EFT) - A file indicating the provider name and number and the amount to be transferred to the provider.
+Provider Directory - An alphabetically ordered list of service names and corresponding service codes and fees.
+
+
 
 \section{Product Overview}
-Give a high level description of the functionality of the project here. Describe the purpose of this section. It may be useful to give your definition of a user, a stake holder and a use case. If there are scope limitations to the project, i.e. things you will not be doing, or are not required to do, this is a good section to put those.
+The main purpose of designing this software is to help the company ChocAn provide customer management and classification management system. It also provides interface and data processing services for third-party companies. This software can help users read the information of membership cards and verify the reliability of their information. It will enable providers to provide their services and a report that records every service they offer to members. And at a fixed time each week, push related records and fees to customers. And it can provide all the information to the company's managers at any time, which can help them monitor the work of his suppliers. The communication software ChocAn terminal and EFT will be handled by third-party companies. Acme Accounting Services will handle all financial procedures.
 
 \subsection{Users and Stakeholders}
-Describe the purpose of this section. Only a few sentences are expected here.
-\subsubsection{Stakeholder 1}
-List the first stakeholder or class of stakeholders if necessary. Describe, exactly, their role in the development, deployment, use, maintenance, etc. of the software.
-\subsubsection{Stakeholder 2}
+The design and use of the software involves the interests of the three parties. They are ChocAn (Contractor , Manager, Providers, and Member), software developers, and third-party processing company EFT. 
+
+\subsubsection{ChocAn Contractor}
+Chris Gilmore is the contractor for this project. It represents the overall needs of ChocAn. We service ChocAn. We provide them with a customer management system to achieve different levels of service and treatment for users.
+
+\subsubsection{ChocAn Manager}
+As software managers, they will be allowed to use our software at any time to view service information provided by service providers on a weekly basis. Not only that, our software can use all the information to help managers determine a reasonable fee to pay the supplier. They can also view and update supplier and member information at any time.
+
+\subsubsection{ChocAn Providers}
+As service providers, they can read members' information through software, provide services to members, and create reports of the services they have done, and record them. To help them get the corresponding compensation.
+
+\subsubsection{ChocAn Members}
+As their members, they can enjoy the services of the company and know their own information. This information includes personal information and service information provided by service providers.
+
+\subsubsection{Software Developer}
+As a software developer, we will do our best to help the company produce an efficient and convenient management system. And to effectively maintain and update the software.And output valid and easy-to-handle data for third-party companies.
+
+\subsubsection{EFT Company }
+Get effective information generated by the software and help them run the software correctly. Provide reasonable and effective analysis.
+
+
 
 \subsection{Use Cases}
-Describe the purpose of this section. Only a few sentences are expected here.
+There following section details the primary use cases for the ChocAn data management software.
 
-\subsubsection{Use Case 1}
-Describe the first use case here. Be sure to explicitly identify the participants, human or otherwise, and explain their roles. Diagrams may be effective here, particularly a sequence diagram.
+\subsubsection{Input}
+Service providers, managers, and operators can enter and change information. Providers will input information pertaining to services provided. Managers will input information
 
-\subsubsection{Use Case 2}
+\subsubsection{Requesting and viewing information}
+Company managers can view complete information and settle fees by determining the number of services provided by service providers. If something goes wrong. You can request changes.
 
-\subsubsection{Use Case 3}
+\subsubsection{Member}
+As members, they can swipe to view their valid information and service history. When the card is swiped incorrectly, they will be asked to enter their card number. Not only that, they receive corresponding pushes every week.
+
+\subsubsection{Third-party Company}
+As a third-party company, they can obtain valid information from our software and process it with their own tools. Not only that, they can also help push weekly information.
+
+
+
 
 \section{Functional Requirements}
-Describe the purpose of this section and outline its contents. Only a few sentences are expected here. It may help to define a functional requirement.
+These functional requirements include provider and manager authentication, member validation, member service and billing history, invoicing provider fees, provider directory requests, accounting reports weekly and at managers request, weekly member and provider reports by email, weekly summary reports for managers, and member and provider management (adding, removing, editing). 
 
-\subsection{Functional Requirement 1}
-Describe the first functional requirement. This is the meat of the document, so be sure to use precise language. Include diagrams when appropriate.
+\subsection{Provider and Manager Authentication}
+Providers and managers will be able to log on to the data management software by providing their provider number.
 
-\subsubsection{Functional Requirement 1 Apects 1}
-It may be necessary to separate some of the larger functional requirements into several sub-requirements or requirement aspects.
+\subsection{Member Validation}
+A provider shall be able to identify a member using their card through a card reader. 
+\subsubsection{When the provider swipes a users identification card, the software will provide information about the user including their membership status.}
+\subsubsection{If the number is valid, the word VALIDATED is displayed.}
+\subsubsection{If the number is not valid, the words INVALID NUMBER is displayed.}
+\subsubsection{If fees are owed by the member, the words MEMBER SUSPENDED is displayed.}
+\subsubsection{This information is retrieved by the software from the ChocAn data center.}
 
-\subsubsection{Functional Requirement 1 Apects 2}
 
-\subsection{Functional Requirement 2}
-Describe the second functional requirement. This is the meat of the document, so be sure to use precise language. Include diagrams when appropriate.
+\subsection{Member Service and Billing History}
+The software shall provide a system in which tracks member service and billing history. When a provider completes a service with a member, they will swipe the members card to bring up the member information. Then, using the Provider Directory, they will enter the appropriate six-digit service code for the service provided. The software will display the service corresponding to the entered service code and ask the provider to confirm the service code. The provider can also enter comments about the service. If invalid information is entered, such as nonexistent service codes, the software will reject the input and provide and error. 
 
-\subsubsection{Functional Requirement 2 Apects 1}
-It may be necessary to separate some of the larger functional requirements into several sub-requirements or requirement aspects.
+Member Service entry:
+Current date and time (MM-DD-YYYY HH:MM:SS)
+Date service was provided (MM-DD-YYYY)
+Provider number (9 digits)
+Member number (9 digits)
+Service code (6 digits)
+Comments (100 characters) (optional)
 
-\subsubsection{Functional Requirement 2 Apects 2}
+\subsection{Provider Directory Requests}
+Providers and managers shall be able to request a report that contains all of the services available. These services will be ordered alphabetically by name and include the cost and codes for each service.
+
+\subsection{Weekly Reporting}
+Each week the software shall generate a series of reports. These reports can also be generated manually by a ChocAn manager. The types of reports generated include member, provider, EFT, and summary. To generate these reports the software shall aggregate all the data from that weeks service files.
+
+\subsubsection{Member Report}
+The user reports generated shall include member information, a list of services the member received that week, and details about those services. This report is only generated for members that received services that week. Service details include the type of service provided, the date of service, and the cost.
+   
+Member report properties
+Member name (25 Characters).
+Member number (9 digits).
+Member street address (35  characters).
+Member city (14 characters).
+Member state (2 letters).
+Member zip code (5 digits).
+For each service provided:
+Date of service (MM-DD-YYYY).
+Provider name (25 characters).
+Service Name (20 characters).
+
+\subsubsection{Provider Report}
+Each provider receives a provider report if they have billed ChocAn that week. The generated provider report will include information about the provider, the services they provided, and the total fees. This data will be reported in the order that the provider input it into the system. This report will ease verification of services for the provider. 
+
+Provider report properties:
+Provider name (25 Characters).
+Provider number (9 digits).
+Provider street address (35  characters).
+Provider city (14 characters).
+Provider state (2 letters).
+Provider zip code (5 digits).
+For each service provided:
+Date of service (MM-DD-YYYY).
+Date and time data were received by the computer (MM-DD-YYYY HH:MM:SS)
+Member Name (25 characters).
+Member number (9 digits)
+Service Code (6 digits)
+Fee to be paid (up to $999.99)
+Total number of consultations with members (3 digits)
+Total fee for the week (up to $99,999.99)
+
+\subsubsection{EFT Report}
+A report of all electronic fund transfers will be saved for each week to be verified by accounting.
+
+\subsubsection{Summary Report}
+The software shall generate a summary report for ChocAn managers that provides a snapshot of provider activity for the week. This report will contain a list of providers that provided consultations, the count of consultations per provider, and the total fee collected by each provider. The report shall include the total number of providers who collected fees, total number of services, and total fees collected.
+
+
+
+
+
+
 
 \section{Nonfunctional Requirements}
-Describe the purpose of this section and outline its contents. Only a few sentences are expected here. It may help to define a nonfunctional requirement.
+In this section of the document guidelines for development that are not specific to the physical code will be laid out. 
 
-\subsection{Nonfunctional Requirement 1}
-Describe the first Nonfunctional requirement. This is the meat of the document, so be sure to use precise language. Include diagrams when appropriate.
+\subsection{Each member and provider report must be written to its own file}
+Member and provider reports, as generated by functional requirement 3.7 and 3.8 respectively, must be written to its own file.
 
-\subsubsection{Nonfunctional Requirement 1 Apects 1}
-It may be necessary to separate some of the larger nonfunctional requirements into several sub-requirements or requirement aspects.
+\subsubsection{File naming}
+The name of each member and provider report should begin with the member name followed by the date of the report.
 
-\subsubsection{Nonfunctional Requirement 1 Apects 2}
+\subsection{Data formatting}
+Data saved for records and reports must be saved in the following formats
+\subsubsection{Members}
+Member name (25 Characters).
+Member number (9 digits).
+Member street address (35  characters).
+Member city (14 characters).
+Member state (2 letters).
+Member zip code (5 digits).
+For each service provided:
+Date of service (MM-DD-YYYY).
+Provider name (25 characters).
+Service Name (20 characters).
 
-\subsection{Nonfunctional Requirement 2}
-Describe the second nonfunctional requirement. This is the meat of the document, so be sure to use precise language. Include diagrams when appropriate.
+\subsubsection{Providers}
+Provider name (25 Characters).
+Provider number (9 digits).
+Provider street address (35  characters).
+Provider city (14 characters).
+Provider state (2 letters).
+Provider zip code (5 digits).
+For each service provided:
+Date of service (MM-DD-YYYY).
+Date and time data were received by the computer (MM-DD-YYYY HH:MM:SS)
+Member Name (25 characters).
+Member number (9 digits)
+Service Code (6 digits)
+Fee to be paid (up to $999.99)
+Total number of consultations with members (3 digits)
+Total fee for the week (up to $99,999.99)
 
-\subsubsection{Nonfunctional Requirement 2 Apects 1}
-It may be necessary to separate some of the larger nonfunctional requirements into several sub-requirements or requirement aspects.
+\subsection{Usability}
+The program should show content through clear menus, input through the keyboard, and easy browsing with the mouse.
 
-\subsubsection{Nonfunctional Requirement 2 Apects 2}
+
+
 
 \section{Milestones and Deliverables}
-Describe the purpose of this section and outline its contents. Describe the milestones on a high level. Include a description of your workflow plan. A Gantt chart may be beneficial here.
+This section describes the milestones and progress that will be met with deadlines.
 
-\subsection{Milestone/Deliverable 1}
-Explain what this milestone consists of. Identify the deliverable or deliverables that will be produced at this milestone. Generally describe what work will be done leading up to the conclusion of this milestone.
 
-\subsubsection{Milestone/Deliverable 1 Stage 2}
-Some of the larger milestones may be broken up into stages. Explain what is involved in this stage and what deliverable will be produced at the end of this stage.
+\subsection{Requirements Document}
+This requirements document will be delivered January 27th, 2020
+
+\subsection{Design Template}
+A design template will be delivered by February 10, 2020
+
+\subsection{Test Plan}
+An outline of the tests that will be run to ensure the efficacy of the final product by February 24, 2020
+
+\subsection{Final Deliverables}
+The first prototype will be delivered by March 13, 2020
+
 
 \end{document}
