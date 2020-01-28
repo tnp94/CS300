@@ -5,29 +5,6 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{underscore}
 
-\titleformat{\section}
-{\huge \bfseries}
-{\thesection\ }
-{0em}
-{}[\titlerule]
-
-\titleformat{\subsection}
-{\LARGE \bfseries}
-{	\thesubsection\ }
-{0em}
-{}
-
-\titleformat{\subsubsection}
-{\Large \bfseries}
-{		\thesubsubsection\ }
-{0em}
-{}
-
-\titleformat{\part}
-{\Large \bfseries}
-{\bullet\ }
-{0em}
-{}
 
 \renewcommand{\maketitle}{
    \begin{center}
@@ -56,14 +33,15 @@ The target audience for this document are the stake holders of the product. Anyo
 
 \subsection{Terms and Definitions}
 This section contains terms or acronyms that are included throughout this document
-ChocAn - Chocoholics Anonymous
-Member - A subscriber to ChocAn who utilizes services from a provider
-Provider - Health care professional who provides services to ChocAn members
-Terminal - Computer interface that users interact with
-Interactive mode - A mode where the software allows operators to add, delete, or update members or providers
-Electronic Funds Transfer (EFT) - A file indicating the provider name and number and the amount to be transferred to the provider.
-Provider Directory - An alphabetically ordered list of service names and corresponding service codes and fees.
-
+\begin{itemize}
+\item ChocAn - Chocoholics Anonymous
+\item Member - A subscriber to ChocAn who utilizes services from a provider
+\item Provider - Health care professional who provides services to ChocAn members
+\item Terminal - Computer interface that users interact with
+\item Interactive mode - A mode where the software allows operators to add, delete, or update members or providers
+\item Electronic Funds Transfer (EFT) - A file indicating the provider name and number and the amount to be transferred to the provider.
+\item Provider Directory - An alphabetically ordered list of service names and corresponding service codes and fees.
+\end{itemize}
 
 
 \section{Product Overview}
@@ -118,23 +96,27 @@ Providers and managers will be able to log on to the data management software by
 
 \subsection{Member Validation}
 A provider shall be able to identify a member using their card through a card reader. 
-\subsubsection{When the provider swipes a users identification card, the software will provide information about the user including their membership status.}
-\subsubsection{If the number is valid, the word VALIDATED is displayed.}
-\subsubsection{If the number is not valid, the words INVALID NUMBER is displayed.}
-\subsubsection{If fees are owed by the member, the words MEMBER SUSPENDED is displayed.}
-\subsubsection{This information is retrieved by the software from the ChocAn data center.}
+\subsubsection{Member Identification}
+When the provider swipes a users identification card, the software will provide information about the user including their membership status.
+\subsubsection{Member Validation}
+If the number is valid, the word VALIDATED is displayed.
+If the number is not valid, the words INVALID NUMBER is displayed.
+If fees are owed by the member, the words MEMBER SUSPENDED is displayed.
+This information is retrieved by the software from the ChocAn data center.
 
 
 \subsection{Member Service and Billing History}
 The software shall provide a system in which tracks member service and billing history. When a provider completes a service with a member, they will swipe the members card to bring up the member information. Then, using the Provider Directory, they will enter the appropriate six-digit service code for the service provided. The software will display the service corresponding to the entered service code and ask the provider to confirm the service code. The provider can also enter comments about the service. If invalid information is entered, such as nonexistent service codes, the software will reject the input and provide and error. 
 
-Member Service entry:
-Current date and time (MM-DD-YYYY HH:MM:SS)
-Date service was provided (MM-DD-YYYY)
-Provider number (9 digits)
-Member number (9 digits)
-Service code (6 digits)
-Comments (100 characters) (optional)
+\subsubsection{Member Service entry:}
+\begin{enumerate}
+\item Current date and time (MM-DD-YYYY HH:MM:SS)
+\item Date service was provided (MM-DD-YYYY)
+\item Provider number (9 digits)
+\item Member number (9 digits)
+\item Service code (6 digits)
+\item Comments (100 characters) (optional)
+\end{enumerate}
 
 \subsection{Provider Directory Requests}
 Providers and managers shall be able to request a report that contains all of the services available. These services will be ordered alphabetically by name and include the cost and codes for each service.
@@ -143,40 +125,43 @@ Providers and managers shall be able to request a report that contains all of th
 Each week the software shall generate a series of reports. These reports can also be generated manually by a ChocAn manager. The types of reports generated include member, provider, EFT, and summary. To generate these reports the software shall aggregate all the data from that weeks service files.
 
 \subsubsection{Member Report}
-The user reports generated shall include member information, a list of services the member received that week, and details about those services. This report is only generated for members that received services that week. Service details include the type of service provided, the date of service, and the cost.
-   
-Member report properties
-Member name (25 Characters).
-Member number (9 digits).
-Member street address (35  characters).
-Member city (14 characters).
-Member state (2 letters).
-Member zip code (5 digits).
-For each service provided:
-Date of service (MM-DD-YYYY).
-Provider name (25 characters).
-Service Name (20 characters).
+The user reports generated shall include member information, a list of services the member received that week, and details about those services. This report is only generated for members that received services that week. Service details include the type of service provided, the date of service, and the cost. the member report will have the following properties:
+\begin{itemize}
+\item Member name (25 Characters).
+\item Member number (9 digits).
+\item Member street address (35  characters).
+\item Member city (14 characters).
+\item Member state (2 letters).
+\item Member zip code (5 digits).
+\item For each service provided:
+\begin{itemize}
+\item Date of service (MM-DD-YYYY).
+\item Provider name (25 characters).
+\item Service Name (20 characters).
+\end{itemize}
+\end{itemize}
 
 \subsubsection{Provider Report}
-Each provider receives a provider report if they have billed ChocAn that week. The generated provider report will include information about the provider, the services they provided, and the total fees. This data will be reported in the order that the provider input it into the system. This report will ease verification of services for the provider. 
-
-Provider report properties:
-Provider name (25 Characters).
-Provider number (9 digits).
-Provider street address (35  characters).
-Provider city (14 characters).
-Provider state (2 letters).
-Provider zip code (5 digits).
-For each service provided:
-Date of service (MM-DD-YYYY).
-Date and time data were received by the computer (MM-DD-YYYY HH:MM:SS)
-Member Name (25 characters).
-Member number (9 digits)
-Service Code (6 digits)
-Fee to be paid (up to $999.99)
-Total number of consultations with members (3 digits)
-Total fee for the week (up to $99,999.99)
-
+Each provider receives a provider report if they have billed ChocAn that week. The generated provider report will include information about the provider, the services they provided, and the total fees. This data will be reported in the order that the provider input it into the system. This report will ease verification of services for the provider. The provider report will have the following properties:
+\begin{itemize}
+\item Provider name (25 Characters)
+\item Provider number (9 digits)
+\item Provider street address (35  characters)
+\item Provider city (14 characters)
+\item Provider state (2 letters)
+\item Provider zip code (5 digits)
+\item For each service provided:
+\begin{itemize}
+\item Date of service (MM-DD-YYYY)
+\item Date and time data were received by the computer (MM-DD-YYYY HH:MM:SS)
+\item Member Name (25 characters)
+\item Member number (9 digits)
+\item Service Code (6 digits)
+\item Fee to be paid (up to \$999.99)
+\item Total number of consultations with members (3 digits)
+\item Total fee for the week (up to \$99,999.99)
+\end{itemize}
+\end{itemize}
 \subsubsection{EFT Report}
 A report of all electronic fund transfers will be saved for each week to be verified by accounting.
 
@@ -201,33 +186,41 @@ The name of each member and provider report should begin with the member name fo
 \subsection{Data formatting}
 Data saved for records and reports must be saved in the following formats
 \subsubsection{Members}
-Member name (25 Characters).
-Member number (9 digits).
-Member street address (35  characters).
-Member city (14 characters).
-Member state (2 letters).
-Member zip code (5 digits).
-For each service provided:
-Date of service (MM-DD-YYYY).
-Provider name (25 characters).
-Service Name (20 characters).
+\begin{itemize}
+\item Member name (25 Characters).
+\item Member number (9 digits).
+\item Member street address (35  characters).
+\item Member city (14 characters).
+\item Member state (2 letters).
+\item Member zip code (5 digits).
+\item For each service provided:
+\begin{itemize}
+\item Date of service (MM-DD-YYYY).
+\item Provider name (25 characters).
+\item Service Name (20 characters).
+\end{itemize}
+\end{itemize}
 
 \subsubsection{Providers}
-Provider name (25 Characters).
-Provider number (9 digits).
-Provider street address (35  characters).
-Provider city (14 characters).
-Provider state (2 letters).
-Provider zip code (5 digits).
-For each service provided:
-Date of service (MM-DD-YYYY).
-Date and time data were received by the computer (MM-DD-YYYY HH:MM:SS)
-Member Name (25 characters).
-Member number (9 digits)
-Service Code (6 digits)
-Fee to be paid (up to $999.99)
-Total number of consultations with members (3 digits)
-Total fee for the week (up to $99,999.99)
+\begin{itemize}
+\item Provider name (25 Characters).
+\item Provider number (9 digits).
+\item Provider street address (35  characters).
+\item Provider city (14 characters).
+\item Provider state (2 letters).
+\item Provider zip code (5 digits).
+\item For each service provided:
+\begin{itemize}
+\item Date of service (MM-DD-YYYY).
+\item Date and time data were received by the computer (MM-DD-YYYY HH:MM:SS)
+\item Member Name (25 characters).
+\item Member number (9 digits)
+\item Service Code (6 digits)
+\item Fee to be paid (up to \$999.99)
+\item Total number of consultations with members (3 digits)
+\item Total fee for the week (up to \$99,999.99)
+\end{itemize}
+\end{itemize}
 
 \subsection{Usability}
 The program should show content through clear menus, input through the keyboard, and easy browsing with the mouse.
