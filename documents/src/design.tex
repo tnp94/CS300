@@ -38,6 +38,7 @@
 
 \maketitle
 \tableofcontents
+\pagebreak
 
 \section{Introduction}
 This design document mainly introduces the system and software design of this project. After analyzing all the requirements of this project, our team set out to establish the overall architecture of the entire system based on the requirements. After discussions between the teams, we chose this structure and added enough details in this design document  to have a reference basis in the future development process.This design document can effectively improve the development efficiency of the team and ensure the feasibility and integrity of the final product.
@@ -99,7 +100,7 @@ The system architecture will be split into three modules, the provider, interact
 \subsection{Person}
 \subsubsection{Member}
 \subsubsection{Provider}
-Member and Provider - Derived from abstract Person class
+Member and Provider - Derived from Person class
 
 \subsection{Service}
 Service - An individual service, the service information
@@ -133,8 +134,8 @@ ProviderDirectory - Table to generate services directory to look up service code
 The constructor will require all of the fields up front to verify that the data is valid. The object provides methods to set and get data fields. These setters and getters are used to update and view member data as well as generate reports. Most of the fields will be stored in C++ strings. ID and zip will be stored as unsigned integers. ID’s are 9 digits long so a standard 32 bit unsigned int will be sufficient.
 
 \subsubsection{Member: public Person}
+\textbf{structures:}
 \begin{itemize}
-   \item Data structures:
    \item bool suspended
 \end{itemize}
 \textbf{Functions:}
