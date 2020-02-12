@@ -1,4 +1,5 @@
-requirements.log
-requirements.synctex.gz
+*.log
+*.gz
 *.docx
-out/*
+out/chocan
+*.o
