@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{enumitem}
+\usepackage{hyperref}
 \usepackage{titlesec}
 \usepackage{titling}
 \usepackage[margin=1in]{geometry}
@@ -249,17 +250,29 @@ The InteractiveModule provides an interface for ChocAn data center employees to 
    \item int generateMemberReport(uint memberID)
 \end{itemize}
 The ManagerModule is where all the reports will be run from. It will provide functions to run reports on specific providers or members as well as running a weekly summary report. The generateWeeklyReports() method will run each Friday and run a report on every member and provider as well as the summary for that week. All the services will be read in from the database into a map C++ standard library data structure keyed on time added. Because map is implemented as a balanced tree, this allows efficient access to any given time frame and preserves order that the services were added to the system. Providers and members are loaded in from the database into the unordered_map so any Person can be retrieved in constant time. The algorithms to generate the reports are as follows:
-Provider Report - Find the provider information from the providers map and pass this person object to the base report method to generate a header for the report. Then filter the services tree to only include services from the last week and that are associated with the provider in question.
-Member Report - Same a Provider.
-Summary Report - Filter the services map to only include services from the last week. Create a local struct called Total with two fields, an int for service count and a float for total billing. Create a local unordered_map<uint, Total> where the key in the provider ID and the value is the running sum of the providers data. This map will be used to keep track of each unique provider encountered. Iterate over the filtered service map and for each service:
-get the provider ID
-try to find the provider in the unordered_map
-if found: dereference the iterator returned and increment the count and add the price for the current service to the totalBilling field in the struct
-else: create a new Total struct and set its count variable to one and its totalBilling field to the billing value. Add the key value pair of the providerID and the new Total struct to the unordered_map
-    Then iterate over the (key, value) pairs in the unordered_map. For each:
-Look up the provider’s name from the key and write it to the file
-Write the count and totalBilling variables to the file from the associated key
-Weekly Report - Run the Provider Report and Member Report for every provider and member in the unordered_maps. Then run the Summary Report.
+
+\begin{itemize}
+   \item Provider Report --- Find the provider information from the providers map and pass this person object to the base report method to generate a header for the report. Then filter the services tree to only include services from the last week and that are associated with the provider in question.
+   \item Member Report --- Same as Provider.
+   \item Summary Report --- Filter the services map to only include services from the last week. Create a local struct called Total with two fields, an int for service count and a float for total billing. Create a local unordered_map<uint, Total> where the key in the provider ID and the value is the running sum of the providers data. This map will be used to keep track of each unique provider encountered.
+
+      Iterate over the filtered service map and for each service:
+
+\begin{itemize}
+   \item get the provider ID
+   \item try to find the provider in the unordered_map
+   \item if found: dereference the iterator returned and increment the count and add the price for the current service to the totalBilling field in the struct
+   \item else: create a new Total struct and set its count variable to one and its totalBilling field to the billing value. Add the key value pair of the providerID and the new Total struct to the unordered_map
+\end{itemize}
+
+Then iterate over the (key, value) pairs in the unordered_map. For each:
+    
+\begin{itemize}
+   \item Look up the provider’s name from the key and write it to the file
+   \item Write the count and totalBilling variables to the file from the associated key
+   \item Weekly Report - Run the Provider Report and Member Report for every provider and member in the unordered_maps. Then run the Summary Report.
+\end{itemize}
+\end{itemize}
 
 \subsection{ProviderModule}
 \textbf{Data Structures:}
