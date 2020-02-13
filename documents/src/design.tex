@@ -4,24 +4,14 @@
 \usepackage{titling}
 \usepackage[margin=1in]{geometry}
 \usepackage{underscore}
-
-%\titleformat{\section}
-%{\huge \bfseries}
-%{}
-%{0em}
-%{}[\titlerule]
-%
-%\titleformat{\subsection}
-%{\LARGE \bfseries}
-%{}
-%{0em}
-%{}
-%
-%\titleformat{\subsubsection}
-%{\Large \bfseries}
-%{$\bullet\;$}
-%{0em}
-%{}
+\usepackage{graphicx}
+\graphicspath{{./resources/}{IR}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{}
+\chead{Austen Nelson --- Zhengmao Zhang --- Xiaoran Ge --- Xingjian Wang --- Michael Kay --- Thomas Pollard}
+\rhead{}
 
 \renewcommand{\maketitle}{
    \begin{center}
@@ -75,6 +65,13 @@ To implement the ChocAn data system the Object Oriented Programming (OOP) paradi
 
 \section{System Overview}
 The data processing system will be divided into three primary modules. Each of these modules are for the different modes that the software provides. These modes are provider, manager, and interactive.
+
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{SystemOverview.png}
+	\caption[System Overview]{System Overview}
+	\label{fig:P1compileP0-1}
+  \end{figure}
 
 Each of these modules will be represented as C++ class objects. The terminal used to simulate the usage of these API’s will ask which mode the user would like to simulate and then provide text based menus to access each of the functionalities.
 
