@@ -105,17 +105,48 @@ The system architecture will be split into three modules, the provider, interact
 Member and Provider - Derived from Person class
 
 \subsection{Service}
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.3\linewidth]{service.png}
+	\caption[Service]{Service}
+	\label{fig:P1compileP0-1}
+  \end{figure}
 Service - An individual service, the service information
 
 \subsection{InteractiveModule}
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.3\linewidth]{interactiveModule.png}
+	\caption[Interactive Module]{Interactive Module}
+	\label{fig:P1compileP0-1}
+  \end{figure}
 InteractiveModule - Contains the API to manage database contents (members and providers)
 
+\pagebreak
 \subsection{ManagerModule}
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.3\linewidth]{managerModule.png}
+	\caption[Manager Module]{Manager Module}
+	\label{fig:P1compileP0-1}
+  \end{figure}
 ManagerModule- Contains the API to run manager reports
 
 \subsection{ProviderModule}
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.3\linewidth]{providerModule.png}
+	\caption[Provider Module]{Provider Module}
+	\label{fig:P1compileP0-1}
+  \end{figure}
 ProviderModule - Contains the API to provide services and request service directory
 \subsubsection{ProviderDirectory}
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.3\linewidth]{providerDirectory.png}
+	\caption[Provider Directory]{Provider Directory}
+	\label{fig:P1compileP0-1}
+  \end{figure}
 ProviderDirectory - Table to generate services directory to look up service codes.
 
 \section{Detailed System Design}
