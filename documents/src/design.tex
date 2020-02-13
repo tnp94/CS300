@@ -100,9 +100,16 @@ The system architecture will be split into three modules, the provider, interact
   \end{figure}
 
 \subsection{Person}
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{1_person.png}
+	\caption[Person Object Architecture]{Person Object Architecture}
+	\label{fig:P1compileP0-1}
+  \end{figure}
 \subsubsection{Member}
+Derived from Person class but has an additional field for status.
 \subsubsection{Provider}
-Member and Provider - Derived from Person class
+Derived from Person class. Has no additional functionality but is a seperate class to anticipate changes to the Provider in the future.
 
 \subsection{Service}
 Service - An individual service, the service information
