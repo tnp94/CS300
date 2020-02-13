@@ -84,7 +84,6 @@ The following objects will be used:
    \item Provider --- A provider, the providers information
    \item Service --- An individual service, the service information
    \item ProviderDirectory --- Table to generate services directory to look up service codes
-   \item SummaryReport --- Generates and writes summary reports to disk.
    \item InteractiveModule --- Contains the API to manage database contents (members and providers)
    \item ManagerModule --- Contains the API to run manager reports
    \item ProviderModule --- Contains the API to provide services and request service directory
@@ -92,6 +91,13 @@ The following objects will be used:
 
 \section{System Architecture}
 The system architecture will be split into three modules, the provider, interactive, and manager module. The subsystem includes several objects. Some of these objects will be included in multiple of the software modules. The only objects with client side APIs are the ProviderModule, InteractiveModule, and ManagerModule. The rest of the objects API will be for internal usage only. The following chart shows the relationship between these objects. Dotted lines demonstrate multiple systems use the subsystem.
+
+  \begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{SystemOverview.png}
+	\caption[System Architecture]{System Architecture}
+	\label{fig:P1compileP0-1}
+  \end{figure}
 
 \subsection{Person}
 \subsubsection{Member}
