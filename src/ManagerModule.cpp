@@ -1,6 +1,33 @@
 #include "../include/ManagerModule.h"
+#include <iostream>
+
+using namespace std;
 
 int ManagerModule::init() {
+  cout << "\n\n\nWelcome to the manager's module\n\n";
+  int choice = 0;
+  while (choice != 4)
+  {
+    cout << "What is your purpose?\n\n"
+        << "1. \n"
+        << "2. \n"
+        << "3. \n"
+        << "4. Exit\n";
+    cin >> choice;
+    switch(choice)
+    {
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        break;
+      default:
+        cout << "You did not select a valid response\n\n";
+    }
+  }
 
    return 0;
 }
