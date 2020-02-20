@@ -2,7 +2,7 @@
 #define PROVIDER_H
 
 #include "Person.h"
-#include <String>
+#include <string>
 
 class Provider : public Person {
    public:
