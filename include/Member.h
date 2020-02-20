@@ -4,7 +4,7 @@
 #include "Person.h"
 #include <string>
 
-class Member: public Person{
+class Member: public Person {
 
    public:
       Member(
@@ -14,7 +14,7 @@ class Member: public Person{
             const std::string state,
             const uint zip
             );
-      ~Member();
+      //~Member();
 
    private:
       bool suspended;

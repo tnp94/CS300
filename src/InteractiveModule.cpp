@@ -50,3 +50,13 @@ int InteractiveModule::write_out() {
    return 0;
 }
 
+InteractiveModule::InteractiveModule()
+{
+
+}
+
+
+InteractiveModule::~InteractiveModule()
+{
+
+}

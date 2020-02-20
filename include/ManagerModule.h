@@ -19,6 +19,9 @@ class ManagerModule {
       int provider_report(uint provider_id);
       int member_report(uint provider_id);
 
+      ManagerModule();
+      ~ManagerModule();
+
    private:
 
       std::map<time_t, Service> service;

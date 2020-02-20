@@ -30,3 +30,14 @@ int ManagerModule::member_report(uint provider_id) {
 
    return 0;
 }
+
+ManagerModule::ManagerModule()
+{
+
+}
+
+
+ManagerModule::~ManagerModule()
+{
+
+}
