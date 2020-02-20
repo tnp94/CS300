@@ -4,7 +4,7 @@
 using namespace std;
 
 int ManagerModule::init() {
-  cout << "\n\n\nWelcome to the manager's module\n\n";
+  cout << "\n\n\nWelcome to the manager's terminal\n\n";
   int choice = 0;
   while (choice != 4)
   {
