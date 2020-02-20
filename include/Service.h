@@ -1,3 +1,6 @@
+#ifndef SERVICE_H
+#define SERVICE_H
+
 #include <ctime>
 #include <string>
 
@@ -29,3 +32,5 @@ class Service {
       uint service_code;
       std::string comments;
 };
+
+#endif

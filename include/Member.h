@@ -1,3 +1,6 @@
+#ifndef MEMBER_H
+#define MEMBER_H
+
 #include "Person.h"
 #include <string>
 
@@ -16,3 +19,5 @@ class Member: public Person{
    private:
       bool suspended;
 }
+
+#endif
