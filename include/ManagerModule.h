@@ -12,11 +12,15 @@
 
 class ManagerModule {
    public:
+      int init();
       int weekly_report();
       int summary_report();
       std::string person_report(Person& person);
       int provider_report(uint provider_id);
       int member_report(uint provider_id);
+
+      ManagerModule();
+      ~ManagerModule();
 
    private:
 

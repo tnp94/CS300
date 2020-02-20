@@ -4,7 +4,7 @@
 #include "Person.h"
 #include <string>
 
-class Member: public Person{
+class Member: public Person {
 
    public:
       Member(
