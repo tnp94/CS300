@@ -1,4 +1,8 @@
+#ifndef PROVIDER_MODULE
+#define PROVIDER_MODULE
+
 #include "Service.h"
+#include "ProviderDirectory.h"
 
 class ProviderModule{
   public:
@@ -11,4 +15,6 @@ class ProviderModule{
   private:
       ProviderDirectory directory;
       uint provider_id;
-}
+};
+
+#endif

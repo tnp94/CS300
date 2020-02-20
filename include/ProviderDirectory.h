@@ -6,9 +6,9 @@
 
 class ProviderDirectory {
    public:
-      int generateDirectory();
+      int generate_directory();
    private:
-      std::map<service, uint> services;
-}
+      std::map<Service, uint> services;
+};
 
 #endif
