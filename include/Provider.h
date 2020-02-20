@@ -7,10 +7,10 @@
 class Provider : public Person {
    public:
    Provider(
-      const std::String name,
+      const std::string name,
       const uint id,
-      const std::String city,
-      const std::String state,
+      const std::string city,
+      const std::string state,
       const uint zip
    );
 

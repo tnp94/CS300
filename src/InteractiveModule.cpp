@@ -5,12 +5,12 @@ int init() {
    return 0;
 }
 
-int display_member(uint member_id) {
+int add_member() {
 
    return 0;
 }
 
-int add_member() {
+int edit_member(uint member_id) {
 
    return 0;
 }
@@ -26,6 +26,11 @@ int display_member(uint member_id) {
 }
 
 int add_provider(uint provider_id) {
+
+   return 0;
+}
+
+int edit_provider(uint member_id) {
 
    return 0;
 }

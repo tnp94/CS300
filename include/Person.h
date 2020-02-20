@@ -5,25 +5,25 @@
 
 class Person {
    public:
-      std::String get_name();
-      std::String get_city();
-      std::String get_state();
+      std::string get_name();
+      std::string get_city();
+      std::string get_state();
       uint get_zip();
       uint get_id();
 
       Person(
-         const std::String name,
+         const std::string name,
          const uint id,
-         const std::String city,
-         const std::String state,
+         const std::string city,
+         const std::string state,
          const uint zip
       );
 
       ~Person();
    private:
-      std::String name;
-      std::String city;
-      std::String state;
+      std::string name;
+      std::string city;
+      std::string state;
       uint id;
       uint zip;
 };
