@@ -14,10 +14,10 @@ class Member: public Person{
             const std::string state,
             const uint zip
             );
-      ~member();
+      ~Member();
 
    private:
       bool suspended;
-}
+};
 
 #endif
