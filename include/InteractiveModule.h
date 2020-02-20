@@ -1,3 +1,6 @@
+#ifndef INTERACTIVEMODULE_H
+#define INTERACTIVEMODULE_H
+
 #include <unordered_map>
 #include "Member.h"
 #include "Provider.h"
@@ -23,3 +26,5 @@ class InteractiveModule {
       unordered_map<uint, Provider> providers;
 
 };
+
+#endif
