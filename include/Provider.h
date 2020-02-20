@@ -14,7 +14,9 @@ class Provider : public Person {
       const uint zip
    );
 
+    whats wrong();
    ~Provider();
    private:
+
 };
 #endif
