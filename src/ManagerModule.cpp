@@ -5,6 +5,7 @@ int ManagerModule::init() {
    return 0;
 }
 
+
 int ManagerModule::weekly_report() {
 
    return 0;
