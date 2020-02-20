@@ -1,5 +1,10 @@
 #include "../include/ManagerModule.h"
 
+int init() {
+
+   return 0;
+}
+
 int weekly_report() {
 
    return 0;

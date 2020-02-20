@@ -12,6 +12,7 @@
 
 class ManagerModule {
    public:
+      int init();
       int weekly_report();
       int summary_report();
       std::string person_report(Person& person);
