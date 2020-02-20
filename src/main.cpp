@@ -16,7 +16,7 @@ int main() {
 
    while (choice != 4)
    {
-      cout << "What terminal would you like to log into?\n"
+      cout << "\n\nWhat terminal would you like to log into?\n"
          << "1. Provider Module\n"
          << "2. Manager Module\n"
          << "3. Database Interactive Module\n"
@@ -49,6 +49,7 @@ int main() {
             cout << "You did not select a valid response\n\n";
       }
    }
+   cout << "\n\n\nThanks for playing!\n\n";
 
    return 0;
 }

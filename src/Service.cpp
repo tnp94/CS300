@@ -30,3 +30,14 @@ std::string Service::get_comments() const{
    std::string a_string;
    return a_string;
 }
+
+Service::Service(const uint member_id, const uint provider_id, const time_t date_added, const time_t service_date, const uint service_code, const std::string comment)
+{
+
+}
+
+Service::~Service()
+{
+
+}
+

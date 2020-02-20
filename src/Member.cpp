@@ -6,7 +6,7 @@ Member::Member(const std::string name, const uint member_id, const std::string c
 
 }
 
-Member::~Member()
+/*Member::~Member()
 {
 
-}
+}*/

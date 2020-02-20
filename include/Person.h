@@ -19,7 +19,7 @@ class Person {
          const uint zip
       );
 
-      ~Person();
+      /*virtual*/ ~Person();
    private:
       std::string name;
       std::string city;

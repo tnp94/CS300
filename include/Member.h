@@ -14,7 +14,7 @@ class Member: public Person {
             const std::string state,
             const uint zip
             );
-      ~Member();
+      //~Member();
 
    private:
       bool suspended;
