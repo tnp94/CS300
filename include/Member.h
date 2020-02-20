@@ -3,17 +3,14 @@
 
 class Member:public Person{
  public:
-  std::
+  Member(
+     const std::string name,
+     const uint member_id,
+     const std::string city,
+     const std::string state,
+     const uint zip
+     );
+  ~member();
+ private:
 bool suspended;
 }
-
-member(){
-member.name=st::;
-member.address=;
-member.city=;
-member.state=;
-member.zip=;
-member.id=;
-member.suspended= false;
-}
-
