@@ -29,6 +29,16 @@ int InteractiveModule::init() {
         break;
       case 4:
         break;
+      case 5:
+        break;
+      case 6:
+        break;
+      case 7:
+        break;
+      case 8:
+        break;
+      case 9:
+        break;
       default:
         cout << "You did not select a valid response\n\n";
     }
