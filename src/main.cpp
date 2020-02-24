@@ -46,6 +46,7 @@ int main() {
          case 4: // Exit
             break;
          default:
+            choice = 0;
             cout << "You did not select a valid response\n\n";
       }
    }
