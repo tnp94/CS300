@@ -17,6 +17,7 @@ class Member: public Person {
       //~Member();
       bool get_suspended();
       void set_suspended(bool suspended);
+      void display_info();
    
    private:
       bool suspended;
