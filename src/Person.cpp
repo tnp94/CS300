@@ -1,7 +1,7 @@
 #include "../include/Person.h"
 
 std::string Person::get_name(){
-    returen this->name;
+    return this->name;
 }
 
 std::string Person::get_city(){
@@ -9,7 +9,7 @@ std::string Person::get_city(){
 }
 
 std::string Person::get_state(){
-     return this->state:
+     return this->state;
  }
 
 uint Person::get_zip(){
