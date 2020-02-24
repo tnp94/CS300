@@ -10,7 +10,11 @@ class Person {
       std::string get_state();
       uint get_zip();
       uint get_id();
-
+      void set_name(std::string name);
+      void set_id(uint id);
+      void set_city(std::string city);
+      void set_state(std::string state);
+      void set_zip(uint zip);
       Person(
          const std::string name,
          const uint id,
