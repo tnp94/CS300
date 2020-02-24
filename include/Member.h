@@ -15,11 +15,8 @@ class Member: public Person {
             const uint zip
             );
       //~Member();
-      void SetName(std::string name);
-      void SetId();
-      void SetCity(std::string city);
-      void SetState(std::string state);
-      void SetZip(uint zip);
+      bool get_suspended();
+      void set_suspended(bool suspended);
    
    private:
       bool suspended;
