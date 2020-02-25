@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//init() : let user choose which function to use.
 int ManagerModule::init() {
   cout << "\n\n\nWelcome to the manager's terminal\n\n";
   int choice = 0, id_number;
@@ -37,15 +38,18 @@ int ManagerModule::init() {
    return 0;
 }
 
+//weekly_report(): check the time, if it is Friday, display this week's service.
 int ManagerModule::weekly_report() {
 
    return 0;
 }
 
+//summary_report(): display all the service in map.
 int ManagerModule::summary_report() {
 
    return 0;
 }
+
 
 std::string ManagerModule::person_report(Person& person) {
 
@@ -53,6 +57,7 @@ std::string ManagerModule::person_report(Person& person) {
    return a_string;
 }
 
+//provider_report(uint provider_id) : display the service the provider provides.
 int ManagerModule::provider_report(uint provider_id) {
   // Check provider map for provider with provider_id
   // If not found, return -1
@@ -62,6 +67,8 @@ int ManagerModule::provider_report(uint provider_id) {
    return 0;
 }
 
+
+//member_report(uint member_id) : display the service the member owns.
 int ManagerModule::member_report(uint member_id) {
   // Check member map for member with member_id
   // If not found, return -1
@@ -70,6 +77,7 @@ int ManagerModule::member_report(uint member_id) {
    return 0;
 }
 
+//ManagerModule(): read the data from csv file into map.
 ManagerModule::ManagerModule()
 {
 
