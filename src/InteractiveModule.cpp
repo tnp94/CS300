@@ -370,7 +370,77 @@ int InteractiveModule::add_provider() {
 
 //edit_provider(): search provider in map, and use provider's set function to edit information.
 int InteractiveModule::edit_provider(uint member_id) {
-
+  cout << "Searching for provider with provider id " << provider_id <<endl;
+    unordered_map<uint, Provider>::iterator i =providers.find(provider_id);
+    if (i == providers.end())
+    {
+        cout << "Provider with provider id " <<provider_id << " not found"<<endl;
+    }
+    else
+    {
+        cout<<"Find the provider, the information is: "<<endl;
+        cout<<"Provider id: "<<i->second.get_id()<<endl;
+        cout<<"Name :"<<i->second.get_name()<<endl;
+        cout<<"City: "<<i->second.get_city()<<endl;
+        cout<<"State: "<<i->second.get_state()<<endl;
+        cout<<"Zip: "<<i->second.get_zip()<<endl;
+        int choice=0;
+        while(choice!=6)
+        {
+            cout<<"Which part of information you want to edit? Input 6 to exit and save."<<endl;
+            cout<<"1.Provider id"<<endl;
+            cout<<"2.Name"<<endl;
+            cout<<"3.City"<<endl;
+            cout<<"4.State"<<endl;
+            cout<<"5.Zip"<<endl;
+            cout<<"6.Exit"<<endl;
+            cin>>choice;
+            switch(choice)
+            {
+                case 1: {
+                    uint new_id = 0;
+                    cout << "Please input new member id: " << endl;
+                    cin >> new_id;
+                    i->second.set_id(new_id);
+                    break;
+                }
+                case 2: {
+                    string new_name = " ";
+                    cout << "Please input new name: " << endl;
+                    cin >> new_name;
+                    i->second.set_name(new_name);
+                    break;
+                }
+                case 3: {
+                    string new_city = " ";
+                    cout << "Please input new city: " << endl;
+                    cin >> new_city;
+                    i->second.set_city(new_city);
+                    break;
+                }
+                case 4:{
+                    string new_state=" ";
+                    cout<<"Please input new state: "<<endl;
+                    cin>>new_state;
+                    i->second.set_state(new_state);
+                    break;
+                }
+                case 5: {
+                    uint new_zip = 0;
+                    cout << "Please input new zip id: " << endl;
+                    cin >> new_zip;
+                    i->second.set_id(new_zip);
+                    break;
+                }
+                case 6:
+                    break;
+                default:
+                    cin.clear();
+                    cin.ignore();
+                    cout << "You did not select a valid response"<<endl;
+            }
+        }
+    }
    return 0;
 }
 
