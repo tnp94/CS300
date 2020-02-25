@@ -160,6 +160,10 @@ int InteractiveModule::add_member() {
   }
 
   Member member(name, id, city, state, zip);
+  //save the member into cvs file
+  ofstream outFile;
+  outFile.open("Member.cvs", ios::app);
+  outFile << name << ',' << id<< ',' << city<<','<<state<<','<<zip<<endl;
   // If member with that id is not in the map already...
   members.insert(make_pair(id, member));
   // else fail
