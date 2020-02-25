@@ -19,6 +19,8 @@ int ManagerModule::init() {
     switch(choice)
     {
       case 1:
+        cout<<"Generate Summary Report\n";
+        
         break;
       case 2:
         cout << "\nGenerate Provider Report\n\n"
@@ -27,8 +29,10 @@ int ManagerModule::init() {
             return_code = provider_report(id_number);
         break;
       case 3:
+        cout<<"Generate Member report\n";
         break;
       case 4:
+        cout<<"Generate Member report\n";
         break;
       default:
         cout << "You did not select a valid response\n\n";
