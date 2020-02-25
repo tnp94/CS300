@@ -1,6 +1,8 @@
 #include "../include/InteractiveModule.h"
 #include <string>
 #include <iostream>
+#include <map>
+#include <unordered_map>
 #include "../include/Person.h"
 #include "../include/Member.h"
 #include "../include/Provider.h"
@@ -42,6 +44,7 @@ int InteractiveModule::init() {
       case 5:
         break;
       case 6:
+        add_provider();
         break;
       case 7:
         break;
@@ -122,7 +125,12 @@ int InteractiveModule::add_member() {
   
 
   }
+
   Member member(name, id, city, state, zip);
+  // If member with that id is not in the map already...
+  members.insert(make_pair(id, member));
+  // else fail
+
 
    return 0;
 }
@@ -141,14 +149,26 @@ int InteractiveModule::remove_member(uint member_id) {
 
 //display_member():search member in map, and use member's display_info() function to display the information.
 int InteractiveModule::display_member(uint member_id) {
+  cout << "Searching for member with member id " << member_id <<"\n\n";
   // Get member by member_id from the database
   // Call the persons display data function
-  cout << "DEBUG: Display Member called\n\n";
+  unordered_map<uint, Member>::iterator i = members.find(member_id);
+  if (i == members.end())
+  {
+    cout << "Member with member id " << member_id << " not found\n\n";
+  }
+  else
+  {
+    cout << "Member found:\n"
+        << "Member id: " << i->second.get_id()
+        << "\nName: " << i->second.get_name()
+        << "\nCity: " << i->second.get_city() << endl;
+  }
    return 0;
 }
 
 //add_provider(): user input information, create a provider object, and insert into map.
-int InteractiveModule::add_provider(uint provider_id) {
+int InteractiveModule::add_provider() {
 
    return 0;
 }
