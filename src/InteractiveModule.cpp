@@ -234,7 +234,10 @@ int InteractiveModule::display_provider(uint provider_id) {
 
 //write_out(): write the data in map to cvs file. 
 int InteractiveModule::write_out() {
-
+  ofstream outFile;
+  outFile.open("Member.cvs", ios::app);
+  outFile << name << ',' << id<< ',' << city<<','<<state<<','<<zip<<endl;
+  
    return 0;
 }
 
