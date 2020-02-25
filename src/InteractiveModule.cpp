@@ -6,7 +6,7 @@
 #include "../include/Provider.h"
 
 using namespace std;
-
+//init(): let user choose which function to use.
 int InteractiveModule::init() {
   cout << "\n\n\nWelcome to the database interactive terminal\n\n";
   int choice = 0;
@@ -59,6 +59,7 @@ int InteractiveModule::init() {
    return 0;
 }
 
+//add_member(): add a member into map, use the member_id as primary key.
 int InteractiveModule::add_member() {
   uint id, zip;
   std::string name, city, state, verification;
@@ -126,16 +127,19 @@ int InteractiveModule::add_member() {
    return 0;
 }
 
+//edit_member(): search member in map, and use member's set funnction to edit member's information.
 int InteractiveModule::edit_member(uint member_id) {
 
    return 0;
 }
 
+//remove_member(): use map's erase function to remove member.
 int InteractiveModule::remove_member(uint member_id) {
 
    return 0;
 }
 
+//display_member():search member in map, and use member's display_info() function to display the information.
 int InteractiveModule::display_member(uint member_id) {
   // Get member by member_id from the database
   // Call the persons display data function
@@ -143,31 +147,37 @@ int InteractiveModule::display_member(uint member_id) {
    return 0;
 }
 
+//add_provider(): user input information, create a provider object, and insert into map.
 int InteractiveModule::add_provider(uint provider_id) {
 
    return 0;
 }
 
+//edit_provider(): search provider in map, and use provider's set function to edit information.
 int InteractiveModule::edit_provider(uint member_id) {
 
    return 0;
 }
 
+//remove_provider(unit provider_id): use map's erase function, to remove provider in map.
 int InteractiveModule::remove_provider(uint provider_id) {
 
    return 0;
 }
 
+//display_provider(unit provider_id): search provider_id in map,and use provider's display_info() to display info.
 int InteractiveModule::display_provider(uint provider_id) {
 
    return 0;
 }
 
+//write_out(): write the data in map to cvs file. 
 int InteractiveModule::write_out() {
 
    return 0;
 }
 
+//InteractiveModule(): read the data in cvs into map.
 InteractiveModule::InteractiveModule()
 {
 
