@@ -36,8 +36,14 @@ int InteractiveModule::init() {
         add_member();
         break;
       case 3:
+        cout<<"Please enter the member number";
+        cin>>id;
+        edit_member(id);
         break;
       case 4:
+        cout<<"Please enter the id u want remove:"<<endl;
+        cin>>id;
+        remove_member(id);
         break;
       case 5:
         break;
