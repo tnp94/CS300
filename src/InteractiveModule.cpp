@@ -10,12 +10,12 @@
 using namespace std;
 //init(): let user choose which function to use.
 int InteractiveModule::init() {
-  cout << "\n\n\nWelcome to the database interactive terminal\n\n";
+  cout << "\n\n\nWelcome to the database interactive terminal";
   int choice = 0;
   uint id = 0;
   while (choice != 9)
   {
-    cout << "What is your purpose?\n\n"
+    cout << "\n\n\nWhat is your purpose?\n\n"
         << "1. Display Existing Member\n"
         << "2. Add New Member\n"
         << "3. Edit Member\n"
@@ -31,7 +31,16 @@ int InteractiveModule::init() {
     {
       case 1:
         cout << "What is the member number of the member you would like to display: ";
-        cin >> id;
+        if (cin.fail())
+        {
+          cin.ignore();
+          cin.clear();
+          cout << "Invalid input...\n\n";
+        }
+        else
+        {
+          cin >> id;
+        }
         display_member(id);
         break;
       case 2:
@@ -39,12 +48,30 @@ int InteractiveModule::init() {
         break;
       case 3:
         cout<<"Please enter the member number";
-        cin>>id;
-        edit_member(id);
+        cin >> id;
+        if (cin.fail())
+        {
+          cin.ignore();
+          cin.clear();
+          cout << "Invalid input...\n\n";
+        }
+        else
+        {
+          edit_member(id);
+        }
         break;
       case 4:
         cout<<"Please enter the id u want remove:"<<endl;
-        cin>>id;
+        if (cin.fail())
+        {
+          cin.ignore();
+          cin.clear();
+          cout << "Invalid input...\n\n";
+        }
+        else
+        {
+          cin>>id;
+        }
         remove_member(id);
         break;
       case 5:
@@ -168,7 +195,9 @@ int InteractiveModule::display_member(uint member_id) {
     cout << "Member found:\n"
         << "Member id: " << i->second.get_id()
         << "\nName: " << i->second.get_name()
-        << "\nCity: " << i->second.get_city() << endl;
+        << "\nCity: " << i->second.get_city()
+        << "\nState: " << i->second.get_state()
+        << "\nZip: " << i->second.get_zip() << endl;
   }
    return 0;
 }
