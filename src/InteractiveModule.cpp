@@ -241,7 +241,21 @@ int InteractiveModule::write_out() {
 //InteractiveModule(): read the data in cvs into map.
 InteractiveModule::InteractiveModule()
 {
-
+  
+  //To test other functions , I will add some test data.
+  Member member1('John',1,'Portland','OR',97201);
+  members.insert(make_pair(1,member1));
+  Member member2('Jim',2,'Portland','OR',97201);
+  members.insert(make_pair(2,member2));
+  Member member3('Tom',3,'Portland','OR',97201);
+  members.insert(make_pari(3,member3));
+  
+  Provider provider1('Jerry',1,' Portland','OR',97201);
+  Provider provider2('Smith',2,'Portland','OR',97201);
+  Provider provider3('Tim',3,'Portland','OR',97201);
+  providers.insert(make_pair(1,provider1));
+  providers.insert(make_pair(2,provider2));
+  providers.insert(make_pair(3,provider3));
 }
 
 
