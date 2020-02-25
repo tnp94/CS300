@@ -264,7 +264,41 @@ int InteractiveModule::edit_member(uint member_id) {
 
 //remove_member(): use map's erase function to remove member.
 int InteractiveModule::remove_member(uint member_id) {
-
+    cout << "Searching for member with member id " << member_id <<endl;
+    unordered_map<uint, Member>::iterator i = members.find(member_id);
+    if (i == members.end())
+    {
+        cout << "Member with member id " << member_id << " not found\n\n";
+    }
+    else
+    {
+        cout<<"Find the member, the information is: "<<endl;
+        cout<<"Member id: "<<i->second.get_id()<<endl;
+        cout<<"Name :"<<i->second.get_name()<<endl;
+        cout<<"City: "<<i->second.get_city()<<endl;
+        cout<<"State: "<<i->second.get_state()<<endl;
+        cout<<"Zip: "<<i->second.get_zip()<<endl;
+        int choice=0;
+        while(choice!=2) {
+            cout << "Input 1 to remove this member, input 2 to exit." << endl;
+            cout << "1.Yes" << endl;
+            cout << "2.Exit" << endl;
+            cin>>choice;
+            switch(choice)
+            {
+                case 1:
+                    members.erase(i);
+                    cout<<"The member has been removed."<<endl;
+                    break;
+                case 2:
+                    break;
+                default:
+                    cin.clear();
+                    cin.ignore();
+                    cout << "You did not select a valid response"<<endl;
+            }
+        }
+    }
    return 0;
 }
 
@@ -446,7 +480,41 @@ int InteractiveModule::edit_provider(uint member_id) {
 
 //remove_provider(unit provider_id): use map's erase function, to remove provider in map.
 int InteractiveModule::remove_provider(uint provider_id) {
-
+   cout << "Searching for provider with provider id " << provider_id <<endl;
+    unordered_map<uint, Provider>::iterator i = providers.find(provider_id);
+    if (i == providers.end())
+    {
+        cout << "Provider with provider id " << provider_id << " not found\n\n";
+    }
+    else
+    {
+        cout<<"Find the provider, the information is: "<<endl;
+        cout<<"Provider id: "<<i->second.get_id()<<endl;
+        cout<<"Name :"<<i->second.get_name()<<endl;
+        cout<<"City: "<<i->second.get_city()<<endl;
+        cout<<"State: "<<i->second.get_state()<<endl;
+        cout<<"Zip: "<<i->second.get_zip()<<endl;
+        int choice=0;
+        while(choice!=2) {
+            cout << "Input 1 to remove this provider, input 2 to exit." << endl;
+            cout << "1.Yes" << endl;
+            cout << "2.Exit" << endl;
+            cin>>choice;
+            switch(choice)
+            {
+                case 1:
+                    providers.erase(i);
+                    cout<<"The member has been removed."<<endl;
+                    break;
+                case 2:
+                    break;
+                default:
+                    cin.clear();
+                    cin.ignore();
+                    cout << "You did not select a valid response"<<endl;
+            }
+        }
+    }
    return 0;
 }
 
