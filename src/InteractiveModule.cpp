@@ -403,7 +403,7 @@ int InteractiveModule::add_provider() {
 }
 
 //edit_provider(): search provider in map, and use provider's set function to edit information.
-int InteractiveModule::edit_provider(uint member_id) {
+int InteractiveModule::edit_provider(uint provider_id) {
   cout << "Searching for provider with provider id " << provider_id <<endl;
     unordered_map<uint, Provider>::iterator i =providers.find(provider_id);
     if (i == providers.end())
