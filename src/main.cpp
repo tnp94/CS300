@@ -18,8 +18,13 @@ int main() {
    outFile.open("Provider.cvs", ios::app);
    outfile<<"NAME"<<','<<"ID"<<','<<"CITY"<<','<<"STATE"<<','<<"ZIP"<<endl;
    outFile.open("Services.cvs", ios::app);
-   
-   
+   outFile<<"MemeberID"<<','<<"ProviderID"<<','<<"AddDate"<<','<<"ServiceDate"<<','<<"ServiceCode"<<','<<"Comments"<<endl;
+   /*this->member_id=member_id;
+   this->provider_id=provider_id;
+   this->date_added=date_added;
+   this->service_date=service_date;
+   this->service_code=service_code;
+   this->comments=comments;*/
    cout << "Welcome to the ChocAn application!\n\n";
 
    while (choice != 4)
