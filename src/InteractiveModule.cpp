@@ -1,6 +1,8 @@
 #include "../include/InteractiveModule.h"
+#include <climits>
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <map>
 #include <unordered_map>
 #include "../include/Person.h"
@@ -33,7 +35,7 @@ int InteractiveModule::init() {
         cout << "What is the member number of the member you would like to display: ";
         if (cin.fail())
         {
-          cin.ignore();
+          cin.ignore(INT_MAX, '\n');
           cin.clear();
           cout << "Invalid input...\n\n";
         }
@@ -51,7 +53,7 @@ int InteractiveModule::init() {
         cin >> id;
         if (cin.fail())
         {
-          cin.ignore();
+          cin.ignore(INT_MAX, '\n');
           cin.clear();
           cout << "Invalid input...\n\n";
         }
@@ -64,7 +66,7 @@ int InteractiveModule::init() {
         cout<<"Please enter the id u want remove:"<<endl;
         if (cin.fail())
         {
-          cin.ignore();
+          cin.ignore(INT_MAX, '\n');
           cin.clear();
           cout << "Invalid input...\n\n";
         }
