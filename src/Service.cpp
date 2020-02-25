@@ -48,7 +48,7 @@ void Service::set_comments(std::string comments){
    this->comments=comments;
 }
 
-Service::Service(const uint member_id, const uint provider_id, const time_t date_added, const time_t service_date, const uint service_code, const std::string comments)
+Service::Service(const uint member_id, const uint provider_id, const std::string service_name, const time_t date_added, const time_t service_date, const uint service_code, const std::string comments)
 {
    this->member_id=member_id;
    this->provider_id=provider_id;

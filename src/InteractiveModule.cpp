@@ -77,6 +77,18 @@ int InteractiveModule::init() {
         remove_member(id);
         break;
       case 5:
+        cout << "What is the provider number of the provider you would like to display: ";
+        if (cin.fail())
+        {
+          cin.ignore(INT_MAX, '\n');
+          cin.clear();
+          cout << "Invalid input...\n\n";
+        }
+        else
+        {
+          cin >> id;
+        }
+        display_provider(id);
         break;
       case 6:
         add_provider();
@@ -162,9 +174,9 @@ int InteractiveModule::add_member() {
   }
 
   Member member(name, id, city, state, zip);
-  //save the member into cvs file
+  //save the member into csv file
   ofstream outFile;
-  outFile.open("Member.cvs", ios::app);
+  outFile.open("Member.csv", ios::app);
   outFile << name << ',' << id<< ',' << city<<','<<state<<','<<zip<<endl;
   // If member with that id is not in the map already...
   members.insert(make_pair(id, member));
@@ -210,6 +222,78 @@ int InteractiveModule::display_member(uint member_id) {
 
 //add_provider(): user input information, create a provider object, and insert into map.
 int InteractiveModule::add_provider() {
+  uint id, zip;
+  std::string name, city, state, verification;
+  bool correct = false;
+
+  while (!correct)
+  {
+  cout << "Add new provider...\n\n";
+  cout << "Enter new provider name:\n";
+  cin >> name;
+
+  do {
+  cin.clear();
+  cin.ignore();
+  cout << "Enter new provider id:\n";
+  cin >> id;
+  } while (cin.fail());
+
+  cout << "Enter new provider city:\n";
+  cin >> city;
+  cout << "Enter new provider state:\n";
+  cin >> state;
+
+  do {
+  cin.clear();
+  cin.ignore();
+  cout << "Enter new provider zip:\n";
+  cin >> zip;
+  } while (cin.fail());
+  
+
+  do
+  {
+    cin.clear();
+    cin.ignore();
+    cout << "The following provider ready to add:\n";
+    cout << "Name: " << name
+        << "\nID: " << id
+        << "\nCity: " << city
+        << "\nState: " << state
+        << "\nZip: " << zip
+        << "\n\nIs this information correct? (y/n): ";
+    cin >> verification;
+    if (verification == "y")
+    {
+      cout << "Adding provider...\n\n";
+      correct = true;
+    }
+    else if (verification == "n")
+    {
+      cout << "Starting over\n";
+      correct = false;
+    }
+    else
+    {
+      cout << "Invalid input...\n";
+    }
+  } while(cin.fail());
+
+  
+
+  }
+
+  Provider provider(name, id, city, state, zip);
+  //save the member into csv file
+  ofstream outFile;
+  outFile.open("Provider.csv", ios::app);
+  outFile << name << ',' << id<< ',' << city<<','<<state<<','<<zip<<endl;
+  // If member with that id is not in the map already...
+  providers.insert(make_pair(id, provider));
+  // else fail
+
+
 
    return 0;
 }
@@ -228,17 +312,34 @@ int InteractiveModule::remove_provider(uint provider_id) {
 
 //display_provider(unit provider_id): search provider_id in map,and use provider's display_info() to display info.
 int InteractiveModule::display_provider(uint provider_id) {
+  cout << "Searching for provider with provider id " << provider_id <<"\n\n";
+  // Get provider by provider_id from the database
+  // Call the persons display data function
+  unordered_map<uint, Provider>::iterator i = providers.find(provider_id);
+  if (i == providers.end())
+  {
+    cout << "Member with provider id " << provider_id << " not found\n\n";
+  }
+  else
+  {
+    cout << "Provider found:\n"
+        << "Provider id: " << i->second.get_id()
+        << "\nName: " << i->second.get_name()
+        << "\nCity: " << i->second.get_city()
+        << "\nState: " << i->second.get_state()
+        << "\nZip: " << i->second.get_zip() << endl;
+  }
 
    return 0;
 }
 
-//write_out(): write the data in map to cvs file. 
+//write_out(): write the data in map to csv file. 
 int InteractiveModule::write_out() {
 
    return 0;
 }
 
-//InteractiveModule(): read the data in cvs into map.
+//InteractiveModule(): read the data in csv into map.
 InteractiveModule::InteractiveModule()
 {
 
