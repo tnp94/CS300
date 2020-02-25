@@ -13,7 +13,7 @@ class InteractiveModule {
       int edit_member(uint provider_id);
       int remove_member(uint member_id);
       int display_member(uint member_id);
-      int add_provider(uint provider_id);
+      int add_provider();
       int edit_provider(uint provider_id);
       int remove_provider(uint provider_id);
       int display_provider(uint provider_id);
