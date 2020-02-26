@@ -13,7 +13,6 @@ class Provider : public Person {
       const std::string state,
       const uint zip
    );
-   void display_info();
    ~Provider();
    private:
 
