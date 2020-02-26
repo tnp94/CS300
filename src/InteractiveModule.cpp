@@ -560,7 +560,7 @@ int InteractiveModule::write_out() {
 InteractiveModule::InteractiveModule()
 {
   char *name, *city, *state;
-  char * last;
+  int last;
   bool suspended;
   uint zip, id;
   
@@ -584,25 +584,30 @@ InteractiveModule::InteractiveModule()
   // Initialize members map by reading from the members.csv file
   fstream inFile;
   inFile.open("database/members.csv");
-  while (!inFile.eof())
-  {
     name = new char[1000];
     city = new char[1000];
     state = new char[1000];
-    last = new char[1000];
-    inFile.getline(name,999,'\n');
+    //last = new char[2];
+  while (!inFile.eof())
+  while (inFile.getline(name,999))
+  {
     inFile >> id;
-    inFile.ignore('\n');
-    inFile.getline(city,999,'\n');
-    inFile.getline(state,999,'\n');
+    inFile.ignore();
+    inFile.getline(city, 999);
+    inFile.getline(state,999);
     inFile >> zip;
-    inFile.ignore('\n');
+    inFile.ignore();
     //inFile.get(last, 1, '\n');
-    inFile.getline(last,999,'\n');
-    /*if (last == 0)
+    //inFile.getline(last,999);
+    //inFile.getline(last, 8);
+    inFile >> last;
+    inFile.ignore();
+    //if (last[0] == '0')
+    if (last == 0)
     {
       suspended = false;
     }
+    //else if (last[0] == '1')
     else if (last == 1)
     {
       suspended = true;
@@ -610,11 +615,20 @@ InteractiveModule::InteractiveModule()
     else
     {
       cout << "Error reading data\n";
-    }*/
+    }
     //inFile.ignore('\n');
-    cout << "DEBUG: " << name << id << city << state << zip << last << endl;
+    cout << "DEBUG: " << name << id << city << state << zip;
+    if (suspended)
+    {
+      cout << "SUSPENDED";
+    }
+    cout << "\n";
   }
   // Initialize providers map by reading from the providers.csv file
+  delete name;
+  delete city;
+  delete state;
+  //delete last;
 
 }
 
