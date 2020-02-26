@@ -176,7 +176,7 @@ int InteractiveModule::add_member() {
   Member member(name, id, city, state, zip);
   //save the member into csv file
   ofstream outFile;
-  outFile.open("Member.csv", ios::app);
+  outFile.open("database/members.csv", ios::app);
   outFile << name << ',' << id<< ',' << city<<','<<state<<','<<zip<<endl;
   // If member with that id is not in the map already...
   members.insert(make_pair(id, member));
@@ -391,7 +391,7 @@ int InteractiveModule::add_provider() {
   Provider provider(name, id, city, state, zip);
   //save the member into csv file
   ofstream outFile;
-  outFile.open("Provider.csv", ios::app);
+  outFile.open("database/providers.csv", ios::app);
   outFile << name << ',' << id<< ',' << city<<','<<state<<','<<zip<<endl;
   // If member with that id is not in the map already...
   providers.insert(make_pair(id, provider));
@@ -544,7 +544,7 @@ int InteractiveModule::display_provider(uint provider_id) {
 //write_out(): write the data in map to csv file. 
 int InteractiveModule::write_out() {
   ofstream outFile;
-  outFile.open("Member.cvs", ios::app);
+  outFile.open("database/members.csv", ios::app);
   unordered_map<uint, Member>::iterator i = members.begin();
   
   while (i != members.end())
@@ -559,6 +559,10 @@ int InteractiveModule::write_out() {
 //InteractiveModule(): read the data in csv into map.
 InteractiveModule::InteractiveModule()
 {
+  char *name, *city, *state;
+  char * last;
+  bool suspended;
+  uint zip, id;
   
   //To test other functions , I will add some test data.
   /*Member member1('John',1,'Portland','OR',97201);
@@ -574,6 +578,44 @@ InteractiveModule::InteractiveModule()
   providers.insert(make_pair(1,provider1));
   providers.insert(make_pair(2,provider2));
   providers.insert(make_pair(3,provider3));*/
+
+
+
+  // Initialize members map by reading from the members.csv file
+  fstream inFile;
+  inFile.open("database/members.csv");
+  while (!inFile.eof())
+  {
+    name = new char[1000];
+    city = new char[1000];
+    state = new char[1000];
+    last = new char[1000];
+    inFile.getline(name,999,'\n');
+    inFile >> id;
+    inFile.ignore('\n');
+    inFile.getline(city,999,'\n');
+    inFile.getline(state,999,'\n');
+    inFile >> zip;
+    inFile.ignore('\n');
+    //inFile.get(last, 1, '\n');
+    inFile.getline(last,999,'\n');
+    /*if (last == 0)
+    {
+      suspended = false;
+    }
+    else if (last == 1)
+    {
+      suspended = true;
+    }
+    else
+    {
+      cout << "Error reading data\n";
+    }*/
+    //inFile.ignore('\n');
+    cout << "DEBUG: " << name << id << city << state << zip << last << endl;
+  }
+  // Initialize providers map by reading from the providers.csv file
+
 }
 
 
