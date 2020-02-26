@@ -14,11 +14,11 @@ void Provider::display_info(){
 
 Provider::Provider(const std::string name, const uint id, const std::string city, const std::string state, const uint zip) : Person(name, id, city, state, zip)
 {
-  this->name=name;
+  /*this->name=name;
   this->id=id;
   this->city=city;
   this->state=state;
-  this->zip=zip;
+  this->zip=zip;*/
 }
 
 Provider::~Provider()

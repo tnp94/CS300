@@ -545,7 +545,13 @@ int InteractiveModule::display_provider(uint provider_id) {
 int InteractiveModule::write_out() {
   ofstream outFile;
   outFile.open("Member.cvs", ios::app);
-  outFile << name << ',' << id<< ',' << city<<','<<state<<','<<zip<<endl;
+  unordered_map<uint, Member>::iterator i = members.begin();
+  
+  while (i != members.end())
+  {
+
+    outFile << i->second.get_name() << ',' << i->second.get_id() << ',' << i->second.get_city() << ',' << i->second.get_state() << ',' << i->second.get_zip() <<endl;
+  }
   
    return 0;
 }
@@ -555,19 +561,19 @@ InteractiveModule::InteractiveModule()
 {
   
   //To test other functions , I will add some test data.
-  Member member1('John',1,'Portland','OR',97201);
+  /*Member member1('John',1,'Portland','OR',97201);
   members.insert(make_pair(1,member1));
   Member member2('Jim',2,'Portland','OR',97201);
   members.insert(make_pair(2,member2));
   Member member3('Tom',3,'Portland','OR',97201);
-  members.insert(make_pari(3,member3));
+  members.insert(make_pair(3,member3));
   
   Provider provider1('Jerry',1,' Portland','OR',97201);
   Provider provider2('Smith',2,'Portland','OR',97201);
   Provider provider3('Tim',3,'Portland','OR',97201);
   providers.insert(make_pair(1,provider1));
   providers.insert(make_pair(2,provider2));
-  providers.insert(make_pair(3,provider3));
+  providers.insert(make_pair(3,provider3));*/
 }
 
 
