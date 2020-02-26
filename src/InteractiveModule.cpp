@@ -560,7 +560,6 @@ int InteractiveModule::write_out() {
 InteractiveModule::InteractiveModule()
 {
   char *name, *city, *state;
-  int last;
   bool suspended;
   uint zip, id;
   
@@ -587,7 +586,6 @@ InteractiveModule::InteractiveModule()
     name = new char[1000];
     city = new char[1000];
     state = new char[1000];
-    //last = new char[2];
   while (!inFile.eof())
   while (inFile.getline(name,999))
   {
@@ -597,38 +595,21 @@ InteractiveModule::InteractiveModule()
     inFile.getline(state,999);
     inFile >> zip;
     inFile.ignore();
-    //inFile.get(last, 1, '\n');
-    //inFile.getline(last,999);
-    //inFile.getline(last, 8);
-    inFile >> last;
+    inFile >> suspended;
     inFile.ignore();
-    //if (last[0] == '0')
-    if (last == 0)
-    {
-      suspended = false;
-    }
-    //else if (last[0] == '1')
-    else if (last == 1)
-    {
-      suspended = true;
-    }
-    else
-    {
-      cout << "Error reading data\n";
-    }
-    //inFile.ignore('\n');
+
     cout << "DEBUG: " << name << id << city << state << zip;
     if (suspended)
     {
       cout << "SUSPENDED";
     }
+    members.insert(make_pair(id,Member(name, id, city, state, zip)));
     cout << "\n";
   }
   // Initialize providers map by reading from the providers.csv file
   delete name;
   delete city;
   delete state;
-  //delete last;
 
 }
 
