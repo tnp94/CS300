@@ -180,13 +180,7 @@ int InteractiveModule::add_member() {
   }
 
   Member member(name, id, city, state, zip, false);
-  //save the member into csv file
-  //ofstream outFile;
-  //outFile.open("database/members.csv", ios::app);
-  //outFile << name << "\n" << id<< "\n" << city<<"\n"<<state<<"\n"<<zip<< false << endl;
-  // If member with that id is not in the map already...
   members.insert(make_pair(id, member));
-  // else fail
 
 
    return 0;
@@ -225,7 +219,18 @@ int InteractiveModule::edit_member(uint member_id) {
                     uint new_id = 0;
                     cout << "Please input new member id: " << endl;
                     cin >> new_id;
-                    i->second.set_id(new_id);
+                    unordered_map<uint, Member>::iterator new_member = members.find(new_id);
+                    if (new_member == members.end())
+                    {
+                      members.insert(make_pair(new_id, Member(i->second.get_name(), new_id, i->second.get_city(), i->second.get_state(), i->second.get_zip(), i->second.get_suspended())));
+                      members.erase(i);
+                      member_id = new_id;
+                      i = members.find(new_id);
+                    }
+                    else
+                    {
+                      cout << "A member already exists with that id\n\n";
+                    }
                     break;
                 }
                 case 2: {
