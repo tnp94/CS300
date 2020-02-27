@@ -48,6 +48,11 @@ void Service::set_comments(std::string comments){
    this->comments=comments;
 }
 
+int Service::build(){
+
+return 0;
+}
+
 Service::Service(const uint member_id, const uint provider_id, const std::string service_name, const time_t date_added, const time_t service_date, const uint service_code, const std::string comments)
 {
    this->member_id=member_id;
@@ -58,6 +63,11 @@ Service::Service(const uint member_id, const uint provider_id, const std::string
    this->comments=comments;
 }
 
+Service::Service()
+{
+
+
+}
 Service::~Service()
 {
 

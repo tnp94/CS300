@@ -20,6 +20,7 @@ class Service {
       void set_date_added(time_t date_added);
       void set_service_date(time_t service_date);
       void set_comments(std::string comments);
+      int build();
       Service(
             const uint member_id,
             const uint provider_id,
@@ -29,7 +30,7 @@ class Service {
             const uint service_code,
             const std::string comments
             );
-
+      Service();
       ~Service();
 
    private:
