@@ -1,27 +1,16 @@
 \documentclass{article}
+\usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{titlesec}
 \usepackage{titling}
 \usepackage[margin=1in]{geometry}
 \usepackage{underscore}
-
-\titleformat{\section}
-{\huge \bfseries}
-{}
-{0em}
-{}[\titlerule]
-
-\titleformat{\subsection}
-{\LARGE \bfseries}
-{}
-{0em}
-{}
-
-\titleformat{\subsubsection}
-{\Large \bfseries}
-{$\bullet\;$}
-{0em}
-{}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{}
+\chead{Austen Nelson --- Zhengmao Zhang --- Xiaoran Ge --- Xingjian Wang --- Michael Kay --- Thomas Pollard}
+\rhead{}
 
 \renewcommand{\maketitle}{
    \begin{center}
@@ -38,28 +27,366 @@
 
 \maketitle
 \tableofcontents
+\pagebreak
 
 \section{Introduction}
+This test plan document will discuss the test methods used in the ChocAn
+project. These testing methods include unit testing, smoke testing, and system
+testing. After going through these tests, our team can discover the weaknesses
+of this project and improve the project against these weaknesses.
+
 \subsection{Purpose and Scope}
+The purpose of this file is to test whether the ChocAn project can meet the
+system requirements and whether it can meet the needs of users. In this test
+plan, these goals need to be achieved:
+
+\begin{itemize}
+   \item Through unit testing, smoke testing, and system testing to ensure that the
+      entire system is error-free and can meet the expected functional requirements.
+   \item During the test, some improvements were made for some unsatisfactory parts.
+   \item Improve understanding of testing.
+\end{itemize}
+
 \subsection{Target Audience}
+The target audience of this test plan document is the maintenance team and test
+team for this project. If anyone is interested in the testing process of this project,
+you can also read this document. Before reading this document, you need to
+understand the basic structure of the project. You can read the design document
+or read the code of the document.
+
+Relevent links:
+\begin{itemize}
+   \item \href{https://github.com/aujxn/CS300}{Project repository}
+   \item \href{https://github.com/aujxn/CS300/documents/design.tex}{Design document}
+\end{itemize}
+
 \subsection{Terms and Definitions}
+Here are some definitions that might be used:
+
+\begin{itemize}
+\item Unit Testing: UNIT TESTING is a level of software testing where
+individual units/ components of a software are tested. The
+purpose is to validate that each unit of the software performs
+as designed. A unit is the smallest testable part of any
+software. It usually has one or a few inputs and usually a single
+output.
+\item Smoke Testing: SMOKE TESTING, also known as “Build Verification Testing”, is
+a type of software testing that includes of a non-exhaustive set of tests that aim
+at ensuring that the most important functions work. The result of this testing is
+used to decide if a build is stable enough to proceed with further testing.
+\item System Testing: SYSTEM TESTING is a level of testing that validates the
+complete and fully integrated software product. The purpose of a system test is
+to evaluate the end-to-end system specifications.
+\end{itemize}
+
 
 \section{Test Plan Description}
+
 \subsection{Scope of Testing}
+
+\begin{itemize}
+   \item Terminal test module \\
+      Test whether the program can complete the basic operation in the
+      computer terminal and reach the required menu as required.
+   \item Maps Data Structure module \\
+      Test whether the corresponding structure of the data storage
+      location is implemented.
+   \item User Hierarchy module \\
+      Testing to ensure members, providers and managers have the right data
+      and function.
+   \item Service Record module \\
+      Test to make sure a service is selected and recorded correctly as
+      Providers and members.
+\end{itemize}
+
 \subsection{Testing Schedule}
+The first test to be performed is a unit test. This will ensure that each sub-
+component (unit) works properly and that all errors and incorrect outputs
+found are fixed.
+
+After unit testing is complete, the next testing phase will be smoke
+testing. This will test the system as a whole, with each slave unit
+interacting with all its systems and dependent units. Once the main
+functions of the system as a whole are tested and completed, we will
+transition to system testing.
+
+The final testing phase will be system testing. This test will ensure that
+the software meets the overall required specifications.
+
 \subsection{Release Criteria}
+Because the document involves the user's personal privacy, we must make
+reasonable adjustments to the final released document.
+\begin{itemize}
+   \item Because the data contains sensitive information of members and
+      providers For ChocAn, our final requirements will require the security of all
+      our data and our data structure does not contain memory leaks that can
+      be exploited.
+   \item Our program should allow logins from different devices or terminals, and
+      must identify different levels of personnel information.
+   \item Allows the administrator to manage the services that are present in the
+      system, and the details related to the services.
+   \item Allow customers to get their own weekly reports, and display the current
+      weekly report in real time when the user needs it.
+\end{itemize}
+
 
 \section{Unit Testing}
+In the unit testing section, we will list the testing strategies and some functions
+that need to be tested. In unit testing, we need to test the individual functions in
+each object, and make sure that each object works correctly before linking them
+together.
+
 \subsection{Strategy}
+In our system, we have built these classes:
+
+\begin{itemize}
+   \item InteractiveModule
+   \item ManagerModule
+   \item Member
+   \item Person
+   \item Provider
+   \item ProviderDirectory
+   \item ProviderModule
+   \item Service
+\end{itemize}
+
+Some of these classes exist independently and have nothing to do with
+other classes, so we decided to test these classes first. There are some
+classes that need to interact with other classes. For these classes, we will
+complete this part of the test after completing the previous part of the test.
+
+\subsection{InteractiveModule}
+InteractiveModule is implemented by relying on Member and Provider, so
+InteractiveModule will be tested after testing Person, Member, and
+Provider. InteractiveModule's private domain has two unordered_maps
+that store information about Members and Providers, and public functions
+mainly operate on these two unordered_maps, including add, remove,
+edit, display. In the constructor, the data in the file is read and stored in
+the two maps. In the write_out function, the data in the map is written to
+the file. The init function will call other functions.
+
+We will test the functions for the map operation and the functions of the
+read and write parts, because these parts of the function are more likely to
+make errors.
+
+\subsection{ManagerModule}
+
+The second object is the ManagerModule. This object depends on
+Service, Member, Person, and Provider, so it will be tested later. This
+object's private domain has three maps to store service, member, and
+provider. Among its public functions, weekly_report and summary_report
+are responsible for generating reports, and person_report,
+provider_report, and member_report are responsible for sending reports to
+specific people. Similarly, this object will read data in the constructor.
+
+We will test the weekly_report function of this object and focus on seeing if
+this function selects the date correctly. We will also test the person_report
+function, because provider_report and member_report both call this
+function, so we must ensure the correctness of this function.
+
+
+\subsection{Person}
+
+Person is a completely independent object, and it is also a subclass of
+member and provider. Its private domain is name, city, state, id, and zip.
+And its common functions are used to get this information and edit this
+information.
+
+This is a simple structured object, we only need to test whether the
+functions can get and change the information stored in it.
+
+\subsection{Member}
+Member is a subclass of Person. Compared with person, member has one
+more suspended variable. At the same time, get and set functions for
+suspended variables have also been added.
+
+We will test the get_suspended and set_suspended functions.
+
+\subsection{Provider}
+Provider is a subclass of person, without any new variables and functions,
+so there is no need to test.
+
+\subsection{Service}
+Service is an independent class that is used to store service information
+and provide external interfaces to access and modify the service.
+
+We need to test whether the interfaces of these services are valid so that
+no errors occur when calling these interfaces.
+
+\subsection{ProviderDirectory}
+
+ProviderDirectory has a map data structure that stores services, so it
+needs to be tested after service unit testing. The common function of this
+object is generate_directory (), which can write directory to directory.txt
+file.
+
+We are going to test the generate_directory () function to make sure the
+format of the data meets our expectations.
+
+\subsection{ProviderModule}
+
+An instance of the providerdirectory object exists in the private domain of
+the ProviderModule, so you need to test it after you finish testing the
+providerdirectory. The public functions to be tested in this object are:
+validate_member, find member by member id, and check suspended
+status of member.
+provide_service, output service information, and confirm that there is no
+error in the service information.
+get_provider_directory, write the service information to the directory.txt
+file.
 
 \section{Smoke Testing}
-\subsection{test 1}
-\subsection{test 2}
-\subsection{test 3}
+In the above, we tested the actual work of each function independently, and we
+actually verified whether the function's return value is reasonable and effective.
+And we verified the processing status of the data by a single function. In this
+section, we will combine all the previous test results to perform linkage between
+multiple functions to determine whether the cooperation between multiple
+functions is effective.
+
+\subsection{ManagerModule, ProviderModule, InteractiveModule Login}
+\begin{tabular}{ |l|l|l| }
+   \hline
+   Case  &              Test           &     Expected Result          \\
+   \hline
+   \hline
+   1     &    Login to manager module with valid ID      &   logs in    \\
+   \hline
+   2     &    Login to manager module with invalid ID    &   login is rejected  \\
+   \hline
+   3     &    Repeat 1 and 2 for InteractiveModule and ProviderModule &          \\
+   \hline
+\end{tabular}
+
+\subsection{InteractiveModule Searching and Editing Members and Providers}
+\begin{tabular}{ |l|l|l| }
+   \hline
+   Case  &              Test           &     Expected Result   \\
+   \hline
+   \hline
+   1     &     Search for provider and member that exist   &   person is found    \\
+   \hline
+   2     &    Edit a provider and member that exist    &  data structure is updated correctly \\
+   \hline
+   3     &   Remove a provider and member that exist  &    data structure is updated correctly \\
+   \hline
+   4     &     Search for provider and member that doesn't exist   &   nothing is found    \\
+   \hline
+   5     &    Edit a provider and member that doesn't exist    &  data structure is unchanged and error is returned \\
+   \hline
+   6     &   Remove a provider and member that doesn't exist  &    data structure is unchanged and error is returned \\
+   \hline
+\end{tabular}
+
+\subsection{Reports}
+\begin{tabular}{ |l|l|l| }
+   \hline
+   Case  &              Test           &     Expected Result    \\
+   \hline
+   \hline
+   1     &    Run provider report & correct data is reported  \\
+   \hline
+   2     &   Run member report &  correct data is reported  \\
+   \hline
+   3     &   Run weekly report & correct data is reported  \\
+   \hline
+\end{tabular}
+
+\subsection{Provide Service}
+\begin{tabular}{ |l|l|l| }
+   \hline
+   Case  &              Test           &     Expected Result      \\
+   \hline
+   \hline
+   1     &   Provide service with valid info & service data structure is updated  \\
+   \hline
+   2     &  Proved service with invalid info & failure is returned and data structure is unchanged \\
+   \hline
+\end{tabular}
+
 
 \section{System Testing}
-\subsection{test 1}
-\subsection{test 2}
-\subsection{test 3}
+In this part we go through three steps to test the integrity and functionality of the
+program as expected. The three tests are: joint test, structural test, and
+performance test.
+\subsection{Joint Test}
+In this test we test the complete program by combining all the units. The
+main purpose of this test is to find out whether the link between the various
+units and interfaces is smooth, and to troubleshoot some errors that are
+only found at runtime.
+\subsection{Permission Test}
+In this test we will test whether the permissions of each type of user are
+correct. For example, members can only change their basic information by
+logging in to their account. Providers can only make changes to their
+users; records of this service and cannot see the basic information and
+other records of members.
+\subsection{Storage test}
+This test will check that the user information and records are stored
+correctly and that the automatically sent abstracts and reports are properly
+structured.
+\subsection{Disk Recording}
+It will include the following info:
+\begin{itemize}
+   \item Current date and time
+   \item Date of service
+   \item Provider's number
+   \item Member number
+   \item Service code
+\end{itemize}
 
+\subsection{Summary Report}
+It will include the following info:
+\begin{itemize}
+   \item A list of providers to pay this week.
+   \item Number of consultations per provider.
+   \item The total cost to be paid by the provider during the week.
+   \item Total number of providers providing services.
+   \item Total number of consultations from all providers.
+\end{itemize}
+\subsection{Generated Form}
+It will include the following info:
+\begin{itemize}
+\item Member name
+\item Member number
+\item Member address
+\item Member cities
+\item Member States
+\item Member postal code
+\end{itemize}
+For each service provider, the following should exist:
+\begin{itemize}
+   \item Date of service
+   \item Provider name
+   \item service name
+\end{itemize}
+On the other hand, the provider's form should contain the following data:
+\begin{itemize}
+   \item Provider name
+   \item Provider number
+   \item Provider address
+   \item Provider city
+   \item Provider status
+   \item he postal code of the provider
+   \item Total number of consultations
+   \item Total cost of the week
+\end{itemize}
+For each service, the following data:
+\begin{itemize}
+   \item Date of service
+   \item The system receives date and time data
+   \item Member name
+   \item Member number
+   \item Service code
+   \item Fees to be paid
+\end{itemize}
+
+\section{Performance Test}
+\subsection{Stress test}
+In this test, the program's endurance limit is tested by entering a large
+amount of data into the program at one time.
+\subsection{Time test}
+This test is to check whether the program produces results at the right
+time for each input.
+\subsection{Security Test}
+In this test we will test the program's response by intentionally entering an
+error code or performing an invalid operation.
 \end{document}
