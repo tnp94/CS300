@@ -114,6 +114,7 @@ int InteractiveModule::add_member() {
   uint id, zip;
   std::string name, city, state, verification;
   bool correct = false;
+  bool id_exists = false;
 
   while (!correct)
   {
@@ -126,7 +127,12 @@ int InteractiveModule::add_member() {
   cin.ignore();
   cout << "Enter new member id:\n";
   cin >> id;
-  } while (cin.fail());
+  id_exists = (members.find(id) != members.end());
+  if (id_exists)
+  {
+    cout << "A member already exists with that id number\n\n";
+  }
+  } while (cin.fail() || id_exists);
 
   cout << "Enter new member city:\n";
   cin >> city;
@@ -160,8 +166,8 @@ int InteractiveModule::add_member() {
     }
     else if (verification == "n")
     {
-      cout << "Starting over\n";
-      correct = false;
+      cout << "Information rejected...\n";
+      return -1;
     }
     else
     {
@@ -329,6 +335,7 @@ int InteractiveModule::add_provider() {
   uint id, zip;
   std::string name, city, state, verification;
   bool correct = false;
+  bool id_exists = false;
 
   while (!correct)
   {
@@ -341,7 +348,12 @@ int InteractiveModule::add_provider() {
   cin.ignore();
   cout << "Enter new provider id:\n";
   cin >> id;
-  } while (cin.fail());
+  id_exists = (providers.find(id) != providers.end());
+  if (id_exists)
+  {
+    cout << "A provider already exists with that id number\n\n";
+  }
+  } while (cin.fail() || id_exists);
 
   cout << "Enter new provider city:\n";
   cin >> city;
@@ -375,8 +387,8 @@ int InteractiveModule::add_provider() {
     }
     else if (verification == "n")
     {
-      cout << "Starting over\n";
-      correct = false;
+      cout << "Information rejected...\n";
+      return -1;
     }
     else
     {
@@ -404,11 +416,11 @@ int InteractiveModule::add_provider() {
 
 //edit_provider(): search provider in map, and use provider's set function to edit information.
 int InteractiveModule::edit_provider(uint provider_id) {
-  cout << "Searching for provider with provider id " << provider_id <<endl;
-    unordered_map<uint, Provider>::iterator i =providers.find(provider_id);
+  cout << "Searching for provider with provider id " << provider_id << endl;
+    unordered_map<uint, Provider>::iterator i = providers.find(provider_id);
     if (i == providers.end())
     {
-        cout << "Provider with provider id " <<provider_id << " not found"<<endl;
+        cout << "Provider with provider id " << provider_id << " not found"<<endl;
     }
     else
     {
@@ -641,6 +653,7 @@ InteractiveModule::InteractiveModule()
     providers.insert(make_pair(id,Provider(name, id, city, state, zip)));
     cout << "\n";
   }
+  inFile.close();
 
   delete name;
   delete city;
