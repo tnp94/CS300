@@ -8,9 +8,9 @@ using namespace std;
 int main() {
    int choice;
    int id = 0;
-   ProviderModule provider_module;
-   ManagerModule manager_module;
-   InteractiveModule interactive_module;
+   ProviderModule *provider_module;
+   ManagerModule *manager_module;
+   InteractiveModule *interactive_module;
 
    //This Part is Creat CVS TABLE
    /*ofstream outFile;
@@ -41,17 +41,23 @@ int main() {
             cout << "Please input your provider number: ";
             cin >> id;
             cout << "Opening provider module\n";
-            provider_module.init(id);
+            provider_module = new ProviderModule;
+            provider_module->init(id);
+            delete provider_module;
             break;
          case 2: // Manager Module
             cout << "You selected manager module.\n"
             << "Opening manager module\n";
-            manager_module.init();
+            manager_module = new ManagerModule;
+            manager_module->init();
+            delete manager_module;
             break;
          case 3: // Interactive Module
             cout << "You selected database interactive module.\n"
             << "Opening database interactive module\n";
-            interactive_module.init();
+            interactive_module = new InteractiveModule;
+            interactive_module->init();
+            delete interactive_module;
             break;
          case 4: // Exit
             break;
