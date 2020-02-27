@@ -12,7 +12,8 @@ class Member: public Person {
             const uint member_id,
             const std::string city,
             const std::string state,
-            const uint zip
+            const uint zip,
+            const bool suspended
             );
       //~Member();
       bool get_suspended();

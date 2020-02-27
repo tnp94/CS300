@@ -173,11 +173,11 @@ int InteractiveModule::add_member() {
 
   }
 
-  Member member(name, id, city, state, zip);
+  Member member(name, id, city, state, zip, false);
   //save the member into csv file
-  ofstream outFile;
-  outFile.open("database/members.csv", ios::app);
-  outFile << name << ',' << id<< ',' << city<<','<<state<<','<<zip<<endl;
+  //ofstream outFile;
+  //outFile.open("database/members.csv", ios::app);
+  //outFile << name << "\n" << id<< "\n" << city<<"\n"<<state<<"\n"<<zip<< false << endl;
   // If member with that id is not in the map already...
   members.insert(make_pair(id, member));
   // else fail
@@ -390,9 +390,9 @@ int InteractiveModule::add_provider() {
 
   Provider provider(name, id, city, state, zip);
   //save the member into csv file
-  ofstream outFile;
-  outFile.open("database/providers.csv", ios::app);
-  outFile << name << ',' << id<< ',' << city<<','<<state<<','<<zip<<endl;
+  //ofstream outFile;
+  //outFile.open("database/providers.csv", ios::app);
+  //outFile << name << ',' << id<< ',' << city<<','<<state<<','<<zip<<endl;
   // If member with that id is not in the map already...
   providers.insert(make_pair(id, provider));
   // else fail
@@ -544,14 +544,28 @@ int InteractiveModule::display_provider(uint provider_id) {
 //write_out(): write the data in map to csv file. 
 int InteractiveModule::write_out() {
   ofstream outFile;
-  outFile.open("database/members.csv", ios::app);
-  unordered_map<uint, Member>::iterator i = members.begin();
+  outFile.open("database/members.csv");
+  unordered_map<uint, Member>::iterator mi = members.begin();
   
-  while (i != members.end())
+  while (mi != members.end())
   {
 
-    outFile << i->second.get_name() << ',' << i->second.get_id() << ',' << i->second.get_city() << ',' << i->second.get_state() << ',' << i->second.get_zip() <<endl;
+    outFile << mi->second.get_name() << "\n" << mi->second.get_id() << "\n" << mi->second.get_city() <<"\n"<<mi->second.get_state() <<"\n"<<mi->second.get_zip() << "\n" << mi->second.get_suspended() << endl;
+    mi++;
   }
+
+  outFile.close();
+  outFile.open("database/providers.csv");
+  unordered_map<uint, Provider>::iterator pi = providers.begin();
+  
+  while (pi != providers.end())
+  {
+
+    outFile << pi->second.get_name() << "\n" << pi->second.get_id() << "\n" << pi->second.get_city() <<"\n"<<pi->second.get_state() <<"\n"<<pi->second.get_zip() << endl;
+    pi++;
+  }
+
+  outFile.close();
   
    return 0;
 }
@@ -603,10 +617,31 @@ InteractiveModule::InteractiveModule()
     {
       cout << "SUSPENDED";
     }
-    members.insert(make_pair(id,Member(name, id, city, state, zip)));
+    members.insert(make_pair(id,Member(name, id, city, state, zip, suspended)));
     cout << "\n";
   }
+  inFile.close();
+
   // Initialize providers map by reading from the providers.csv file
+  inFile.open("database/providers.csv");
+    name = new char[1000];
+    city = new char[1000];
+    state = new char[1000];
+  while (!inFile.eof())
+  while (inFile.getline(name,999))
+  {
+    inFile >> id;
+    inFile.ignore();
+    inFile.getline(city, 999);
+    inFile.getline(state,999);
+    inFile >> zip;
+    inFile.ignore();
+
+    cout << "DEBUG: " << name << id << city << state << zip;
+    providers.insert(make_pair(id,Provider(name, id, city, state, zip)));
+    cout << "\n";
+  }
+
   delete name;
   delete city;
   delete state;
@@ -616,5 +651,6 @@ InteractiveModule::InteractiveModule()
 
 InteractiveModule::~InteractiveModule()
 {
+  write_out();
 
 }

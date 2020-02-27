@@ -18,8 +18,9 @@ void Member::display_info(){
   cout<<"Zip: "<<get_zip()<<endl;
 }
 
-Member::Member(const std::string name, const uint member_id, const std::string city, const std::string state, const uint zip):Person(name, member_id, city, state, zip)
+Member::Member(const std::string name, const uint member_id, const std::string city, const std::string state, const uint zip, const bool suspended):Person(name, member_id, city, state, zip)
 {
+  this->suspended = suspended;
   //Person(const std::string name, const uint member_id, const std::string city, const std::string state, const uint zip)
 
 }
