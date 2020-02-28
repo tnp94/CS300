@@ -94,6 +94,18 @@ int InteractiveModule::init() {
         add_provider();
         break;
       case 7:
+        cout << "What is the provider number of the provider you would like to edit: ";
+        if (cin.fail())
+        {
+          cin.ignore(INT_MAX, '\n');
+          cin.clear();
+          cout << "Invalid input...\n\n";
+        }
+        else
+        {
+          cin >> id;
+        }
+        edit_provider(id);
         break;
       case 8:
         break;
@@ -449,10 +461,22 @@ int InteractiveModule::edit_provider(uint provider_id) {
             switch(choice)
             {
                 case 1: {
+
                     uint new_id = 0;
-                    cout << "Please input new member id: " << endl;
+                    cout << "Please input new provider id: " << endl;
                     cin >> new_id;
-                    i->second.set_id(new_id);
+                    unordered_map<uint, Provider>::iterator new_provider = providers.find(new_id);
+                    if (new_provider == providers.end())
+                    {
+                      providers.insert(make_pair(new_id, Provider(i->second.get_name(), new_id, i->second.get_city(), i->second.get_state(), i->second.get_zip())));
+                      providers.erase(i);
+                      provider_id = new_id;
+                      i = providers.find(new_id);
+                    }
+                    else
+                    {
+                      cout << "A provider already exists with that id\n\n";
+                    }
                     break;
                 }
                 case 2: {
