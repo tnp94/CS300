@@ -50,7 +50,15 @@ int ManagerModule::weekly_report() {
 
 //summary_report(): display all the service in map.
 int ManagerModule::summary_report() {
-
+  map<time_t ,Service>::iterator iterator;
+    iterator = service.begin();
+    cout<<"All service will be listed: "<<endl;
+    while(iterator!=service.end()){
+        cout<<"The service date: "<<endl;
+        cout<<iterator->first<<endl;
+        cout<<"The service's information: "<<endl;
+        iterator->second.display_info();
+   }
    return 0;
 }
 
