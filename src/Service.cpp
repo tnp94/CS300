@@ -1,5 +1,7 @@
 #include "../include/Service.h"
 
+using namespace std;
+
 uint Service::get_member_id() const {
    return this->member_id;
 }
