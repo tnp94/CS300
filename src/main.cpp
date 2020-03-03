@@ -2,6 +2,7 @@
 #include "../include/ManagerModule.h"
 #include "../include/InteractiveModule.h"
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
@@ -40,10 +41,22 @@ int main() {
             cout << "You selected provider module.\n";
             cout << "Please input your provider number: ";
             cin >> id;
-            cout << "Opening provider module\n";
-            provider_module = new ProviderModule;
-            provider_module->init(id);
-            delete provider_module;
+            if (!cin.fail())
+            {
+              cout << "Opening provider module\n";
+              provider_module = new ProviderModule;
+              if (provider_module->init(id) == -1)
+              {
+                cout << "Provider with id " << id << " not found\n";
+              }
+              delete provider_module;
+            }
+            else
+            {
+              cout << "Invalid input\n\n";
+              cin.clear();
+              cin.ignore(INT_MAX, '\n');
+            }
             break;
          case 2: // Manager Module
             cout << "You selected manager module.\n"

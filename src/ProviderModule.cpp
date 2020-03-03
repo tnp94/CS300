@@ -1,14 +1,22 @@
 #include "../include/ProviderModule.h"
+#include <unordered_map>
 #include <climits>
 #include <string>
 #include <iostream>
+#include <fstream>
+#include "../include/Member.h"
+
 using namespace std;
 
 int ProviderModule::init(uint id)
 {
+  if (providers.find(id) == providers.end())
+    return -1;
+
   cout << "\n\n\nWelcome to the Provider terminal";
   int choice = 0;
   uint sel=0;
+
   while (choice != 4)
   {
     cout << "\n\n\nWhat is your purpose?\n\n"
@@ -21,6 +29,7 @@ int ProviderModule::init(uint id)
     switch(choice)
     {
       case 1:
+        int isSuspended;
         cout << "What is the member ID you wish to validate?";
         if (cin.fail())
         {
@@ -32,7 +41,19 @@ int ProviderModule::init(uint id)
         {
           cin >> sel;
         }
-        validate_member(sel);
+        isSuspended = validate_member(sel);
+        if (isSuspended == 1)
+        {
+          cout << "Member ID " << sel << " status: SUSPENDED\n";
+        }
+        else if (isSuspended == 0)
+        {
+          cout << "Member ID " << sel << " status: VALID\n";
+        }
+        else if (isSuspended < 0)
+        {
+          cout << "Member ID " << sel << " not found\n";
+        }
         break;
       case 2:
       {
@@ -59,8 +80,15 @@ int ProviderModule::init(uint id)
 
 int ProviderModule::validate_member(uint id)
 {
+  int returnCode = -1;
+  unordered_map<uint, Member>::iterator i = members.find(id);
+  if (i != members.end())
+  {
+    returnCode = i->second.get_suspended();
+  }
 
-return 0;
+
+  return returnCode;
 }
 int ProviderModule::provide_service(Service& service)
 {
@@ -72,8 +100,65 @@ int ProviderModule::get_provider_directory()
 
 return 0;
 }
+
 ProviderModule::ProviderModule()
 {
+  char *name, *city, *state;
+  bool suspended;
+  uint zip, id;
+
+  // Initialize members map by reading from the members.csv file
+  fstream inFile;
+  inFile.open("database/members.csv");
+    name = new char[1000];
+    city = new char[1000];
+    state = new char[1000];
+  while (!inFile.eof())
+  while (inFile.getline(name,999))
+  {
+    inFile >> id;
+    inFile.ignore();
+    inFile.getline(city, 999);
+    inFile.getline(state,999);
+    inFile >> zip;
+    inFile.ignore();
+    inFile >> suspended;
+    inFile.ignore();
+
+    cout << "DEBUG: " << name << id << city << state << zip;
+    if (suspended)
+    {
+      cout << "SUSPENDED";
+    }
+    members.insert(make_pair(id,Member(name, id, city, state, zip, suspended)));
+    cout << "\n";
+  }
+  inFile.close();
+
+  // Initialize providers map by reading from the providers.csv file
+  inFile.open("database/providers.csv");
+    name = new char[1000];
+    city = new char[1000];
+    state = new char[1000];
+  while (!inFile.eof())
+  while (inFile.getline(name,999))
+  {
+    inFile >> id;
+    inFile.ignore();
+    inFile.getline(city, 999);
+    inFile.getline(state,999);
+    inFile >> zip;
+    inFile.ignore();
+
+    cout << "DEBUG: " << name << id << city << state << zip;
+    providers.insert(make_pair(id,Provider(name, id, city, state, zip)));
+    cout << "\n";
+  }
+  inFile.close();
+
+  delete name;
+  delete city;
+  delete state;
 
 }
 

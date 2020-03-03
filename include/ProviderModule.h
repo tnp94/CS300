@@ -3,6 +3,9 @@
 
 #include "Service.h"
 #include "ProviderDirectory.h"
+#include "Member.h"
+#include "Provider.h"
+#include <unordered_map>
 
 class ProviderModule{
   public:
@@ -15,6 +18,9 @@ class ProviderModule{
   private:
       ProviderDirectory directory;
       uint provider_id;
+      std::unordered_map<uint, Member> members;
+      std::unordered_map<uint, Provider> providers;
+
 };
 
 #endif

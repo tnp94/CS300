@@ -108,6 +108,18 @@ int InteractiveModule::init() {
         edit_provider(id);
         break;
       case 8:
+        cout << "What is the provider number of the provider you would like to remove: ";
+        if (cin.fail())
+        {
+          cin.ignore(INT_MAX, '\n');
+          cin.clear();
+          cout << "Invalid input...\n\n";
+        }
+        else
+        {
+          cin >> id;
+        }
+        remove_provider(id);
         break;
       case 9:
         break;
@@ -540,7 +552,7 @@ int InteractiveModule::remove_provider(uint provider_id) {
             cout << "Input 1 to remove this provider, input 2 to exit." << endl;
             cout << "1.Yes" << endl;
             cout << "2.Exit" << endl;
-            cin>>choice;
+            cin >> choice;
             switch(choice)
             {
                 case 1:
@@ -617,23 +629,6 @@ InteractiveModule::InteractiveModule()
   char *name, *city, *state;
   bool suspended;
   uint zip, id;
-  
-  //To test other functions , I will add some test data.
-  /*Member member1('John',1,'Portland','OR',97201);
-  members.insert(make_pair(1,member1));
-  Member member2('Jim',2,'Portland','OR',97201);
-  members.insert(make_pair(2,member2));
-  Member member3('Tom',3,'Portland','OR',97201);
-  members.insert(make_pair(3,member3));
-  
-  Provider provider1('Jerry',1,' Portland','OR',97201);
-  Provider provider2('Smith',2,'Portland','OR',97201);
-  Provider provider3('Tim',3,'Portland','OR',97201);
-  providers.insert(make_pair(1,provider1));
-  providers.insert(make_pair(2,provider2));
-  providers.insert(make_pair(3,provider3));*/
-
-
 
   // Initialize members map by reading from the members.csv file
   fstream inFile;
