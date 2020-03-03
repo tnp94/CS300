@@ -20,6 +20,7 @@ class Service {
       void set_date_added(time_t date_added);
       void set_service_date(time_t service_date);
       void set_comments(std::string comments);
+      void display_info();
       int build();
       Service(
             const uint member_id,

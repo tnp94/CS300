@@ -48,6 +48,14 @@ void Service::set_comments(std::string comments){
    this->comments=comments;
 }
 
+void Service::display_info(){
+   cout<<"The member id is: "<<this->get_member_id()<<endl;
+   cout<<"The provider id is: "<<this->get_provider_id()<<endl;
+   cout<<"The date when this service added: "<<this->get_date_added()<<endl;
+   cout<<"The date when this service is done: "<<this->get_service_date()<<endl;
+   cout<<"The service code: "<<this->get_service_code()<<endl;
+   cout<<"The user's comments: "<<this->get_comments()<<endl;
+}
 int Service::build(){
 
 return 0;
