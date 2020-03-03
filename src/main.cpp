@@ -7,7 +7,7 @@
 using namespace std;
 
 int main() {
-   int choice;
+   int choice = 0;
    int id = 0;
    ProviderModule *provider_module;
    ManagerModule *manager_module;
@@ -76,6 +76,8 @@ int main() {
             break;
          default:
             choice = 0;
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
             cout << "You did not select a valid response\n\n";
       }
    }

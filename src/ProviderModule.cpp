@@ -110,10 +110,10 @@ ProviderModule::ProviderModule()
   // Initialize members map by reading from the members.csv file
   fstream inFile;
   inFile.open("database/members.csv");
+  //while (!inFile.eof())
     name = new char[1000];
     city = new char[1000];
     state = new char[1000];
-  while (!inFile.eof())
   while (inFile.getline(name,999))
   {
     inFile >> id;
@@ -133,14 +133,17 @@ ProviderModule::ProviderModule()
     members.insert(make_pair(id,Member(name, id, city, state, zip, suspended)));
     cout << "\n";
   }
+  delete [] name;
+  delete [] city;
+  delete [] state;
   inFile.close();
 
   // Initialize providers map by reading from the providers.csv file
   inFile.open("database/providers.csv");
+  //while (!inFile.eof())
     name = new char[1000];
     city = new char[1000];
     state = new char[1000];
-  while (!inFile.eof())
   while (inFile.getline(name,999))
   {
     inFile >> id;
@@ -155,10 +158,10 @@ ProviderModule::ProviderModule()
     cout << "\n";
   }
   inFile.close();
+  delete [] name;
+  delete [] city;
+  delete [] state;
 
-  delete name;
-  delete city;
-  delete state;
 
 }
 

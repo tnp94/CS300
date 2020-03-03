@@ -51,5 +51,7 @@ Person::Person(const std::string name, const uint id, const std::string city, co
 
 Person::~Person()
 {
-
+  /*delete [] name;
+  delete [] city;
+  delete [] state;*/
 }

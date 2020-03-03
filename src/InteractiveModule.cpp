@@ -636,7 +636,7 @@ InteractiveModule::InteractiveModule()
     name = new char[1000];
     city = new char[1000];
     state = new char[1000];
-  while (!inFile.eof())
+  //while (!inFile.eof())
   while (inFile.getline(name,999))
   {
     inFile >> id;
@@ -657,13 +657,16 @@ InteractiveModule::InteractiveModule()
     cout << "\n";
   }
   inFile.close();
+  delete [] name;
+  delete [] city;
+  delete [] state;
 
   // Initialize providers map by reading from the providers.csv file
   inFile.open("database/providers.csv");
     name = new char[1000];
     city = new char[1000];
     state = new char[1000];
-  while (!inFile.eof())
+  //while (!inFile.eof())
   while (inFile.getline(name,999))
   {
     inFile >> id;
@@ -678,10 +681,10 @@ InteractiveModule::InteractiveModule()
     cout << "\n";
   }
   inFile.close();
+  delete [] name;
+  delete [] city;
+  delete [] state;
 
-  delete name;
-  delete city;
-  delete state;
 
 }
 
