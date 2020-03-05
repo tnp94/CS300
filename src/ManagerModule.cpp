@@ -22,6 +22,7 @@ int ManagerModule::init() {
     {
       case 1:
         cout<<"Generate Summary Report\n";
+        return_code = summary_report();
         
         break;
       case 2:
@@ -55,11 +56,13 @@ int ManagerModule::summary_report() {
   map<time_t ,Service>::iterator iterator;
     iterator = services.begin();
     cout<<"All service will be listed: "<<endl;
-    while(iterator!=services.end()){
+    while(iterator != services.end()){
         cout<<"The service date: "<<endl;
         cout<<iterator->first<<endl;
         cout<<"The service's information: "<<endl;
         iterator->second.display_info();
+
+        iterator++;
    }
    return 0;
 }
@@ -94,9 +97,9 @@ int ManagerModule::member_report(uint member_id) {
 //ManagerModule(): read the data from csv file into map.
 ManagerModule::ManagerModule()
 {
+      char * service_name; // CSV should be in this order
       uint member_id;
       uint provider_id;
-      char * service_name;
       time_t date_added;
       time_t service_date;
       uint service_code;
@@ -117,8 +120,8 @@ ManagerModule::ManagerModule()
     inFile.ignore();
     inFile.getline(comments, 999);
 
-    cout << "DEBUG: " << member_id << provider_id << service_name << date_added << service_date << service_code << comments;
-    services.insert(make_pair(service_date,Service(member_id, provider_id, service_name, date_added, service_date, service_code,comments)));
+    //cout << "DEBUG: " << member_id << provider_id << service_name << date_added << service_date << service_code << comments;
+    services.insert(make_pair(service_date, Service(member_id, provider_id, service_name, date_added, service_date, service_code,comments)));
     cout << "\n";
   }
   inFile.close();

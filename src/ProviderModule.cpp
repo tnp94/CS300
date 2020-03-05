@@ -97,8 +97,8 @@ return 0;
 }
 int ProviderModule::get_provider_directory()
 {
-
-return 0;
+  directory.generate_directory();
+  return 0;
 }
 
 ProviderModule::ProviderModule()
@@ -125,13 +125,13 @@ ProviderModule::ProviderModule()
     inFile >> suspended;
     inFile.ignore();
 
-    cout << "DEBUG: " << name << id << city << state << zip;
+    //cout << "DEBUG: " << name << id << city << state << zip;
     if (suspended)
     {
-      cout << "SUSPENDED";
+      //cout << "SUSPENDED";
+      //cout << "\n";
     }
     members.insert(make_pair(id,Member(name, id, city, state, zip, suspended)));
-    cout << "\n";
   }
   delete [] name;
   delete [] city;
@@ -153,9 +153,9 @@ ProviderModule::ProviderModule()
     inFile >> zip;
     inFile.ignore();
 
-    cout << "DEBUG: " << name << id << city << state << zip;
+    //cout << "DEBUG: " << name << id << city << state << zip;
+    //cout << "\n";
     providers.insert(make_pair(id,Provider(name, id, city, state, zip)));
-    cout << "\n";
   }
   inFile.close();
   delete [] name;

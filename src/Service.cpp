@@ -23,6 +23,10 @@ time_t Service::get_service_date() const {
    return this->service_date;
 }
 
+std::string Service::get_service_name() const {
+   return this->service_name;
+}
+
 std::string Service::get_comments() const {
    return this->comments;
 }

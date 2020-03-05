@@ -648,13 +648,13 @@ InteractiveModule::InteractiveModule()
     inFile >> suspended;
     inFile.ignore();
 
-    cout << "DEBUG: " << name << id << city << state << zip;
+    //cout << "DEBUG: " << name << id << city << state << zip;
     if (suspended)
     {
-      cout << "SUSPENDED";
+      //cout << "SUSPENDED";
+      //cout << "\n";
     }
     members.insert(make_pair(id,Member(name, id, city, state, zip, suspended)));
-    cout << "\n";
   }
   inFile.close();
   delete [] name;
@@ -676,9 +676,9 @@ InteractiveModule::InteractiveModule()
     inFile >> zip;
     inFile.ignore();
 
-    cout << "DEBUG: " << name << id << city << state << zip;
+    //cout << "DEBUG: " << name << id << city << state << zip;
+    //cout << "\n";
     providers.insert(make_pair(id,Provider(name, id, city, state, zip)));
-    cout << "\n";
   }
   inFile.close();
   delete [] name;
