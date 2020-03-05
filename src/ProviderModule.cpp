@@ -92,8 +92,18 @@ int ProviderModule::validate_member(uint id)
 }
 int ProviderModule::provide_service(Service& service)
 {
-
-return 0;
+  int return_code = 0;
+  fstream outFile;
+  outFile.open("database/services.csv", fstream::out | fstream::app);
+  if (outFile.is_open())
+  {
+  outFile << service.get_service_name() << "\n" << service.get_member_id() << "\n" << service.get_provider_id() << "\n" << service.get_date_added() << "\n" << service.get_service_date() << "\n" << service.get_service_code() << "\n" << service.get_comments() << "\n";
+  }
+  else
+  {
+    return_code = -1;
+  }
+  return return_code;
 }
 int ProviderModule::get_provider_directory()
 {
