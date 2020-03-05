@@ -58,9 +58,10 @@ int ProviderModule::init(uint id)
       case 2:
       {
         Service new_service;
-        new_service.build();
-        provide_service(new_service);   
-
+        if (new_service.build())
+        {
+          provide_service(new_service);   
+        }
         break;
       }
       case 3:
@@ -97,7 +98,8 @@ int ProviderModule::provide_service(Service& service)
   outFile.open("database/services.csv", fstream::out | fstream::app);
   if (outFile.is_open())
   {
-  outFile << service.get_service_name() << "\n" << service.get_member_id() << "\n" << service.get_provider_id() << "\n" << service.get_date_added() << "\n" << service.get_service_date() << "\n" << service.get_service_code() << "\n" << service.get_comments() << "\n";
+    outFile << service.get_service_name() << "\n" << service.get_member_id() << "\n" << service.get_provider_id() << "\n" << service.get_date_added() << "\n" << service.get_service_date() << "\n" << service.get_service_code() << "\n" << service.get_comments() << "\n";
+    outFile.close();
   }
   else
   {
