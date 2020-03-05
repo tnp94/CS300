@@ -1,5 +1,7 @@
 #include "../include/ManagerModule.h"
 #include <iostream>
+#include <fstream>
+#include <ctime>
 
 using namespace std;
 
@@ -51,9 +53,9 @@ int ManagerModule::weekly_report() {
 //summary_report(): display all the service in map.
 int ManagerModule::summary_report() {
   map<time_t ,Service>::iterator iterator;
-    iterator = service.begin();
+    iterator = services.begin();
     cout<<"All service will be listed: "<<endl;
-    while(iterator!=service.end()){
+    while(iterator!=services.end()){
         cout<<"The service date: "<<endl;
         cout<<iterator->first<<endl;
         cout<<"The service's information: "<<endl;
@@ -92,7 +94,36 @@ int ManagerModule::member_report(uint member_id) {
 //ManagerModule(): read the data from csv file into map.
 ManagerModule::ManagerModule()
 {
+      uint member_id;
+      uint provider_id;
+      char * service_name;
+      time_t date_added;
+      time_t service_date;
+      uint service_code;
+      char * comments;
 
+  // Initialize services map by reading from the services.csv file
+  fstream inFile;
+  inFile.open("database/services.csv");
+    service_name = new char[1000];
+    comments = new char[1000];
+  while (inFile.getline(service_name,999))
+  {
+    inFile >> member_id;
+    inFile >> provider_id;
+    inFile >> date_added;
+    inFile >> service_date;
+    inFile >> service_code;
+    inFile.ignore();
+    inFile.getline(comments, 999);
+
+    cout << "DEBUG: " << member_id << provider_id << service_name << date_added << service_date << service_code << comments;
+    services.insert(make_pair(service_date,Service(member_id, provider_id, service_name, date_added, service_date, service_code,comments)));
+    cout << "\n";
+  }
+  inFile.close();
+  delete [] service_name;
+  delete [] comments;
 }
 
 

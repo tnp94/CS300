@@ -24,7 +24,7 @@ class ManagerModule {
 
    private:
 
-      std::map<time_t, Service> service;
+      std::map<time_t, Service> services;
       std::unordered_map<uint, Provider> providers;
       std::unordered_map<uint, Member> members;
 };
