@@ -7,5 +7,72 @@
 using namespace std;
 
 int main() {
+   int choice = 0;
+   int id = 0;
+   ProviderModule *provider_module;
+   ManagerModule *manager_module;
+   InteractiveModule *interactive_module;
+   
+   Member("TestMember1", 10001, "Portland", "OR", 97201, true);
+   Provider("TestProvider1",20001, "Portland", "OR", 97201);
+   
+   while (choice != 4)
+   {
+      cout << "1. Provider Module\n"
+         << "2. Manager Module\n"
+         << "3. Database Interactive Module\n"
+         << "4. Exit\n";
+      
+      cin >> choice;
+
+      switch (choice)
+      {
+         case 1: // Provider Module
+            cout << "You selected provider module.\n";
+            cout << "Please input your provider number: ";
+            cin >> id;
+            if (!cin.fail())
+            {
+              cout << "Opening provider module\n";
+              provider_module = new ProviderModule;
+              if (provider_module->init(id) == -1)
+              {
+                cout << "Provider with id " << id << " not found\n";
+              }
+              delete provider_module;
+            }
+            else
+            {
+              cout << "Invalid input\n\n";
+              cin.clear();
+              cin.ignore(INT_MAX, '\n');
+            }
+            break;
+         case 2: // Manager Module
+            cout << "You selected manager module.\n"
+            << "Opening manager module\n";
+            manager_module = new ManagerModule;
+            manager_module->init();
+            delete manager_module;
+            break;
+         case 3: // Interactive Module
+            cout << "You selected database interactive module.\n"
+            << "Opening database interactive module\n";
+            interactive_module = new InteractiveModule;
+            interactive_module->init();
+            delete interactive_module;
+            break;
+         case 4: // Exit
+            break;
+         default:
+            choice = 0;
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            cout << "You did not select a valid response\n\n";
+      }
+   }
+   cout << "\n\n\nThanks for playing!\n\n";
+
+   return 0;
    return 0;
 }
