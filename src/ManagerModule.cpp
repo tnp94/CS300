@@ -129,6 +129,7 @@ int ManagerModule::weekly_report() {
                             iterator->second.display_info();
                         }
             }
+           iterator++;
         }
     }
     else{
