@@ -47,7 +47,93 @@ int ManagerModule::init() {
 
 //weekly_report(): check the time, if it is Friday, display this week's service.
 int ManagerModule::weekly_report() {
-
+  char *weekday[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    time_t curr_time;
+    struct tm * curr_timep;
+    time(&curr_time);
+    cout<<"The system's time is:"<<endl;
+    printf("%s", ctime(&curr_time));
+    curr_timep=localtime(&curr_time);
+    cout<<"Today is: "<<endl;
+    printf("%s", weekday[curr_timep->tm_wday]);
+    if( weekday[curr_timep->tm_wday]=="Fri"){
+        cout<<"Today is Friday, so the system will display this week's service."<<endl;
+        time_t tem_time;
+        struct tm* tem_timep;
+        map<time_t ,Service>::iterator iterator;
+        iterator = service.begin();
+        cout<<"All service in this week will be listed: "<<endl;
+        while(iterator!=service.end()){
+            tem_time=iterator->second.get_service_date();
+            tem_timep=localtime(&tem_time);
+            if(curr_timep->tm_mday>7) {//this week all in a month
+                if ((curr_timep->tm_year == tem_timep->tm_year) && (curr_timep->tm_mon == tem_timep->tm_mon) &&
+                    (curr_timep->tm_mday - tem_timep->tm_mday <= 7)) {
+                    cout << "The service's information: " << endl;
+                    iterator->second.display_info();
+                }
+            }
+            else{// this week devided into two months
+                    int cur_days=curr_timep->tm_mday;
+                    int last_days=8-cur_days;
+                    int last_mon_days=0;
+                    int year=1900+curr_timep->tm_year;
+                    switch(curr_timep->tm_mon+1) {
+                        case 1:
+                            last_mon_days=31;
+                            break;
+                        case 2:
+                            if(year%400 == 0 || (year %4 == 0 && year %100 != 0)){
+                                last_mon_days=29;
+                                }
+                            else
+                                last_days=28;
+                            break;
+                        case 3:
+                            last_mon_days=31;
+                            break;
+                        case 4:
+                            last_mon_days=30;
+                            break;
+                        case 5:
+                            last_mon_days=31;
+                        case 6:
+                            last_mon_days=30;
+                            break;
+                        case 7:
+                            last_mon_days=31;
+                            break;
+                        case 8:
+                            last_mon_days=31;
+                            break;
+                        case 9:
+                            last_mon_days=30;
+                            break;
+                        case 10:
+                            last_mon_days=31;
+                            break;
+                        case 11:
+                            last_mon_days=30;
+                            break;
+                        case 12:
+                            last_mon_days=31;
+                            break;
+                    }
+                    if(tem_timep->tm_mon==curr_timep->tm_mon&&tem_timep->tm_mday<=cur_days){
+                        cout << "The service's information: " << endl;
+                        iterator->second.display_info();
+                    }
+                    else if(tem_timep->tm_mon==curr_timep->tm_mon-1&&tem_timep->tm_mday<=last_mon_days-last_days)
+                        {
+                            cout << "The service's information: " << endl;
+                            iterator->second.display_info();
+                        }
+            }
+        }
+    }
+    else{
+        cout<<"Today is not Friday, so the system will not display any service."<<endl;
+    }
    return 0;
 }
 
