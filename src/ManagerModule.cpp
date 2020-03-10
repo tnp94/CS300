@@ -176,8 +176,6 @@ int ManagerModule::provider_report(uint provider_id) {
   if (i != providers.end())
   {
     //pass report to person_report
-    
-    iterator++;
     returnCode = 0;
   }
   // Check provider map for provider with provider_id
@@ -197,7 +195,6 @@ int ManagerModule::member_report(uint member_id) {
   {
     //pass report to person_report
     
-    iterator++;
     returnCode = 0;
   }
   // Check member map for member with member_id
