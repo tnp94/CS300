@@ -193,7 +193,7 @@ int ManagerModule::provider_report(uint provider_id) {
 int ManagerModule::member_report(uint member_id) {
   int returnCode = -1;
   unordered_map<uint, Member>::iterator i = members.find(member_id);
-  if (i != providers.end())
+  if (i != members.end())
   {
     //pass report to person_report
     
