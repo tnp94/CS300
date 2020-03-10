@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <cstring>
 
 using namespace std;
 
@@ -10,6 +11,9 @@ int ManagerModule::init() {
   cout << "\n\n\nWelcome to the manager's terminal\n\n";
   int choice = 0, id_number;
   int return_code;
+  weekly_report();
+
+
   while (choice != 4)
   {
     cout << "What is your purpose?\n\n"
@@ -23,6 +27,10 @@ int ManagerModule::init() {
       case 1:
         cout<<"Generate Summary Report\n";
         return_code = summary_report();
+        if (!return_code)
+        {
+          cout << "Summary report failed!\n\n";
+        }
         
         break;
       case 2:
@@ -35,7 +43,6 @@ int ManagerModule::init() {
         cout<<"Generate Member report\n";
         break;
       case 4:
-        cout<<"Generate Member report\n";
         break;
       default:
         cout << "You did not select a valid response\n\n";
@@ -47,23 +54,24 @@ int ManagerModule::init() {
 
 //weekly_report(): check the time, if it is Friday, display this week's service.
 int ManagerModule::weekly_report() {
-  char *weekday[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+  const char *weekday[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     time_t curr_time;
     struct tm * curr_timep;
     time(&curr_time);
     cout<<"The system's time is:"<<endl;
     printf("%s", ctime(&curr_time));
     curr_timep=localtime(&curr_time);
-    cout<<"Today is: "<<endl;
-    printf("%s", weekday[curr_timep->tm_wday]);
-    if( weekday[curr_timep->tm_wday]=="Fri"){
+    cout<<"Today is: "<< weekday[curr_timep->tm_wday] << endl;
+    if( strcmp(weekday[curr_timep->tm_wday],"Fri") != 0){
+      //TODO: Check if weekly report has been run today already by attempting to open the projected file name
+      // If it opens (inFile.isopen()) then we have already run it today and don't need to run it again.
         cout<<"Today is Friday, so the system will display this week's service."<<endl;
         time_t tem_time;
         struct tm* tem_timep;
         map<time_t ,Service>::iterator iterator;
-        iterator = service.begin();
+        iterator = services.begin();
         cout<<"All service in this week will be listed: "<<endl;
-        while(iterator!=service.end()){
+        while(iterator!=services.end()){
             tem_time=iterator->second.get_service_date();
             tem_timep=localtime(&tem_time);
             if(curr_timep->tm_mday>7) {//this week all in a month
@@ -133,7 +141,7 @@ int ManagerModule::weekly_report() {
         }
     }
     else{
-        cout<<"Today is not Friday, so the system will not display any service."<<endl;
+        cout<<"Today is not Friday, so the system does not need to run a weekly report."<<endl;
     }
    return 0;
 }

@@ -314,7 +314,7 @@ int InteractiveModule::remove_member(uint member_id) {
         cout<<"State: "<<i->second.get_state()<<endl;
         cout<<"Zip: "<<i->second.get_zip()<<endl;
         int choice=0;
-        while(choice!=2) {
+        while(choice != 1 && choice != 2) {
             cout << "Input 1 to remove this member, input 2 to exit." << endl;
             cout << "1.Yes" << endl;
             cout << "2.Exit" << endl;
@@ -548,7 +548,7 @@ int InteractiveModule::remove_provider(uint provider_id) {
         cout<<"State: "<<i->second.get_state()<<endl;
         cout<<"Zip: "<<i->second.get_zip()<<endl;
         int choice=0;
-        while(choice!=2) {
+        while(choice!=2 && choice!=1) {
             cout << "Input 1 to remove this provider, input 2 to exit." << endl;
             cout << "1.Yes" << endl;
             cout << "2.Exit" << endl;
