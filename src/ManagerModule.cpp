@@ -171,22 +171,40 @@ std::string ManagerModule::person_report(Person& person) {
 
 //provider_report(uint provider_id) : display the service the provider provides.
 int ManagerModule::provider_report(uint provider_id) {
+  int returnCode = -1;
+  unordered_map<uint, Provider>::iterator i = providers.find(provider_id);
+  if (i != providers.end())
+  {
+    //pass report to person_report
+    
+    iterator++;
+    returnCode = 0;
+  }
   // Check provider map for provider with provider_id
   // If not found, return -1
   // Else, pass provider to person_report and print return with the rest of the report
-  cout << "Debug: This is provider_report.\n";
+  //cout << "Debug: This is provider_report.\n";
 
-   return 0;
+   return returnCode;
 }
 
 
 //member_report(uint member_id) : display the service the member owns.
 int ManagerModule::member_report(uint member_id) {
+  int returnCode = -1;
+  unordered_map<uint, Member>::iterator i = members.find(member_id);
+  if (i != providers.end())
+  {
+    //pass report to person_report
+    
+    iterator++;
+    returnCode = 0;
+  }
   // Check member map for member with member_id
   // If not found, return -1
   // Else, pass member to person_report and print return with the rest of the report
 
-   return 0;
+   return returnCode;
 }
 
 //ManagerModule(): read the data from csv file into map.
