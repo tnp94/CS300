@@ -62,7 +62,7 @@ int ManagerModule::weekly_report() {
     printf("%s", ctime(&curr_time));
     curr_timep=localtime(&curr_time);
     cout<<"Today is: "<< weekday[curr_timep->tm_wday] << endl;
-    if( strcmp(weekday[curr_timep->tm_wday],"Fri") != 0){
+    if( strcmp(weekday[curr_timep->tm_wday],"Fri") == 0){
       //TODO: Check if weekly report has been run today already by attempting to open the projected file name
       // If it opens (inFile.isopen()) then we have already run it today and don't need to run it again.
         cout<<"Today is Friday, so the system will display this week's service."<<endl;
