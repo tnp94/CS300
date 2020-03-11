@@ -78,6 +78,16 @@ Service::Service(const uint member_id, const uint provider_id, const std::string
    this->comments=comments;
 }
 
+Service::Service(const std::string service_name, const uint service_code)
+{
+   /*this->member_id=member_id;
+   this->provider_id=provider_id;
+   this->date_added=date_added;
+   this->comments=comments;*/
+   this->service_date=service_date;
+   this->service_code=service_code;
+}
+
 Service::Service()
 {
 
