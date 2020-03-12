@@ -58,7 +58,7 @@ int ProviderModule::init(uint id)
       case 2:
       {
         Service new_service;
-        if (new_service.build())
+        if (new_service.build(id))
         {
           provide_service(new_service);   
         }
