@@ -58,12 +58,12 @@ void Service::set_comments(std::string comments){
 }
 
 void Service::display_info(){
-   cout<<"The member id is: "<<this->get_member_id()<<endl;
-   cout<<"The provider id is: "<<this->get_provider_id()<<endl;
-   cout<<"The date when this service added: "<<this->get_date_added()<<endl;
-   cout<<"The date when this service is done: "<<this->get_service_date()<<endl;
-   cout<<"The service code: "<<this->get_service_code()<<endl;
-   cout<<"The user's comments: "<<this->get_comments()<<endl;
+   cout<<"The member id is: "<<member_id<<"\n";
+   cout<<"The provider id is: "<<provider_id<<"\n";
+   cout<<"The date when this service added: "<<ctime(&date_added);
+   cout<<"The date when this service is done: "<<ctime(&service_date);
+   cout<<"The service code: "<<service_code<<"\n";
+   cout<<"The user's comments: "<<comments<<"\n";
 }
 int Service::build(uint prov_id){
 
@@ -127,6 +127,7 @@ int Service::build(uint prov_id){
     cin.ignore(INT_MAX,'\n');
     if(strcpy(ans,"N"))
         return -1;
+    Service(mem_id,prov_id,serv_name,added, serv_d, serv_code, comm);
 
 return 0;
 }
