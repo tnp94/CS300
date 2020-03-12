@@ -31,6 +31,10 @@ class Service {
             const uint service_code,
             const std::string comments
             );
+      Service(
+            const std::string service_name,
+            const uint service_code
+            );
       Service();
       ~Service();
 
