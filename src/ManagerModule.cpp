@@ -160,8 +160,8 @@ int ManagerModule::summary_report() {
     iterator = services.begin();
     cout<<"All service will be listed: "<<endl;
     while(iterator != services.end()){
-        cout<<"The service date: "<<endl;
-        cout<<iterator->first<<endl;
+        cout<<endl<<"The service date: ";
+        cout<<ctime(&iterator->first)<<endl;
         cout<<"The service's information: "<<endl;
         iterator->second.display_info();
 
