@@ -4,3 +4,4 @@
 out/chocan
 *.o
 documents/src/design.pdf
+.*swp
