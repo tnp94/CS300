@@ -11,7 +11,9 @@ class Person {
       void set_state(std::string state);
       void set_zip(uint zip);
       void display_info();
+      std::string get_name();
       std::string to_csv();
+      std::string report();
 
       Person(
             std::string name,

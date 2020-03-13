@@ -14,6 +14,10 @@ void Person::set_name(std::string name){
    this->name=name;
 }
 
+string Person::get_name() {
+   return name;
+}
+
 void Person::set_id(std::string id){
    this->id=id;
 }
@@ -32,6 +36,10 @@ void Person::set_zip(uint zip){
 
 string Person::to_csv() {
    return name + "|" + id + "|" + city + "|" + state + "|" + to_string(zip);
+}
+
+string Person::report() {
+   return "Name: " + name + "\nID: " + id + "\nCity: " + city + "\nState: " + state + "\nZip " + to_string(zip);
 }
 
 Person::Person() { }

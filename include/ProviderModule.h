@@ -6,8 +6,9 @@
 #include "Member.h"
 #include "Provider.h"
 #include <unordered_map>
+#include "Database.h"
 
-class ProviderModule{
+class ProviderModule {
    public:
       int init(std::string providerid);
 
@@ -22,9 +23,6 @@ class ProviderModule{
 
       ProviderDirectory directory;
       std::string provider_id;
-      std::unordered_map<std::string, Member> members;
-      std::unordered_map<std::string, Provider> providers;
-      std::map<time_t, Service> services;
 };
 
 #endif

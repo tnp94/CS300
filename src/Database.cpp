@@ -4,7 +4,15 @@
 
 using namespace std;
 
-Database::Database() {}
+Database data;
+
+Database::Database() {
+      read_service_info();
+      read_members();
+      read_providers();
+      read_services();
+}
+
 Database::~Database() {}
 
 void Database::read_person(std::istream &inFile, person_data& result) {
@@ -19,7 +27,7 @@ void Database::read_person(std::istream &inFile, person_data& result) {
    inFile >> result.zip;
 }
 
-void Database::members(std::unordered_map<std::string, Member>& map) {
+void Database::read_members() {
    person_data base;
    bool suspended;
 
@@ -36,13 +44,13 @@ void Database::members(std::unordered_map<std::string, Member>& map) {
       inFile.peek();
 
       Member to_add(string(base.name), string(base.id), string(base.city), string(base.state), base.zip, suspended);
-      map.insert(make_pair(base.id, to_add));
+      members.insert(make_pair(base.id, to_add));
    }
 
    inFile.close();
 }
 
-void Database::providers(std::unordered_map<std::string, Provider>& map) {
+void Database::read_providers() {
    person_data base;
 
    fstream inFile;
@@ -56,22 +64,20 @@ void Database::providers(std::unordered_map<std::string, Provider>& map) {
       inFile.peek();
 
       Provider to_add(string(base.name), string(base.id), string(base.city), string(base.state), base.zip);
-      map.insert(make_pair(base.id, to_add));
+      providers.insert(make_pair(base.id, to_add));
    }
 
    inFile.close();
 }
 
-void Database::services(std::map<time_t, Service>& services) {
+void Database::read_services() {
    char member[10];
    char provider[10];
    time_t date_added;
    time_t date_service;
    uint service_code;
    char comments[1000];
-   map<string, uint> service_names;
-   map<uint, string> service_codes;
-   service_info(service_names, service_codes);
+   float fee;
 
    fstream inFile;
    inFile.open("database/services.csv");
@@ -89,18 +95,20 @@ void Database::services(std::map<time_t, Service>& services) {
       inFile.ignore(1, '|');
       inFile >> service_code;
       inFile.ignore(1, '|');
+      inFile >> fee;
+      inFile.ignore(1, '|');
       inFile.get(comments, 1000, '\n');
       inFile.ignore(1, '\n');
       inFile.peek();
 
-      Service to_add(string(member), string(provider), service_codes.find(service_code) -> second, date_added, date_service, service_code, string(comments));
+      Service to_add(string(member), string(provider), service_codes.find(service_code) -> second, date_added, date_service, service_code, string(comments), fee);
       services.insert(make_pair(date_service, to_add));
    }
 
    inFile.close();
 }
 
-void Database::service_info(map<string, uint>& name_map, map<uint, string>& code_map) {
+void Database::read_service_info() {
    char name[1000];
    uint code;
 
@@ -116,14 +124,14 @@ void Database::service_info(map<string, uint>& name_map, map<uint, string>& code
       inFile.ignore(1, '\n');
       inFile.peek();
 
-      name_map.insert(pair<string, uint>(string(name), code));
-      code_map.insert(pair<uint, string>(code, string(name)));
+      service_names.insert(pair<string, uint>(string(name), code));
+      service_codes.insert(pair<uint, string>(code, string(name)));
    }
 
    inFile.close();
 }
 
-void Database::write_members(std::unordered_map<std::string, Member>& members) {
+void Database::write_members() {
    ofstream outFile;
    outFile.open("database/members.csv");
    outFile << "name|id|city|state|zip|suspended\n";
@@ -139,7 +147,7 @@ void Database::write_members(std::unordered_map<std::string, Member>& members) {
    outFile.close();
 }
 
-void Database::write_providers(std::unordered_map<std::string, Provider>& providers) {
+void Database::write_providers() {
    ofstream outFile;
    outFile.open("database/providers.csv");
    outFile << "name|id|city|state|zip\n";
@@ -155,10 +163,10 @@ void Database::write_providers(std::unordered_map<std::string, Provider>& provid
    outFile.close();
 }
 
-void Database::write_services(std::map<time_t, Service>& services) {
+void Database::write_services() {
    ofstream outFile;
    outFile.open("database/services.csv");
-   outFile << "member|provider|date added|date of service|service code|comments\n";
+   outFile << "member|provider|date added|date of service|service code|fee|comments\n";
    map<time_t, Service>::iterator si = services.begin();
 
    while (si != services.end()) {

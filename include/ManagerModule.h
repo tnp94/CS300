@@ -8,6 +8,7 @@
 #include <map>
 #include <unordered_map>
 #include <string>
+#include "Database.h"
 
 class ManagerModule {
 
@@ -18,15 +19,9 @@ class ManagerModule {
       ~ManagerModule();
 
    private:
-      int weekly_report();
       int summary_report();
-      std::string person_report(Person& person);
-      int provider_report(uint provider_id);
-      int member_report(uint provider_id);
-
-      std::map<time_t, Service> services;
-      std::unordered_map<std::string, Provider> providers;
-      std::unordered_map<std::string, Member> members;
+      int provider_report(std::string provider_id);
+      int member_report(std::string provider_id);
 };
 
 #endif

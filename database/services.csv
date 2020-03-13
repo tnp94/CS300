@@ -1,4 +1,4 @@
-member|provider|date added|date of service|service code|comments
-123456789|123456789|583354434|583376318|1|This is a test service
-123456787|123456788|583498018|583873848|3|This is a test service
-123456787|123456787|583377627|583991427|2|This is a test service
+member|provider|date added|date of service|service code|fee|comments
+123456789|123456789|1583354434|1583376318|1|83.23|This is a test service
+123456787|123456788|1583498018|1583873848|3|231.33|This is a test service
+123456787|123456787|1583377627|1583991427|2|23.12|This is a test service

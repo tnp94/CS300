@@ -4,8 +4,9 @@
 #include <map>
 #include <string>
 #include "Service.h"
+#include "Database.h"
 
-class ProviderDirectory {
+class ProviderDirectory: public Database {
    public:
       int generate_directory();
       std::string get_name(uint code);
@@ -13,10 +14,6 @@ class ProviderDirectory {
 
       ProviderDirectory();
       ~ProviderDirectory();
-
-   private:
-      std::map<std::string, uint> service_names;
-      std::map<uint, std::string> service_codes;
 };
 
 #endif

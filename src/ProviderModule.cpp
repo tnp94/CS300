@@ -10,7 +10,7 @@
 using namespace std;
 
 int ProviderModule::init(string id) {
-   if (providers.find(id) == providers.end())
+   if (data.providers.find(id) == data.providers.end())
       return -1;
 
    cout << "\n\n\nWelcome to the Provider terminal\n\n";
@@ -50,20 +50,17 @@ int ProviderModule::init(string id) {
                  }
 
          case 2: {
-                    {
-                       Service new_service;
-                       if (new_service.build(id))
-                          provide_service(new_service);   
-                       break;
-                    }
+                    Service new_service;
+                    if (new_service.build(id))
+                       provide_service(new_service);   
+                    break;
                  }
          case 3: {
                     get_provider_directory();
                     break;
                  }
          case 4: {
-                    Database writer;
-                    writer.write_services(services);
+                    data.write_services();
                     return 0;
                  }
 
@@ -80,8 +77,8 @@ int ProviderModule::init(string id) {
 
 int ProviderModule::validate_member(string id) {
    int returnCode = -1;
-   unordered_map<string, Member>::iterator i = members.find(id);
-   if (i != members.end())
+   unordered_map<string, Member>::iterator i = data.members.find(id);
+   if (i != data.members.end())
    {
       returnCode = i->second.get_suspended();
    }
@@ -90,7 +87,7 @@ int ProviderModule::validate_member(string id) {
 }
 
 int ProviderModule::provide_service(Service& service) {
-   services.insert(make_pair(service.get_service_date(), service));
+   data.services.insert(make_pair(service.get_service_date(), service));
    return 0;
 }
 
@@ -99,11 +96,6 @@ int ProviderModule::get_provider_directory() {
    return 0;
 }
 
-ProviderModule::ProviderModule() {
-   Database reader;
-   reader.members(members);
-   reader.providers(providers);
-   reader.services(services);
-}
+ProviderModule::ProviderModule() { }
 
 ProviderModule::~ProviderModule() { }

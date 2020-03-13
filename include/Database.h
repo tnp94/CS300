@@ -1,4 +1,4 @@
-#ifndef DATBASE_H
+#ifndef DATABASE_H
 #define DATABASE_H
 
 #include "Service.h"
@@ -18,22 +18,36 @@ struct person_data {
    uint zip;
 };
 
+class Service;
+
 // helper class to load data into working memory
-class Database {
+extern class Database {
    public:
       Database();
       ~Database();
 
-      void members(std::unordered_map<std::string, Member>& map);
-      void providers(std::unordered_map<std::string, Provider>& map);
-      void services(std::map<time_t, Service>& map);
-      void service_info(std::map<std::string, uint>&, std::map<uint, std::string>&);
-
-      void write_members(std::unordered_map<std::string, Member>& map);
-      void write_providers(std::unordered_map<std::string, Provider>& map);
-      void write_services(std::map<time_t, Service>& map);
-
    private:
+      void read_members();
+      void read_providers();
+      void read_services();
+      void read_service_info();
+
+      void write_members();
+      void write_providers();
+      void write_services();
+
       void read_person(std::istream &file, person_data& result);
-};
+
+      std::map<time_t, Service> services;
+      std::map<uint, std::string> service_codes;
+      std::map<std::string, uint> service_names;
+      std::unordered_map<std::string, Provider> providers;
+      std::unordered_map<std::string, Member> members;
+
+      friend class Service;
+      friend class InteractiveModule;
+      friend class ManagerModule;
+      friend class ProviderDirectory;
+      friend class ProviderModule;
+} data;
 #endif

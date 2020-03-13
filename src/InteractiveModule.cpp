@@ -186,7 +186,7 @@ int InteractiveModule::add_person(Person* to_add, PersonType type) {
          cout << "Enter new member id:\n";
          cin >> id;
          fflush(stdin);
-         id_exists = (members.find(id) != members.end());
+         id_exists = (data.members.find(id) != data.members.end());
          if (id_exists) {
             cout << "A member already exists with that id number\n\n";
          }
@@ -243,26 +243,26 @@ int InteractiveModule::add_person(Person* to_add, PersonType type) {
 
    // static cast is okay because objects were made by init()
    if(type == PROVIDER)
-      providers.insert(make_pair(id, *static_cast<Provider*>(to_add)));
+      data.providers.insert(make_pair(id, *static_cast<Provider*>(to_add)));
    else
-      members.insert(make_pair(id, *static_cast<Member*>(to_add)));
+      data.members.insert(make_pair(id, *static_cast<Member*>(to_add)));
 
    return 0;
 }
 
-// Edits a member or providers record in the database
+// Edits a member or data.providers record in the database
 int InteractiveModule::edit_person(string id, PersonType type) {
    Person *target;
    if(type == PROVIDER) {
-      unordered_map<string, Provider>::iterator i = providers.find(id);
-      if (i == providers.end()) {
+      unordered_map<string, Provider>::iterator i = data.providers.find(id);
+      if (i == data.providers.end()) {
          cout << "provider with id " << id << " not found\n\n";
          return -1;
       }
       target = &(i -> second);
    } else {
-      unordered_map<string, Member>::iterator i = members.find(id);
-      if (i == members.end()) {
+      unordered_map<string, Member>::iterator i = data.members.find(id);
+      if (i == data.members.end()) {
          cout << "member with id " << id << " not found\n\n";
          return -1;
       }
@@ -289,7 +289,6 @@ int InteractiveModule::edit_person(string id, PersonType type) {
 
       switch(choice) {
          case 1: {
-                    // TODO while id isnt valid
                     string new_id = "0";
                     bool valid = false;
                     do {
@@ -300,11 +299,11 @@ int InteractiveModule::edit_person(string id, PersonType type) {
 
                     if(type == PROVIDER) {
                        cout << "A provider already exists with that id\n\n";
-                       if(providers.find(new_id) != providers.end())
+                       if(data.providers.find(new_id) != data.providers.end())
                           valid = true;
                     } else {
                        cout << "A member already exists with that id\n\n";
-                       if(members.find(new_id) != members.end())
+                       if(data.members.find(new_id) != data.members.end())
                           valid = true;
                     }
 
@@ -312,17 +311,17 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                        if(type == PROVIDER) {
                           Provider new_person = *static_cast<Provider*>(target);
                           new_person.set_id(new_id);
-                          providers.insert(make_pair(new_id, new_person));
-                          providers.erase(providers.find(id));
+                          data.providers.insert(make_pair(new_id, new_person));
+                          data.providers.erase(data.providers.find(id));
                           id = new_id;
-                          target = &providers.find(new_id) -> second;
+                          target = &data.providers.find(new_id) -> second;
                        } else {
                           Member new_person = *static_cast<Member*>(target);
                           new_person.set_id(new_id);
-                          members.insert(make_pair(new_id, new_person));
-                          members.erase(members.find(id));
+                          data.members.insert(make_pair(new_id, new_person));
+                          data.members.erase(data.members.find(id));
                           id = new_id;
-                          target = &providers.find(new_id) -> second;
+                          target = &data.providers.find(new_id) -> second;
                        }
                     }
 
@@ -389,8 +388,8 @@ int InteractiveModule::remove_person(string id, PersonType type) {
    cout << "Searching for person with id " << id <<endl;
    Person* target;
    if(type == PROVIDER) {
-      unordered_map<string, Provider>::iterator i = providers.find(id);
-      if (i == providers.end()) {
+      unordered_map<string, Provider>::iterator i = data.providers.find(id);
+      if (i == data.providers.end()) {
          cout << "Person with ID " << id << " not found\n\n";
          return -1;
       }
@@ -409,7 +408,7 @@ int InteractiveModule::remove_person(string id, PersonType type) {
 
          switch(choice) {
             case 1:
-               providers.erase(i);
+               data.providers.erase(i);
                cout << "The person has been removed." << endl;
                break;
             case 2:
@@ -423,8 +422,8 @@ int InteractiveModule::remove_person(string id, PersonType type) {
       return 0;
    }
 
-   unordered_map<string, Member>::iterator i = members.find(id);
-   if (i == members.end()) {
+   unordered_map<string, Member>::iterator i = data.members.find(id);
+   if (i == data.members.end()) {
       cout << "Person with ID " << id << " not found\n\n";
       return -1;
    }
@@ -444,7 +443,7 @@ int InteractiveModule::remove_person(string id, PersonType type) {
 
       switch(choice) {
          case 1:
-            members.erase(i);
+            data.members.erase(i);
             cout << "The person has been removed." << endl;
             break;
          case 2:
@@ -463,16 +462,16 @@ int InteractiveModule::display_person(string id, PersonType type) {
    cout << "Searching for person with id " << id <<"\n\n";
    Person* target;
    if(type == PROVIDER) {
-      unordered_map<string, Provider>::iterator i = providers.find(id);
-      if (i == providers.end()) {
+      unordered_map<string, Provider>::iterator i = data.providers.find(id);
+      if (i == data.providers.end()) {
          cout << "Person with id " << id << " not found\n\n";
          return -1;
       }
       target = &(i -> second);
    }
    else {
-      unordered_map<string, Member>::iterator i = members.find(id);
-      if (i == members.end()) {
+      unordered_map<string, Member>::iterator i = data.members.find(id);
+      if (i == data.members.end()) {
          cout << "Person with id " << id << " not found\n\n";
          return -1;
       }
@@ -486,17 +485,12 @@ int InteractiveModule::display_person(string id, PersonType type) {
 
 // write the data in maps to file. 
 int InteractiveModule::write_out() {
-   Database writer;
-   writer.write_members(members);
-   writer.write_providers(providers);
+   data.write_members();
+   data.write_providers();
    return 0;
 }
 
 //InteractiveModule(): read the data in csv into map.
-InteractiveModule::InteractiveModule() {
-   Database reader;
-   reader.members(members);
-   reader.providers(providers);
-}
+InteractiveModule::InteractiveModule() { }
 
 InteractiveModule::~InteractiveModule() { }
