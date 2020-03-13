@@ -10,56 +10,56 @@ using namespace std;
 
 //init() : let user choose which function to use.
 int ManagerModule::init() {
-  cout << "\n\n\nWelcome to the manager's terminal\n\n";
-  int choice = 0, id_number;
-  weekly_report();
+   cout << "\n\n\nWelcome to the manager's terminal\n\n";
+   int choice = 0, id_number;
+   weekly_report();
 
 
-  while (choice != 4) {
-    cin.clear();
-    cout << "What is your purpose?\n\n"
-        << "1. Generate Summary Report\n"
-        << "2. Generate Provider Report\n"
-        << "3. Generate Member report\n"
-        << "4. Exit\n";
-    cin >> choice;
-    cin.ignore(INT_MAX, '\n');
+   while (choice != 4) {
+      cin.clear();
+      cout << "What is your purpose?\n\n"
+         << "1. Generate Summary Report\n"
+         << "2. Generate Provider Report\n"
+         << "3. Generate Member report\n"
+         << "4. Exit\n";
+      cin >> choice;
+      fflush(stdin);
 
-    switch(choice) {
-      case 1:
-        cout<<"\nGenerate Summary Report\n";
-        if(summary_report())
-          cout << "Summary report failed!\n\n";
-        break;
+      switch(choice) {
+         case 1:
+            cout<<"\nGenerate Summary Report\n";
+            if(summary_report())
+               cout << "Summary report failed!\n\n";
+            break;
 
-      case 2:
-        cout << "\nGenerate Provider Report\n\n"
-            << "What is the provider number of the provider you want a report for?\n";
+         case 2:
+            cout << "\nGenerate Provider Report\n\n"
+               << "What is the provider number of the provider you want a report for?\n";
             cin >> id_number;
-            cin.ignore(INT_MAX, '\n');
+            fflush(stdin);
             if(provider_report(id_number))
                cout << "Provider report failed!\n\n";
-        break;
+            break;
 
-      case 3:
-        cout<<"\nGenerate Member report\n\n"
-            << "What is the member number of the member you want a report for?\n";
+         case 3:
+            cout<<"\nGenerate Member report\n\n"
+               << "What is the member number of the member you want a report for?\n";
             cin >> id_number;
-            cin.ignore(INT_MAX, '\n');
+            fflush(stdin);
             if(member_report(id_number))
                cout << "Member report failed!\n\n";
-        break;
+            break;
 
-      case 4:
-        return 0;
+         case 4:
+            return 0;
 
-      default:
-        cout << "You did not select a valid response\n\n";
-        cin.ignore(INT_MAX, '\n');
-        cin.clear();
-    }
-  }
-  return 0;
+         default:
+            cout << "You did not select a valid response\n\n";
+            fflush(stdin);
+            cin.clear();
+      }
+   }
+   return 0;
 }
 
 //weekly_report(): check the time, if it is Friday, display this week's service.
@@ -95,6 +95,5 @@ ManagerModule::ManagerModule() {
    reader.providers(providers);
    reader.services(services);
 }
-
 
 ManagerModule::~ManagerModule() { }

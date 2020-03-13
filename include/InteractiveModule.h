@@ -24,6 +24,7 @@ class InteractiveModule {
       int display_person(std::string id, PersonType);
       int add_person(Person*, PersonType);
       int write_out();
+      bool id_is_valid(std::string id);
 
       std::unordered_map<std::string, Member> members;
       std::unordered_map<std::string, Provider> providers;

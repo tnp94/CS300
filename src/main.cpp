@@ -12,7 +12,7 @@ int main() {
    ProviderModule provider_module;
    ManagerModule manager_module;
    InteractiveModule interactive_module;
-   
+
    cout << "Welcome to the ChocAn application!\n\n";
 
    while (choice != 4) {
@@ -21,9 +21,9 @@ int main() {
          << "2. Manager Module\n"
          << "3. Database Interactive Module\n"
          << "4. Exit\n";
-      
+
       cin >> choice;
-      cin.ignore(INT_MAX, '\n');
+      fflush(stdin);
 
       switch (choice) {
          case 1: // Provider Module
@@ -31,26 +31,26 @@ int main() {
             cout << "Please input your provider number: ";
             cin >> id;
             if (!cin.fail()) {
-              cout << "Opening provider module\n";
-              if (provider_module.init(id) == -1) {
-                cout << "Provider with id " << id << " not found\n";
-              }
+               cout << "Opening provider module\n";
+               if (provider_module.init(id) == -1) {
+                  cout << "Provider with id " << id << " not found\n";
+               }
             } else {
-              cout << "Invalid input\n\n";
-              cin.clear();
-              cin.ignore(INT_MAX, '\n');
+               cout << "Invalid input\n\n";
+               cin.clear();
+               fflush(stdin);
             }
             break;
 
          case 2: // Manager Module
             cout << "You selected manager module.\n"
-            << "Opening manager module\n";
+               << "Opening manager module\n";
             manager_module.init();
             break;
 
          case 3: // Interactive Module
             cout << "You selected database interactive module.\n"
-            << "Opening database interactive module\n";
+               << "Opening database interactive module\n";
             interactive_module.init();
             break;
 
@@ -61,7 +61,7 @@ int main() {
          default:
             choice = 0;
             cin.clear();
-            cin.ignore(INT_MAX, '\n');
+            fflush(stdin);
             cout << "You did not select a valid response\n\n";
       }
    }

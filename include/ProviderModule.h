@@ -8,13 +8,13 @@
 #include <unordered_map>
 
 class ProviderModule{
-  public:
+   public:
       int init(std::string providerid);
 
       ProviderModule();
       ~ProviderModule();
 
-  private:
+   private:
       int write_out();
       int validate_member(std::string memberid);
       int provide_service(Service& service);

@@ -14,12 +14,12 @@ class Person {
       std::string to_csv();
 
       Person(
-         std::string name,
-         std::string id,
-         std::string city,
-         std::string state,
-         uint zip
-      );
+            std::string name,
+            std::string id,
+            std::string city,
+            std::string state,
+            uint zip
+            );
       Person();
       virtual ~Person();
 

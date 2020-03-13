@@ -21,72 +21,69 @@ void Service::display_info() {
 }
 
 int Service::build(string prov_id) {
-    uint serv_code;
-    char ans = 'N';
-    string serv_name, comm, mem_id;
-    time_t added,serv_d;
-    struct tm ser;
+   uint serv_code;
+   char ans = 'N';
+   string serv_name, comm, mem_id;
+   time_t added,serv_d;
+   struct tm ser;
 
-    cout<<"What is the member ID?\n";
-    cin>> mem_id;
-    cin.ignore(INT_MAX,'\n');
+   cout<<"What is the member ID?\n";
+   cin>> mem_id;
+   cin.ignore(INT_MAX,'\n');
 
-    cout<<"What is the service name?\n";
-    cin >> serv_name;
-    cin.ignore(INT_MAX,'\n');
-    
-    cout<<"What is the service code?\n";
-    cin>> serv_code;
-    cin.ignore(INT_MAX,'\n');
+   cout<<"What is the service code?\n";
+   cin>> serv_code;
+   cin.ignore(INT_MAX,'\n');
 
-    cout<<"What are the comments?\n";
-    cin >> comm;
-    cin.ignore(INT_MAX,'\n');
+   cout<<"What are the comments?\n";
+   cin >> comm;
+   cin.ignore(INT_MAX,'\n');
 
-    added= time(0);
+   added= time(0);
 
-    cout<<"What was the year the service was provided?\n";
-    cin>> ser.tm_year;
-    cin.ignore(INT_MAX,'\n');
-    ser.tm_year-=1900;
+   cout<<"What was the year the service was provided?\n";
+   cin>> ser.tm_year;
+   cin.ignore(INT_MAX,'\n');
+   ser.tm_year-=1900;
 
-    cout<<"What was the month the service was provided?\n";
-    cin>> ser.tm_mon;
-    cin.ignore(INT_MAX,'\n');
-    ser.tm_mon-=1;
-    
-    cout<<"What was the day the service was provided?\n";
-    cin>> ser.tm_mday;
-    cin.ignore(INT_MAX,'\n');
-   
-    ser.tm_hour=0;
-    ser.tm_min=0;
-    ser.tm_sec=0;
-    ser.tm_wday=0;
-    ser.tm_yday=0;
-    ser.tm_isdst=0;
-    serv_d=mktime(&ser);
-    
-    cout<<"Member ID: "<<mem_id<<"\n"
-        <<"Service Name: "<<serv_name<<"\n"
-        <<"Service Code: "<<serv_code<<"\n"
-        <<"Comments: "<<comm<<"\n"
-        <<"Service Added: "<<ctime(&added)<<"\n"
-        <<"Service Provided: "<<ctime(&serv_d)<<"\n";
-    cout<<"Is this correct? (Y/N)";
-    cin >> ans;
-    cin.ignore(INT_MAX,'\n');
+   cout<<"What was the month the service was provided?\n";
+   cin>> ser.tm_mon;
+   cin.ignore(INT_MAX,'\n');
+   ser.tm_mon-=1;
 
-    if(ans == 'N')
-        return -1;
+   cout<<"What was the day the service was provided?\n";
+   cin>> ser.tm_mday;
+   cin.ignore(INT_MAX,'\n');
 
-    Service(mem_id, prov_id, serv_name, added, serv_d, serv_code, comm);
+   ser.tm_hour=0;
+   ser.tm_min=0;
+   ser.tm_sec=0;
+   ser.tm_wday=0;
+   ser.tm_yday=0;
+   ser.tm_isdst=0;
+   serv_d=mktime(&ser);
 
-return 0;
+   cout<<"Member ID: "<<mem_id<<"\n"
+      <<"Service Name: "<<serv_name<<"\n"
+      <<"Service Code: \n"
+      <<"Comments: "<<comm<<"\n"
+      <<"Service Added: "<<ctime(&added)<<"\n"
+      <<"Service Provided: "<<ctime(&serv_d)<<"\n";
+   cout<<"Is this correct? (Y/N)";
+   cin >> ans;
+   cin.ignore(INT_MAX,'\n');
+
+   if(ans == 'N')
+      return -1;
+
+   //TODO get name from code
+   Service(mem_id, prov_id, string(" "), added, serv_d, serv_code, comm);
+
+   return 0;
 }
 
 string Service::to_csv() {
-   return string(" ");
+   return member_id + "|" + provider_id + "|" + to_string(date_added) + "|" + to_string(service_date) + "|" + to_string(service_code) + "|" + comments;
 }
 
 Service::Service( string member_id,  string provider_id,  std::string service_name,  time_t date_added,  time_t service_date,  uint service_code,  std::string comments) {
@@ -96,6 +93,10 @@ Service::Service( string member_id,  string provider_id,  std::string service_na
    this->service_date = service_date;
    this->service_code = service_code;
    this->comments     = comments;
+}
+
+time_t Service::get_service_date() {
+   return service_date;
 }
 
 Service::Service() { }

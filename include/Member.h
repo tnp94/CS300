@@ -11,14 +11,14 @@ class Member: public Person {
       void set_suspended(bool suspended);
       void display_info();
       std::string to_csv();
-   
+
       Member(
-             std::string name,
-             std::string member_id,
-             std::string city,
-             std::string state,
-             uint zip,
-             bool suspended
+            std::string name,
+            std::string member_id,
+            std::string city,
+            std::string state,
+            uint zip,
+            bool suspended
             );
       Member();
       ~Member();

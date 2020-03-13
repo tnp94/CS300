@@ -9,15 +9,16 @@ class Service {
       void display_info();
       int build(std::string prov_id);
       std::string to_csv();
+      time_t get_service_date();
 
       Service(
-             std::string member_id,
-             std::string provider_id,
-             std::string service_name,
-             time_t date_added,
-             time_t service_date,
-             uint service_code,
-             std::string comments
+            std::string member_id,
+            std::string provider_id,
+            std::string service_name,
+            time_t date_added,
+            time_t service_date,
+            uint service_code,
+            std::string comments
             );
       Service();
       ~Service();

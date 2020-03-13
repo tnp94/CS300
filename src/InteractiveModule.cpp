@@ -20,9 +20,7 @@ int InteractiveModule::init() {
 
    while (choice != 9) {
       cin.clear();
-      cin.ignore(INT_MAX, '\n');
 
-      // TODO suspend person
       cout << "\n\nWhat is your purpose?\n\n"
          << "1. Display Existing Member\n"
          << "2. Add New Member\n"
@@ -35,14 +33,14 @@ int InteractiveModule::init() {
          << "9. Exit\n";
 
       cin >> choice;
-      cin.ignore(INT_MAX, '\n');
+      fflush(stdin);
       cout << "\n\n";
 
       switch(choice) {
          case 1: {
                     cout << "What is the member ID of the member you would like to display: ";
                     cin >> id;
-                    cin.ignore(INT_MAX, '\n');
+                    fflush(stdin);
 
                     if (cin.fail()) {
                        cin.clear();
@@ -63,7 +61,7 @@ int InteractiveModule::init() {
          case 3: {
                     cout << "Please enter the member ID";
                     cin >> id;
-                    cin.ignore(INT_MAX, '\n');
+                    fflush(stdin);
 
                     if (cin.fail()) {
                        cin.clear();
@@ -77,7 +75,7 @@ int InteractiveModule::init() {
          case 4: {
                     cout << "Please enter the id you want remove:\n";
                     cin >> id;
-                    cin.ignore(INT_MAX, '\n');
+                    fflush(stdin);
 
                     if (cin.fail()) {
                        cin.clear();
@@ -91,7 +89,7 @@ int InteractiveModule::init() {
          case 5: {
                     cout << "What is the provider ID of the provider you would like to display: ";
                     cin >> id;
-                    cin.ignore(INT_MAX, '\n');
+                    fflush(stdin);
 
                     if (cin.fail()) {
                        cin.clear();
@@ -111,7 +109,7 @@ int InteractiveModule::init() {
          case 7: {
                     cout << "What is the provider ID of the provider you would like to edit: ";
                     cin >> id;
-                    cin.ignore(INT_MAX, '\n');
+                    fflush(stdin);
 
                     if (cin.fail()) {
                        cin.clear();
@@ -125,7 +123,7 @@ int InteractiveModule::init() {
          case 8: {
                     cout << "What is the provider number of the provider you would like to remove: ";
                     cin >> id;
-                    cin.ignore(INT_MAX, '\n');
+                    fflush(stdin);
 
                     if (cin.fail()) {
                        cin.clear();
@@ -143,12 +141,28 @@ int InteractiveModule::init() {
 
          default: {
                      cin.clear();
-                     cin.ignore(INT_MAX, '\n');
+                     fflush(stdin);
                      cout << "You did not select a valid response\n\n";
                   }
       }
    }
    return 0;
+}
+
+bool InteractiveModule::id_is_valid(string id) {
+   if(id.size() != 9) {
+      cout << "id must be 9 digits\n";
+      return false;
+   }
+
+   for(string::iterator it = id.begin(); it != id.end(); ++it) {
+      if(!isdigit(*it)) {
+         cout << "id must be 9 digits\n";
+         return false;
+      }
+   }
+
+   return true;
 }
 
 //add_member(): add a member into map, use the member_id as primary key.
@@ -160,44 +174,43 @@ int InteractiveModule::add_person(Person* to_add, PersonType type) {
 
    while (!correct) {
       cin.clear();
-      cin.ignore(INT_MAX, '\n');
+      fflush(stdin);
       cout << "Add new member...\n\n";
       cout << "Enter new member name:\n";
       cin >> name;
-      cin.ignore(INT_MAX, '\n');
+      fflush(stdin);
 
       do {
          cin.clear();
-         cin.ignore(INT_MAX, '\n');
-         //TODO check vlid id
+         fflush(stdin);
          cout << "Enter new member id:\n";
          cin >> id;
-         cin.ignore(INT_MAX, '\n');
+         fflush(stdin);
          id_exists = (members.find(id) != members.end());
          if (id_exists) {
             cout << "A member already exists with that id number\n\n";
          }
-      } while (cin.fail() || id_exists);
+      } while (cin.fail() || id_exists || !id_is_valid(id));
 
       cout << "Enter new member city:\n";
       cin >> city;
-      cin.ignore(INT_MAX, '\n');
+      fflush(stdin);
       cout << "Enter new member state:\n";
       cin >> state;
-      cin.ignore(INT_MAX, '\n');
+      fflush(stdin);
 
       do {
          cin.clear();
-         cin.ignore();
+         fflush(stdin);
          cout << "Enter new member zip:\n";
          cin >> zip;
-         cin.ignore(INT_MAX, '\n');
+         fflush(stdin);
       } while (cin.fail());
 
 
       do {
          cin.clear();
-         cin.ignore(INT_MAX, '\n');
+         fflush(stdin);
          cout << "The following member ready to add:\n"
             << "Name: " << name
             << "\nID: " << id
@@ -207,7 +220,7 @@ int InteractiveModule::add_person(Person* to_add, PersonType type) {
             << "\n\nIs this information correct? (y/n): ";
 
          cin >> verification;
-         cin.ignore(INT_MAX, '\n');
+         fflush(stdin);
          if (verification == "y") {
             cout << "Adding member...\n\n";
             correct = true;
@@ -271,7 +284,7 @@ int InteractiveModule::edit_person(string id, PersonType type) {
       cout<<"6.Exit"<<endl;
 
       cin>>choice;
-      cin.ignore(INT_MAX, '\n');
+      fflush(stdin);
       cin.clear();
 
       switch(choice) {
@@ -279,9 +292,11 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                     // TODO while id isnt valid
                     string new_id = "0";
                     bool valid = false;
-                    cout << "Please input new member id: " << endl;
-                    cin >> new_id;
-                    cin.ignore(INT_MAX, '\n');
+                    do {
+                       cout << "Please input new member id: " << endl;
+                       cin >> new_id;
+                       fflush(stdin);
+                    } while(id_is_valid(new_id));
 
                     if(type == PROVIDER) {
                        cout << "A provider already exists with that id\n\n";
@@ -344,7 +359,7 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                        uint new_zip = 0;
                        cout << "Please input new zip id:\n";
                        cin >> new_zip;
-                       cin.ignore(INT_MAX, '\n');
+                       fflush(stdin);
 
                        if(cin.fail()) {
                           cout << "Please enter a valid zip\n";
@@ -361,7 +376,7 @@ int InteractiveModule::edit_person(string id, PersonType type) {
 
          default: {
                      cin.clear();
-                     cin.ignore(INT_MAX, '\n');
+                     fflush(stdin);
                      cout << "You did not select a valid response"<<endl;
                   }
       }
@@ -390,7 +405,7 @@ int InteractiveModule::remove_person(string id, PersonType type) {
          cout << "2.Exit" << endl;
 
          cin >> choice;
-         cin.ignore(INT_MAX, '\n');
+         fflush(stdin);
 
          switch(choice) {
             case 1:
@@ -401,7 +416,7 @@ int InteractiveModule::remove_person(string id, PersonType type) {
                break;
             default:
                cin.clear();
-               cin.ignore(INT_MAX, '\n');
+               fflush(stdin);
                cout << "You did not select a valid response" << endl;
          }
       }
@@ -425,7 +440,7 @@ int InteractiveModule::remove_person(string id, PersonType type) {
       cout << "2.Exit" << endl;
 
       cin >> choice;
-      cin.ignore(INT_MAX, '\n');
+      fflush(stdin);
 
       switch(choice) {
          case 1:
@@ -436,7 +451,7 @@ int InteractiveModule::remove_person(string id, PersonType type) {
             break;
          default:
             cin.clear();
-            cin.ignore(INT_MAX, '\n');
+            fflush(stdin);
             cout << "You did not select a valid response" << endl;
       }
    }

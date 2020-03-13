@@ -8,15 +8,15 @@ Database::Database() {}
 Database::~Database() {}
 
 void Database::read_person(std::istream &inFile, person_data& result) {
-      inFile.get(result.name, 1000, '|');
-      inFile.ignore(1, '|');
-      inFile.get(result.id, 1000, '|');
-      inFile.ignore(1, '|');
-      inFile.get(result.city, 1000, '|');
-      inFile.ignore(1, '|');
-      inFile.get(result.state, 1000, '|');
-      inFile.ignore(1, '|');
-      inFile >> result.zip;
+   inFile.get(result.name, 1000, '|');
+   inFile.ignore(1, '|');
+   inFile.get(result.id, 1000, '|');
+   inFile.ignore(1, '|');
+   inFile.get(result.city, 1000, '|');
+   inFile.ignore(1, '|');
+   inFile.get(result.state, 1000, '|');
+   inFile.ignore(1, '|');
+   inFile >> result.zip;
 }
 
 void Database::members(std::unordered_map<std::string, Member>& map) {
@@ -123,10 +123,10 @@ void Database::service_info(map<string, uint>& name_map, map<uint, string>& code
    inFile.close();
 }
 
-//TODO
 void Database::write_members(std::unordered_map<std::string, Member>& members) {
    ofstream outFile;
    outFile.open("database/members.csv");
+   outFile << "name|id|city|state|zip|suspended\n";
    unordered_map<string, Member>::iterator mi = members.begin();
 
    while (mi != members.end()) {
@@ -142,6 +142,7 @@ void Database::write_members(std::unordered_map<std::string, Member>& members) {
 void Database::write_providers(std::unordered_map<std::string, Provider>& providers) {
    ofstream outFile;
    outFile.open("database/providers.csv");
+   outFile << "name|id|city|state|zip\n";
    unordered_map<string, Provider>::iterator pi = providers.begin();
 
    while (pi != providers.end()) {
@@ -157,6 +158,7 @@ void Database::write_providers(std::unordered_map<std::string, Provider>& provid
 void Database::write_services(std::map<time_t, Service>& services) {
    ofstream outFile;
    outFile.open("database/services.csv");
+   outFile << "member|provider|date added|date of service|service code|comments\n";
    map<time_t, Service>::iterator si = services.begin();
 
    while (si != services.end()) {

@@ -4,18 +4,18 @@ using namespace std;
 
 
 void Provider::display_info(){
-  cout<<"The provider's information:"<<endl;
-  Person::display_info();
+   cout<<"The provider's information:"<<endl;
+   Person::display_info();
 }
 
 Provider::Provider() { }
 
 Provider::Provider(
-       std::string name,
-       std::string id,
-       std::string city,
-       std::string state,
-       uint zip
+      std::string name,
+      std::string id,
+      std::string city,
+      std::string state,
+      uint zip
       ) : Person(name, id, city, state, zip) { }
 
 Provider::~Provider() { }
