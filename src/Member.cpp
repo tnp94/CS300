@@ -6,12 +6,17 @@ void Member::set_suspended(bool suspended){
 }
 
 bool Member::get_suspended(){
-  return this->suspended;
+  return suspended;
 }
 
 void Member::display_info(){
-  cout<<"The member's information:"<<endl;
+  cout << "The member's information:" << endl;
   Person::display_info();
+  cout << "suspeded: " << suspended;
+}
+
+string Member::to_csv() {
+   return string(" ");
 }
 
 Member::Member(
@@ -25,4 +30,5 @@ Member::Member(
   this->suspended = suspended;
 }
 
+Member::Member() { }
 Member::~Member() { }

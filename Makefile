@@ -13,7 +13,7 @@ LATEXFLAGS=--keep-logs --synctex --outdir
 
 ## CPP variables ##
 CC=g++
-CFLAGS=-g -Wall
+CFLAGS=-g -Wall -fmax-errors=5
 IDIR=./include/
 OUTDIR=./out/
 ODIR=$(OUTDIR)objects/

@@ -20,22 +20,19 @@ void Service::display_info() {
       << comments << "\n";
 }
 
-int Service::build(uint prov_id) {
-    uint mem_id, serv_code;
-    char *ans, *serv_name, *comm;
+int Service::build(string prov_id) {
+    uint serv_code;
+    char ans = 'N';
+    string serv_name, comm, mem_id;
     time_t added,serv_d;
     struct tm ser;
-
-    ans=new char[5];
-    serv_name=new char[86];
-    comm=new char[601];
 
     cout<<"What is the member ID?\n";
     cin>> mem_id;
     cin.ignore(INT_MAX,'\n');
 
     cout<<"What is the service name?\n";
-    cin.get(serv_name,85,'\n');
+    cin >> serv_name;
     cin.ignore(INT_MAX,'\n');
     
     cout<<"What is the service code?\n";
@@ -43,7 +40,7 @@ int Service::build(uint prov_id) {
     cin.ignore(INT_MAX,'\n');
 
     cout<<"What are the comments?\n";
-    cin.get(comm,600,'\n');
+    cin >> comm;
     cin.ignore(INT_MAX,'\n');
 
     added= time(0);
@@ -77,13 +74,19 @@ int Service::build(uint prov_id) {
         <<"Service Added: "<<ctime(&added)<<"\n"
         <<"Service Provided: "<<ctime(&serv_d)<<"\n";
     cout<<"Is this correct? (Y/N)";
-    cin.get(ans,5,'\n');
+    cin >> ans;
     cin.ignore(INT_MAX,'\n');
-    if(strcpy(ans,"N"))
+
+    if(ans == 'N')
         return -1;
-    Service(mem_id,prov_id,serv_name,added, serv_d, serv_code, comm);
+
+    Service(mem_id, prov_id, serv_name, added, serv_d, serv_code, comm);
 
 return 0;
+}
+
+string Service::to_csv() {
+   return string(" ");
 }
 
 Service::Service( string member_id,  string provider_id,  std::string service_name,  time_t date_added,  time_t service_date,  uint service_code,  std::string comments) {

@@ -8,9 +8,11 @@ void Provider::display_info(){
   Person::display_info();
 }
 
+Provider::Provider() { }
+
 Provider::Provider(
        std::string name,
-       uint id,
+       std::string id,
        std::string city,
        std::string state,
        uint zip

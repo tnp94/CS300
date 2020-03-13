@@ -8,7 +8,7 @@ using namespace std;
 
 int main() {
    int choice = 0;
-   int id = 0;
+   string id = "0";
    ProviderModule provider_module;
    ManagerModule manager_module;
    InteractiveModule interactive_module;
@@ -32,7 +32,7 @@ int main() {
             cin >> id;
             if (!cin.fail()) {
               cout << "Opening provider module\n";
-              if (provider_module->init(id) == -1) {
+              if (provider_module.init(id) == -1) {
                 cout << "Provider with id " << id << " not found\n";
               }
             } else {
@@ -45,13 +45,13 @@ int main() {
          case 2: // Manager Module
             cout << "You selected manager module.\n"
             << "Opening manager module\n";
-            manager_module->init();
+            manager_module.init();
             break;
 
          case 3: // Interactive Module
             cout << "You selected database interactive module.\n"
             << "Opening database interactive module\n";
-            interactive_module->init();
+            interactive_module.init();
             break;
 
          case 4: // Exit

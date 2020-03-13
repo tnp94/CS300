@@ -1,4 +1,5 @@
 #include "../include/ProviderModule.h"
+#include "../include/Database.h"
 #include <unordered_map>
 #include <climits>
 #include <string>
@@ -14,7 +15,7 @@ int ProviderModule::init(string id) {
 
   cout << "\n\n\nWelcome to the Provider terminal\n\n";
   int choice = 0;
-  uint sel=0;
+  string sel="0";
 
   while (choice != 4)
   {
@@ -27,7 +28,7 @@ int ProviderModule::init(string id) {
     cout << "\n\n";
     switch(choice)
     {
-      case 1:
+      case 1: {
         int isSuspended;
         cout << "What is the member ID you wish to validate?";
         if (cin.fail())
@@ -54,7 +55,9 @@ int ProviderModule::init(string id) {
           cout << "Member ID " << sel << " not found\n";
         }
         break;
-      case 2:
+              }
+
+      case 2: {
       {
         Service new_service;
         if (new_service.build(id))
@@ -63,51 +66,40 @@ int ProviderModule::init(string id) {
         }
         break;
       }
-      case 3:
+              }
+      case 3: {
         get_provider_directory();
         break;
-      case 4:
+              }
+      case 4: {
         Database writer;
         writer.write_services(services);
         return 0;
+              }
 
-      default:
+      default: {
         cin.clear();
         cin.ignore();
         cout << "You did not select a valid response\n\n";
+               }
     }
   }
 
   return 0;
 }
 
-int ProviderModule::validate_member(uint id)
-{
+int ProviderModule::validate_member(string id) {
   int returnCode = -1;
-  unordered_map<uint, Member>::iterator i = members.find(id);
+  unordered_map<string, Member>::iterator i = members.find(id);
   if (i != members.end())
   {
     returnCode = i->second.get_suspended();
   }
 
-
   return returnCode;
 }
 int ProviderModule::provide_service(Service& service)
 {
-  int return_code = 0;
-  fstream outFile;
-  outFile.open("database/services.csv", fstream::out | fstream::app);
-  if (outFile.is_open())
-  {
-    outFile << service.get_service_name() << "\n" << service.get_member_id() << "\n" << service.get_provider_id() << "\n" << service.get_date_added() << "\n" << service.get_service_date() << "\n" << service.get_service_code() << "\n" << service.get_comments() << "\n";
-    outFile.close();
-  }
-  else
-  {
-    return_code = -1;
-  }
-  return return_code;
 }
 int ProviderModule::get_provider_directory()
 {
@@ -119,6 +111,7 @@ ProviderModule::ProviderModule() {
    Database reader;
    reader.members(members);
    reader.providers(providers);
+   reader.services(services);
 }
 
 ProviderModule::~ProviderModule() { }

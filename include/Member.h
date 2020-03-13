@@ -10,15 +10,17 @@ class Member: public Person {
       bool get_suspended();
       void set_suspended(bool suspended);
       void display_info();
+      std::string to_csv();
    
       Member(
              std::string name,
-             uint member_id,
+             std::string member_id,
              std::string city,
              std::string state,
              uint zip,
              bool suspended
             );
+      Member();
       ~Member();
 
    private:

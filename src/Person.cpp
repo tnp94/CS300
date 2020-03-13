@@ -1,5 +1,7 @@
 #include "../include/Person.h"
+#include <iostream>
 
+using namespace std;
 void Person::display_info(){
   cout << "Name: "         << name  << endl;
   cout << "Provider_id: "  << id    << endl;
@@ -12,7 +14,7 @@ void Person::set_name(std::string name){
     this->name=name;
 }
 
-void Person::set_id(string id){
+void Person::set_id(std::string id){
     this->id=id;
 }
 
@@ -28,7 +30,12 @@ void Person::set_zip(uint zip){
     this->zip=zip;
 }
 
-Person::Person( std::string name,  std::string id,  std::string city,  std::string state,  uint zip) {
+string Person::to_csv() {
+   return string(" ");
+}
+
+Person::Person() { }
+Person::Person(std::string name, std::string id, std::string city, std::string state, uint zip) {
     this->name=name;
     this->id=id;
     this->city=city;

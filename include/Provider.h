@@ -15,6 +15,7 @@ class Provider : public Person {
             std::string state,
             uint zip
             );
+      Provider();
       ~Provider();
 };
 #endif

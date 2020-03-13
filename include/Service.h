@@ -8,6 +8,7 @@ class Service {
    public:
       void display_info();
       int build(std::string prov_id);
+      std::string to_csv();
 
       Service(
              std::string member_id,

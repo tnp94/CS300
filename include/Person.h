@@ -6,11 +6,12 @@
 class Person {
    public:
       void set_name(std::string name);
-      void set_id(string id);
+      void set_id(std::string id);
       void set_city(std::string city);
       void set_state(std::string state);
       void set_zip(uint zip);
       void display_info();
+      std::string to_csv();
 
       Person(
          std::string name,
@@ -19,6 +20,7 @@ class Person {
          std::string state,
          uint zip
       );
+      Person();
       virtual ~Person();
 
    private:

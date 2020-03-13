@@ -5,6 +5,11 @@
 #include "Member.h"
 #include "Provider.h"
 
+enum PersonType {
+   PROVIDER,
+   MEMBER
+};
+
 class InteractiveModule {
 
    public:
@@ -14,11 +19,10 @@ class InteractiveModule {
       ~InteractiveModule();
 
    private:
-      int add_person();
-      int edit_person(string id, std::unordered_map<string, Person> map);
-      int remove_person(string id, std::unordered_map<string, Person> map);
-      int display_person(string id, std::unordered_map<string, Person> map);
-      int add_person(std::unordered_map<string, Person> map);
+      int edit_person(std::string id, PersonType);
+      int remove_person(std::string id, PersonType);
+      int display_person(std::string id, PersonType);
+      int add_person(Person*, PersonType);
       int write_out();
 
       std::unordered_map<std::string, Member> members;

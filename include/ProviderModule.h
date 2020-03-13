@@ -9,13 +9,13 @@
 
 class ProviderModule{
   public:
-      int init(string providerid);
+      int init(std::string providerid);
 
       ProviderModule();
       ~ProviderModule();
 
   private:
-      int write_out()
+      int write_out();
       int validate_member(std::string memberid);
       int provide_service(Service& service);
       int get_provider_directory();
@@ -24,6 +24,7 @@ class ProviderModule{
       std::string provider_id;
       std::unordered_map<std::string, Member> members;
       std::unordered_map<std::string, Provider> providers;
+      std::map<time_t, Service> services;
 };
 
 #endif

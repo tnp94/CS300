@@ -9,7 +9,6 @@
 #include <unordered_map>
 #include <string>
 
-
 class ManagerModule {
 
    public:

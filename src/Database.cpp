@@ -1,12 +1,13 @@
 #include "../include/Database.h"
+#include <climits>
+#include <fstream>
 
 using namespace std;
 
+Database::Database() {}
+Database::~Database() {}
 
-Databse() {}
-~Database() {}
-
-void read_person(std::istream &file, person_data& result) {
+void Database::read_person(std::istream &inFile, person_data& result) {
       inFile.get(result.name, 1000, '|');
       inFile.ignore(1, '|');
       inFile.get(result.id, 1000, '|');
@@ -18,13 +19,13 @@ void read_person(std::istream &file, person_data& result) {
       inFile >> result.zip;
 }
 
-void members(std::unordered_map<std::string, Member>& map) {
+void Database::members(std::unordered_map<std::string, Member>& map) {
    person_data base;
    bool suspended;
 
-   fstream inFile;
+   ifstream inFile;
    inFile.open("database/members.csv");
-   cin.ignore(INT_MAX, '\n');
+   inFile.ignore(INT_MAX, '\n');
    inFile.peek();
 
    while(!inFile.eof()) {
@@ -41,12 +42,12 @@ void members(std::unordered_map<std::string, Member>& map) {
    inFile.close();
 }
 
-void providers(std::unordered_map<std::string, Provider>& map) {
+void Database::providers(std::unordered_map<std::string, Provider>& map) {
    person_data base;
 
    fstream inFile;
    inFile.open("database/providers.csv");
-   cin.ignore(INT_MAX, '\n');
+   inFile.ignore(INT_MAX, '\n');
    inFile.peek();
 
    while(!inFile.eof()) {
@@ -61,19 +62,20 @@ void providers(std::unordered_map<std::string, Provider>& map) {
    inFile.close();
 }
 
-void services(std::map<time_t, Service>& map) {
+void Database::services(std::map<time_t, Service>& services) {
    char member[10];
    char provider[10];
    time_t date_added;
    time_t date_service;
    uint service_code;
    char comments[1000];
-   map<string, uint> service_names, service_codes;
+   map<string, uint> service_names;
+   map<uint, string> service_codes;
    service_info(service_names, service_codes);
 
    fstream inFile;
-   inFile.open("database/providers.csv");
-   cin.ignore(INT_MAX, '\n');
+   inFile.open("database/services.csv");
+   inFile.ignore(INT_MAX, '\n');
    inFile.peek();
 
    while(!inFile.eof()) {
@@ -87,65 +89,82 @@ void services(std::map<time_t, Service>& map) {
       inFile.ignore(1, '|');
       inFile >> service_code;
       inFile.ignore(1, '|');
-      inFile.get(comments, 10, '|');
+      inFile.get(comments, 1000, '\n');
       inFile.ignore(1, '\n');
       inFile.peek();
 
       Service to_add(string(member), string(provider), service_codes.find(service_code) -> second, date_added, date_service, service_code, string(comments));
-      map.insert(make_pair(date_service, to_add));
+      services.insert(make_pair(date_service, to_add));
    }
 
    inFile.close();
 }
 
-void service_info(map<string, uint>& name_map, map<uint, string>& code_map) {
+void Database::service_info(map<string, uint>& name_map, map<uint, string>& code_map) {
    char name[1000];
    uint code;
 
    fstream inFile;
    inFile.open("database/providerdirectory.csv");
-   cin.ignore(INT_MAX, '\n');
+   inFile.ignore(INT_MAX, '\n');
    inFile.peek();
 
    while(!inFile.eof()) {
       inFile.get(name, 1000, '|');
+      inFile.ignore(1, '\n');
       inFile >> code;
-      inFile.ignore(1, '\n';
+      inFile.ignore(1, '\n');
       inFile.peek();
 
-      name_map.insert(make_pair<string, uint>(name, code));
-      code_map.insert(make_pair<uint, string>(code, name));
+      name_map.insert(pair<string, uint>(string(name), code));
+      code_map.insert(pair<uint, string>(code, string(name)));
    }
 
    inFile.close();
 }
 
 //TODO
-void write_members(std::unordered_map<std::string, Member>& map) {
+void Database::write_members(std::unordered_map<std::string, Member>& members) {
    ofstream outFile;
    outFile.open("database/members.csv");
-   unordered_map<uint, Member>::iterator mi = members.begin();
+   unordered_map<string, Member>::iterator mi = members.begin();
 
    while (mi != members.end()) {
-      outFile << mi -> to_csv() << endl;
+      outFile << mi -> second.to_csv();
       mi++;
+      if (mi != members.end()) 
+         outFile << endl;
    }
 
    outFile.close();
 }
 
-void write_providers(std::unordered_map<std::string, Provider>& map) {
+void Database::write_providers(std::unordered_map<std::string, Provider>& providers) {
+   ofstream outFile;
    outFile.open("database/providers.csv");
-   unordered_map<uint, Provider>::iterator pi = providers.begin();
+   unordered_map<string, Provider>::iterator pi = providers.begin();
 
    while (pi != providers.end()) {
-      outFile pi -> to_csv() << endl;
+      outFile << pi -> second.to_csv();
       pi++;
+      if (pi != providers.end()) 
+         outFile << endl;
    }
 
    outFile.close();
 }
 
-void write_services(std::map<time_t, Service>& map) {
-}
+void Database::write_services(std::map<time_t, Service>& services) {
+   ofstream outFile;
+   outFile.open("database/services.csv");
+   map<time_t, Service>::iterator si = services.begin();
 
+   while (si != services.end()) {
+      outFile << si -> second.to_csv();
+      si++;
+      if (si != services.end()) 
+         outFile << endl;
+   }
+
+   outFile.close();
+}
