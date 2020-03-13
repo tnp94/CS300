@@ -8,12 +8,11 @@
 
 using namespace std;
 
-int ProviderModule::init(uint id)
-{
+int ProviderModule::init(string id) {
   if (providers.find(id) == providers.end())
     return -1;
 
-  cout << "\n\n\nWelcome to the Provider terminal";
+  cout << "\n\n\nWelcome to the Provider terminal\n\n";
   int choice = 0;
   uint sel=0;
 
@@ -68,7 +67,10 @@ int ProviderModule::init(uint id)
         get_provider_directory();
         break;
       case 4:
-        break;
+        Database writer;
+        writer.write_services(services);
+        return 0;
+
       default:
         cin.clear();
         cin.ignore();
@@ -113,72 +115,10 @@ int ProviderModule::get_provider_directory()
   return 0;
 }
 
-ProviderModule::ProviderModule()
-{
-  char *name, *city, *state;
-  bool suspended;
-  uint zip, id;
-
-  // Initialize members map by reading from the members.csv file
-  fstream inFile;
-  inFile.open("database/members.csv");
-  //while (!inFile.eof())
-    name = new char[1000];
-    city = new char[1000];
-    state = new char[1000];
-  while (inFile.getline(name,999))
-  {
-    inFile >> id;
-    inFile.ignore();
-    inFile.getline(city, 999);
-    inFile.getline(state,999);
-    inFile >> zip;
-    inFile.ignore();
-    inFile >> suspended;
-    inFile.ignore();
-
-    //cout << "DEBUG: " << name << id << city << state << zip;
-    if (suspended)
-    {
-      //cout << "SUSPENDED";
-      //cout << "\n";
-    }
-    members.insert(make_pair(id,Member(name, id, city, state, zip, suspended)));
-  }
-  delete [] name;
-  delete [] city;
-  delete [] state;
-  inFile.close();
-
-  // Initialize providers map by reading from the providers.csv file
-  inFile.open("database/providers.csv");
-  //while (!inFile.eof())
-    name = new char[1000];
-    city = new char[1000];
-    state = new char[1000];
-  while (inFile.getline(name,999))
-  {
-    inFile >> id;
-    inFile.ignore();
-    inFile.getline(city, 999);
-    inFile.getline(state,999);
-    inFile >> zip;
-    inFile.ignore();
-
-    //cout << "DEBUG: " << name << id << city << state << zip;
-    //cout << "\n";
-    providers.insert(make_pair(id,Provider(name, id, city, state, zip)));
-  }
-  inFile.close();
-  delete [] name;
-  delete [] city;
-  delete [] state;
-
-
+ProviderModule::ProviderModule() {
+   Database reader;
+   reader.members(members);
+   reader.providers(providers);
 }
 
-
-ProviderModule::~ProviderModule()
-{
-
-}
+ProviderModule::~ProviderModule() { }

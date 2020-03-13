@@ -1,30 +1,18 @@
 #include "../include/Person.h"
 
-std::string Person::get_name(){
-    return this->name;
-}
-
-std::string Person::get_city(){
-    return this->city;
-}
-
-std::string Person::get_state(){
-     return this->state;
- }
-
-uint Person::get_zip(){
-    return this->zip;
-}
-
-uint Person::get_id(){
-    return this->id;
+void Person::display_info(){
+  cout << "Name: "         << name  << endl;
+  cout << "Provider_id: "  << id    << endl;
+  cout << "City: "         << city  << endl;
+  cout << "State: "        << state << endl;
+  cout << "Zip: "          << zip   << endl;
 }
 
 void Person::set_name(std::string name){
     this->name=name;
 }
 
-void Person::set_id(uint id){
+void Person::set_id(string id){
     this->id=id;
 }
 
@@ -40,8 +28,7 @@ void Person::set_zip(uint zip){
     this->zip=zip;
 }
 
-Person::Person(const std::string name, const uint id, const std::string city, const std::string state, const uint zip)
-{
+Person::Person( std::string name,  std::string id,  std::string city,  std::string state,  uint zip) {
     this->name=name;
     this->id=id;
     this->city=city;
@@ -49,6 +36,4 @@ Person::Person(const std::string name, const uint id, const std::string city, co
     this->zip=zip;
 }
 
-Person::~Person()
-{
-}
+Person::~Person() { }

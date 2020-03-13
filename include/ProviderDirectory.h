@@ -8,8 +8,12 @@
 class ProviderDirectory {
    public:
       int generate_directory();
+
+      ProviderDirectory();
+      ~ProviderDirectory();
+
    private:
-      std::map<std::string, Service> services;
+      std::map<std::string, uint> services;
 };
 
 #endif

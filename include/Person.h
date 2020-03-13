@@ -5,30 +5,27 @@
 
 class Person {
    public:
-      std::string get_name();
-      std::string get_city();
-      std::string get_state();
-      uint get_zip();
-      uint get_id();
       void set_name(std::string name);
-      void set_id(uint id);
+      void set_id(string id);
       void set_city(std::string city);
       void set_state(std::string state);
       void set_zip(uint zip);
-      Person(
-         const std::string name,
-         const uint id,
-         const std::string city,
-         const std::string state,
-         const uint zip
-      );
+      void display_info();
 
-      /*virtual*/ ~Person();
+      Person(
+         std::string name,
+         std::string id,
+         std::string city,
+         std::string state,
+         uint zip
+      );
+      virtual ~Person();
+
    private:
       std::string name;
       std::string city;
       std::string state;
-      uint id;
+      std::string id;
       uint zip;
 };
 

@@ -14,42 +14,51 @@ int ManagerModule::init() {
   weekly_report();
 
 
-  while (choice != 4)
-  {
+  while (choice != 4) {
+    cin.clear();
     cout << "What is your purpose?\n\n"
         << "1. Generate Summary Report\n"
         << "2. Generate Provider Report\n"
         << "3. Generate Member report\n"
         << "4. Exit\n";
     cin >> choice;
-    switch(choice)
-    {
+    cin.ignore(INT_MAX, '\n');
+
+    switch(choice) {
       case 1:
-        cout<<"Generate Summary Report\n";
-        return_code = summary_report();
-        if (!return_code)
-        {
+        cout<<"\nGenerate Summary Report\n";
+        if(summary_report())
           cout << "Summary report failed!\n\n";
-        }
-        
         break;
+
       case 2:
         cout << "\nGenerate Provider Report\n\n"
             << "What is the provider number of the provider you want a report for?\n";
             cin >> id_number;
-            return_code = provider_report(id_number);
+            cin.ignore(INT_MAX, '\n');
+            if(provider_report(id_number))
+               cout << "Provider report failed!\n\n";
         break;
+
       case 3:
-        cout<<"Generate Member report\n";
+        cout<<"\nGenerate Member report\n\n"
+            << "What is the member number of the member you want a report for?\n";
+            cin >> id_number;
+            cin.ignore(INT_MAX, '\n');
+            if(member_report(id_number))
+               cout << "Member report failed!\n\n";
         break;
+
       case 4:
-        break;
+        return 0;
+
       default:
         cout << "You did not select a valid response\n\n";
+        cin.ignore(INT_MAX, '\n');
+        cin.clear()
     }
   }
-
-   return 0;
+  return 0;
 }
 
 //weekly_report(): check the time, if it is Friday, display this week's service.
@@ -213,42 +222,12 @@ int ManagerModule::member_report(uint member_id) {
 }
 
 //ManagerModule(): read the data from csv file into map.
-ManagerModule::ManagerModule()
-{
-      char * service_name; // CSV should be in this order
-      uint member_id;
-      uint provider_id;
-      time_t date_added;
-      time_t service_date;
-      uint service_code;
-      char * comments;
-
-  // Initialize services map by reading from the services.csv file
-  fstream inFile;
-  inFile.open("database/services.csv");
-    service_name = new char[1000];
-    comments = new char[1000];
-  while (inFile.getline(service_name,999))
-  {
-    inFile >> member_id;
-    inFile >> provider_id;
-    inFile >> date_added;
-    inFile >> service_date;
-    inFile >> service_code;
-    inFile.ignore();
-    inFile.getline(comments, 999);
-
-    //cout << "DEBUG: " << member_id << provider_id << service_name << date_added << service_date << service_code << comments;
-    services.insert(make_pair(service_date, Service(member_id, provider_id, service_name, date_added, service_date, service_code,comments)));
-    cout << "\n";
-  }
-  inFile.close();
-  delete [] service_name;
-  delete [] comments;
+ManagerModule::ManagerModule() {
+   Database reader;
+   reader.members(members);
+   reader.providers(providers);
+   reader.services(services);
 }
 
 
-ManagerModule::~ManagerModule()
-{
-
-}
+ManagerModule::~ManagerModule() { }

@@ -9,23 +9,20 @@ class InteractiveModule {
 
    public:
       int init();
-      int add_member();
-      int edit_member(uint provider_id);
-      int remove_member(uint member_id);
-      int display_member(uint member_id);
-      int add_provider();
-      int edit_provider(uint provider_id);
-      int remove_provider(uint provider_id);
-      int display_provider(uint provider_id);
-      int write_out();
 
       InteractiveModule();
       ~InteractiveModule();
 
    private:
-      std::unordered_map<uint, Member> members;
-      std::unordered_map<uint, Provider> providers;
+      int add_person();
+      int edit_person(string id, std::unordered_map<string, Person> map);
+      int remove_person(string id, std::unordered_map<string, Person> map);
+      int display_person(string id, std::unordered_map<string, Person> map);
+      int add_person(std::unordered_map<string, Person> map);
+      int write_out();
 
+      std::unordered_map<std::string, Member> members;
+      std::unordered_map<std::string, Provider> providers;
 };
 
 #endif

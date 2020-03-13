@@ -7,19 +7,20 @@
 class Member: public Person {
 
    public:
-      Member(
-            const std::string name,
-            const uint member_id,
-            const std::string city,
-            const std::string state,
-            const uint zip,
-            const bool suspended
-            );
-      //~Member();
       bool get_suspended();
       void set_suspended(bool suspended);
       void display_info();
    
+      Member(
+             std::string name,
+             uint member_id,
+             std::string city,
+             std::string state,
+             uint zip,
+             bool suspended
+            );
+      ~Member();
+
    private:
       bool suspended;
 };

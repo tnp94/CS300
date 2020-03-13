@@ -5,68 +5,22 @@
 
 using namespace std;
 
-uint Service::get_member_id() const {
-   return this->member_id;
+void Service::display_info() {
+   cout << "The member id is: "
+      << member_id << "\n"
+      << "The provider id is: "
+      << provider_id << "\n"
+      << "The date when this service added: "
+      << ctime(&date_added)
+      << "The date when this service is done: "
+      << ctime(&service_date)
+      << "The service code: "
+      << service_code << "\n"
+      << "The user's comments: "
+      << comments << "\n";
 }
 
-uint Service::get_provider_id() const {
-   return this->provider_id;
-}
-
-uint Service::get_service_code() const {
-   return this->service_code;
-}
-
-time_t Service::get_date_added() const {
-   return this->date_added;
-}
-
-time_t Service::get_service_date() const {
-   return this->service_date;
-}
-
-std::string Service::get_service_name() const {
-   return this->service_name;
-}
-
-std::string Service::get_comments() const {
-   return this->comments;
-}
-
-void Service::set_member_id(uint member_id){
-   this->member_id=member_id;
-}
-
-void Service::set_provider_id(uint provider_id){
-   this->provider_id=provider_id;
-}
-
-void Service::set_date_added(time_t date_added){
-   this->date_added=date_added;
-}
-
-void Service::set_service_date(time_t service_date){
-   this->service_date=service_date;
-}
-
-void Service::set_service_code(uint service_code){
-   this->service_code=service_code;
-}
-
-void Service::set_comments(std::string comments){
-   this->comments=comments;
-}
-
-void Service::display_info(){
-   cout<<"The member id is: "<<member_id<<"\n";
-   cout<<"The provider id is: "<<provider_id<<"\n";
-   cout<<"The date when this service added: "<<ctime(&date_added);
-   cout<<"The date when this service is done: "<<ctime(&service_date);
-   cout<<"The service code: "<<service_code<<"\n";
-   cout<<"The user's comments: "<<comments<<"\n";
-}
-int Service::build(uint prov_id){
-
+int Service::build(uint prov_id) {
     uint mem_id, serv_code;
     char *ans, *serv_name, *comm;
     time_t added,serv_d;
@@ -132,33 +86,15 @@ int Service::build(uint prov_id){
 return 0;
 }
 
-Service::Service(const uint member_id, const uint provider_id, const std::string service_name, const time_t date_added, const time_t service_date, const uint service_code, const std::string comments)
-{
-   this->member_id=member_id;
-   this->provider_id=provider_id;
-   this->date_added=date_added;
-   this->service_date=service_date;
-   this->service_code=service_code;
-   this->comments=comments;
+Service::Service( string member_id,  string provider_id,  std::string service_name,  time_t date_added,  time_t service_date,  uint service_code,  std::string comments) {
+   this->member_id    = member_id;
+   this->provider_id  = provider_id;
+   this->date_added   = date_added;
+   this->service_date = service_date;
+   this->service_code = service_code;
+   this->comments     = comments;
 }
 
-Service::Service(const std::string service_name, const uint service_code)
-{
-   /*this->member_id=member_id;
-   this->provider_id=provider_id;
-   this->date_added=date_added;
-   this->comments=comments;*/
-   this->service_date=service_date;
-   this->service_code=service_code;
-}
+Service::Service() { }
 
-Service::Service()
-{
-
-
-}
-Service::~Service()
-{
-
-}
-
+Service::~Service() { }

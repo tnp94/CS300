@@ -11,21 +11,18 @@ bool Member::get_suspended(){
 
 void Member::display_info(){
   cout<<"The member's information:"<<endl;
-  cout<<"Name: "<<get_name()<<endl;
-  cout<<"Member_id: "<<get_id()<<endl;
-  cout<<"City: "<<get_city()<<endl;
-  cout<<"State: "<<get_state()<<endl;
-  cout<<"Zip: "<<get_zip()<<endl;
+  Person::display_info();
 }
 
-Member::Member(const std::string name, const uint member_id, const std::string city, const std::string state, const uint zip, const bool suspended):Person(name, member_id, city, state, zip)
-{
+Member::Member(
+       std::string name,
+       std::string member_id,
+       std::string city,
+       std::string state,
+       uint zip,
+       bool suspended
+      ):Person(name, member_id, city, state, zip) {
   this->suspended = suspended;
-  //Person(const std::string name, const uint member_id, const std::string city, const std::string state, const uint zip)
-
 }
 
-/*Member::~Member()
-{
-
-}*/
+Member::~Member() { }

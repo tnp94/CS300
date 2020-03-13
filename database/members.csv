@@ -1,12 +1,3 @@
-Thomas
-12345
-Hillsboro
-Oregon
-97123
-0
-Michael
-12346
-Camas
-Washington
-98607
-1
+name|id|city|state|zip|suspended
+Thomas|123456789|Hillsboro|Oregon|97123|0
+Michael|123456787|Camas|Washington|98607|1

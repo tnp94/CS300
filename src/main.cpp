@@ -9,24 +9,13 @@ using namespace std;
 int main() {
    int choice = 0;
    int id = 0;
-   ProviderModule *provider_module;
-   ManagerModule *manager_module;
-   InteractiveModule *interactive_module;
-
-   //This Part is Creat CVS TABLE
-   /*ofstream outFile;
-   outFile.open("Member.cvs", ios::app);
-   outFile<<"NAME"<<','<<"ID"<<','<<"CITY"<<','<<"STATE"<<','<<"ZIP"<<endl;
-   outFile.open("Provider.cvs", ios::app);
-   outFile<<"NAME"<<','<<"ID"<<','<<"CITY"<<','<<"STATE"<<','<<"ZIP"<<endl;
-   outFile.open("Services.cvs", ios::app);
-   outFile<<"MemeberID"<<','<<"ProviderID"<<','<<"AddDate"<<','<<"ServiceDate"<<','<<"ServiceCode"<<','<<"Comments"<<endl;
-*/
+   ProviderModule provider_module;
+   ManagerModule manager_module;
+   InteractiveModule interactive_module;
    
    cout << "Welcome to the ChocAn application!\n\n";
 
-   while (choice != 4)
-   {
+   while (choice != 4) {
       cout << "\n\nWhat terminal would you like to log into?\n"
          << "1. Provider Module\n"
          << "2. Manager Module\n"
@@ -34,46 +23,41 @@ int main() {
          << "4. Exit\n";
       
       cin >> choice;
+      cin.ignore(INT_MAX, '\n');
 
-      switch (choice)
-      {
+      switch (choice) {
          case 1: // Provider Module
             cout << "You selected provider module.\n";
             cout << "Please input your provider number: ";
             cin >> id;
-            if (!cin.fail())
-            {
+            if (!cin.fail()) {
               cout << "Opening provider module\n";
-              provider_module = new ProviderModule;
-              if (provider_module->init(id) == -1)
-              {
+              if (provider_module->init(id) == -1) {
                 cout << "Provider with id " << id << " not found\n";
               }
-              delete provider_module;
-            }
-            else
-            {
+            } else {
               cout << "Invalid input\n\n";
               cin.clear();
               cin.ignore(INT_MAX, '\n');
             }
             break;
+
          case 2: // Manager Module
             cout << "You selected manager module.\n"
             << "Opening manager module\n";
-            manager_module = new ManagerModule;
             manager_module->init();
-            delete manager_module;
             break;
+
          case 3: // Interactive Module
             cout << "You selected database interactive module.\n"
             << "Opening database interactive module\n";
-            interactive_module = new InteractiveModule;
             interactive_module->init();
-            delete interactive_module;
             break;
+
          case 4: // Exit
-            break;
+            cout << "\n\n\nThanks for playing!\n\n";
+            return 0;
+
          default:
             choice = 0;
             cin.clear();
@@ -81,7 +65,5 @@ int main() {
             cout << "You did not select a valid response\n\n";
       }
    }
-   cout << "\n\n\nThanks for playing!\n\n";
-
    return 0;
 }

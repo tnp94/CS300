@@ -6,15 +6,15 @@
 
 class Provider : public Person {
    public:
-   Provider(
-      const std::string name,
-      const uint id,
-      const std::string city,
-      const std::string state,
-      const uint zip
-   );
-   ~Provider();
-   private:
+      void display_info();
 
+      Provider(
+            std::string name,
+            std::string id,
+            std::string city,
+            std::string state,
+            uint zip
+            );
+      ~Provider();
 };
 #endif

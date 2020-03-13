@@ -21,7 +21,7 @@ SRCDIR=./src/
 TESTDIR=./test/
 TESTSRC=$(TESTDIR)src/
 TESTIDIR=$(TESTDIR)include/
-MODS= InteractiveModule ManagerModule Member Person Provider ProviderModule Service ProviderDirectory
+MODS= InteractiveModule ManagerModule Member Person Provider ProviderModule Service ProviderDirectory Database
 
 ## Rule to build documents ##
 .PHONY: docs
