@@ -61,9 +61,10 @@ int main() {
 
          default:
             choice = 0;
-            cin.clear();
-            if(cin.peek() != EOF)
-               cin.ignore();
+            if (cin.fail()) {
+              cin.clear();
+              cin.ignore();
+            }
             cout << "You did not select a valid response\n\n";
       }
    }
