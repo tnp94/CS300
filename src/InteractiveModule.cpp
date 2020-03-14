@@ -309,7 +309,6 @@ int InteractiveModule::edit_person(string id, PersonType type) {
    int choice=0;
 
    while(choice!=7) {
-<<<<<<< HEAD
       cout<<"Which part of information you want to edit? Input 7 to exit and save."<<endl;
       cout<<"1.id"<<endl;
       cout<<"2.Name"<<endl;
@@ -389,15 +388,9 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                  }
 
          case 5: {
-<<<<<<< HEAD
                     string new_state=" ";
                     cout<<"Please input new state: "<<endl;
                     getline(cin, new_state);
-=======
-                    string new_state = " ";
-                    cout << "Please input new state: (TWO letter code)" << endl;
-                    cin >> new_state;
->>>>>>> bc345388435eb89230fd30f11ce4673a9499414b
                     target -> set_state(new_state);
                     break;
                  }
