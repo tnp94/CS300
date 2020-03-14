@@ -309,7 +309,7 @@ int InteractiveModule::edit_person(string id, PersonType type) {
    int choice=0;
 
    while(choice!=7) {
-      cout<<"Which part of information you want to edit? Input 6 to exit and save."<<endl;
+      cout<<"Which part of information you want to edit? Input 7 to exit and save."<<endl;
       cout<<"1.id"<<endl;
       cout<<"2.Name"<<endl;
       cout<<"3.Street"<<endl;
@@ -371,8 +371,8 @@ int InteractiveModule::edit_person(string id, PersonType type) {
 
          case 3: {
                     string new_street = " ";
-                    cout << "Please input new name: " << endl;
-                    cin >> new_street;
+                    cout << "Please input new street address: " << endl;
+                    getline(cin, new_street);
                     target -> set_street(new_street);
                     break;
                  }
@@ -380,7 +380,7 @@ int InteractiveModule::edit_person(string id, PersonType type) {
          case 4: {
                     string new_city = " ";
                     cout << "Please input new city: " << endl;
-                    cin >> new_city;
+                    getline(cin, new_city);
                     target -> set_city(new_city);
                     break;
                  }
@@ -388,21 +388,21 @@ int InteractiveModule::edit_person(string id, PersonType type) {
          case 5: {
                     string new_state=" ";
                     cout<<"Please input new state: "<<endl;
-                    cin>>new_state;
+                    getline(cin, new_state);
                     target -> set_state(new_state);
                     break;
                  }
 
          case 6: {
+                    uint new_zip = 0;
                     do {
-                       cin.clear();
-                       uint new_zip = 0;
                        cout << "Please input new zip id:\n";
                        cin >> new_zip;
-                       cin.ignore(INT_MAX, '\n');
 
                        if(cin.fail()) {
                           cout << "Please enter a valid zip\n";
+                          cin.clear();
+                          cin.ignore(INT_MAX, '\n');
                        } else
                           target -> set_zip(new_zip);
                     } while(cin.fail());
