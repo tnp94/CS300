@@ -308,7 +308,7 @@ int InteractiveModule::edit_person(string id, PersonType type) {
 
    int choice=0;
 
-   while(choice!=6) {
+   while(choice!=7) {
       cout<<"Which part of information you want to edit? Input 6 to exit and save."<<endl;
       cout<<"1.id"<<endl;
       cout<<"2.Name"<<endl;
@@ -320,6 +320,7 @@ int InteractiveModule::edit_person(string id, PersonType type) {
 
       cin>>choice;
       cin.ignore(INT_MAX, '\n');
+      cin.clear();
 
       switch(choice) {
          case 1: {
