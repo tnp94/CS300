@@ -15,6 +15,7 @@ class Member: public Person {
       Member(
             std::string name,
             std::string member_id,
+            std::string street,
             std::string city,
             std::string state,
             uint zip,

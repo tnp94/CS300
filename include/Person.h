@@ -18,6 +18,7 @@ class Person {
       Person(
             std::string name,
             std::string id,
+            std::string street,
             std::string city,
             std::string state,
             uint zip
@@ -27,9 +28,10 @@ class Person {
 
    private:
       std::string name;
+      std::string id;
+      std::string street;
       std::string city;
       std::string state;
-      std::string id;
       uint zip;
 };
 

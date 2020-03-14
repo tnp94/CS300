@@ -20,6 +20,8 @@ void Database::read_person(std::istream &inFile, person_data& result) {
    inFile.ignore(1, '|');
    inFile.get(result.id, 1000, '|');
    inFile.ignore(1, '|');
+   inFile.get(result.street, 1000, '|');
+   inFile.ignore(1, '|');
    inFile.get(result.city, 1000, '|');
    inFile.ignore(1, '|');
    inFile.get(result.state, 1000, '|');
@@ -43,7 +45,7 @@ void Database::read_members() {
       inFile.ignore(1, '\n');
       inFile.peek();
 
-      Member to_add(string(base.name), string(base.id), string(base.city), string(base.state), base.zip, suspended);
+      Member to_add(string(base.name), string(base.id), string(base.street), string(base.city), string(base.state), base.zip, suspended);
       members.insert(make_pair(base.id, to_add));
    }
 
@@ -63,7 +65,7 @@ void Database::read_providers() {
       inFile.ignore(1, '\n');
       inFile.peek();
 
-      Provider to_add(string(base.name), string(base.id), string(base.city), string(base.state), base.zip);
+      Provider to_add(string(base.name), string(base.id), string(base.street), string(base.city), string(base.state), base.zip);
       providers.insert(make_pair(base.id, to_add));
    }
 

@@ -11,10 +11,11 @@
 #include <string>
 
 struct person_data {
-   char name[1000];
+   char name[25];
+   char street[36];
    char id[10];
-   char city[1000];
-   char state[1000];
+   char city[15];
+   char state[3];
    uint zip;
 };
 

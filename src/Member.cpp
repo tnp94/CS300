@@ -25,11 +25,12 @@ string Member::to_csv() {
 Member::Member(
       std::string name,
       std::string member_id,
+      std::string street,
       std::string city,
       std::string state,
       uint zip,
       bool suspended
-      ):Person(name, member_id, city, state, zip) {
+      ):Person(name, member_id, street, city, state, zip) {
    this->suspended = suspended;
 }
 

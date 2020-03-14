@@ -3,11 +3,12 @@
 
 using namespace std;
 void Person::display_info(){
-   cout << "Name: "         << name  << endl;
-   cout << "Provider_id: "  << id    << endl;
-   cout << "City: "         << city  << endl;
-   cout << "State: "        << state << endl;
-   cout << "Zip: "          << zip   << endl;
+   cout << "Name: "     << name   << endl;
+   cout << "ID: "       << id     << endl;
+   cout << "Street: "   << street << endl;
+   cout << "City: "     << city   << endl;
+   cout << "State: "    << state  << endl;
+   cout << "Zip: "      << zip    << endl;
 }
 
 void Person::set_name(std::string name){
@@ -35,20 +36,21 @@ void Person::set_zip(uint zip){
 }
 
 string Person::to_csv() {
-   return name + "|" + id + "|" + city + "|" + state + "|" + to_string(zip);
+   return name + "|" + id + "|" + street + "|" + city + "|" + state + "|" + to_string(zip);
 }
 
 string Person::report() {
-   return "Name: " + name + "\nID: " + id + "\nCity: " + city + "\nState: " + state + "\nZip " + to_string(zip);
+   return "Name: " + name + "\nID: " + id + "\nStreet: " + street + "\nCity: " + city + "\nState: " + state + "\nZip " + to_string(zip);
 }
 
 Person::Person() { }
-Person::Person(std::string name, std::string id, std::string city, std::string state, uint zip) {
-   this->name=name;
-   this->id=id;
-   this->city=city;
-   this->state=state;
-   this->zip=zip;
+Person::Person(std::string name, std::string id, std::string street, std::string city, std::string state, uint zip) {
+   this -> name   = name;
+   this -> id     = id;
+   this -> street = street;
+   this -> city   = city;
+   this -> state  = state;
+   this -> zip    = zip;
 }
 
 Person::~Person() { }

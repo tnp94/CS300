@@ -11,6 +11,7 @@ class Provider : public Person {
       Provider(
             std::string name,
             std::string id,
+            std::string street,
             std::string city,
             std::string state,
             uint zip

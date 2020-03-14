@@ -13,9 +13,10 @@ Provider::Provider() { }
 Provider::Provider(
       std::string name,
       std::string id,
+      std::string street,
       std::string city,
       std::string state,
       uint zip
-      ) : Person(name, id, city, state, zip) { }
+      ) : Person(name, id, street, city, state, zip) { }
 
 Provider::~Provider() { }
