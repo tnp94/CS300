@@ -331,7 +331,7 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                           cout << "Please input new member id: " << endl;
                           cin >> new_id;
                           cin.ignore(INT_MAX, '\n');
-                       } while(id_is_valid(new_id));
+                       } while(!id_is_valid(new_id));
 
                        if(type == PROVIDER && data.providers.find(new_id) != data.providers.end()) {
                           cout << "A provider already exists with that id\n\n";
