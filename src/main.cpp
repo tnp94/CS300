@@ -10,12 +10,13 @@ using namespace std;
 int main() {
    cout << "Running tests.....\n\n";
 
-   int failed = 13;
+   int failed = 0;
 
    failed += valid_login_provider();
    failed += invalid_login_provider();
    failed += valid_verify_member();
    failed += invalid_verify_member();
+   failed += suspended_member();
    failed += search_valid_provider();
    failed += search_invalid_provider();
    failed += remove_valid_provider();
@@ -25,11 +26,13 @@ int main() {
    failed += add_valid_provider();
    failed += add_valid_member();
    failed += provide_service();
+   failed += valid_id_test();
+   failed += invalid_id_test();
 
-   if(failed)
+   if(!failed)
       cout << "\n\nALL TESTS PASS\n\n";
    else
-      cout << failed << " tests failed.";
+      cout << -1 * failed << " tests failed.";
 
    return 0;
 }

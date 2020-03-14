@@ -15,5 +15,5 @@ g++ -o out/chocan out/objects/InteractiveModule.o out/objects/ManagerModule.o ou
 
 echo "Compiling complete. Running tests..."
 
-OUTPUT=$(./out/chocan)
+OUTPUT=$(printf '4\n4\n' | ./out/chocan)
 echo "$OUTPUT"

@@ -12,6 +12,30 @@
 
 using namespace std;
 
+#ifdef TEST
+   int valid_id_test() {
+      InteractiveModule mod;
+      cout << "valid id test\n";
+      if(mod.id_is_valid(string("123456789"))) {
+         cout << "passed\n";
+         return 0;
+      }
+
+      cout << "failed\n";
+      return -1;
+   }
+   int invalid_id_test() {
+      InteractiveModule mod;
+      cout << "invalid id test\n";
+      if(!mod.id_is_valid(string("23456789"))) {
+         cout << "passed\n";
+         return 0;
+      }
+
+      cout << "failed\n";
+      return -1;
+   }
+#endif
 //let user choose which function to use
 int InteractiveModule::init() {
    cout << "\n\n\nWelcome to the database interactive terminal\n\n\n";

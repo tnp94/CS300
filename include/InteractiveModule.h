@@ -15,17 +15,15 @@ class InteractiveModule {
 
    public:
       int init();
-
-      InteractiveModule();
-      ~InteractiveModule();
-
-   private:
       int edit_person(std::string id, PersonType);
       int remove_person(std::string id, PersonType);
       int display_person(std::string id, PersonType);
       int add_person(Person*, PersonType);
       int write_out();
       bool id_is_valid(std::string id);
+
+      InteractiveModule();
+      ~InteractiveModule();
 };
 
 #endif

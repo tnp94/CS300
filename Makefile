@@ -38,7 +38,7 @@ $(ODIR)%.o: $(SRCDIR)%.cpp $(DEPS)
 $(OUTDIR)chocan: $(OBJ) $(ODIR)main.o
 	$(CC) -o $@ $^ $(CFLAGS)
 
-chocan:
+chocan: clean
 	make $(OUTDIR)chocan
 
 ## Rules to clean objects and binary ##

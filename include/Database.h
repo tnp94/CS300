@@ -22,12 +22,11 @@ struct person_data {
 class Service;
 
 // helper class to load data into working memory
-extern class Database {
+extern struct Database {
    public:
       Database();
       ~Database();
 
-   private:
       void read_members();
       void read_providers();
       void read_services();
@@ -44,11 +43,5 @@ extern class Database {
       std::map<std::string, uint> service_names;
       std::unordered_map<std::string, Provider> providers;
       std::unordered_map<std::string, Member> members;
-
-      friend class Service;
-      friend class InteractiveModule;
-      friend class ManagerModule;
-      friend class ProviderDirectory;
-      friend class ProviderModule;
 } data;
 #endif
