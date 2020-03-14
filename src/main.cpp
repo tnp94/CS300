@@ -16,6 +16,7 @@ int main() {
    cout << "Welcome to the ChocAn application!\n\n";
 
    while (choice != 4) {
+      cin.clear();
       cout << "\n\nWhat terminal would you like to log into?\n"
          << "1. Provider Module\n"
          << "2. Manager Module\n"
@@ -23,13 +24,14 @@ int main() {
          << "4. Exit\n";
 
       cin >> choice;
-      fflush(stdin);
+      cin.ignore(INT_MAX, '\n');
 
       switch (choice) {
          case 1: // Provider Module
             cout << "You selected provider module.\n";
             cout << "Please input your provider number: ";
             cin >> id;
+            cin.ignore(INT_MAX, '\n');
             if (!cin.fail()) {
                cout << "Opening provider module\n";
                if (provider_module.init(id) == -1) {
@@ -38,7 +40,6 @@ int main() {
             } else {
                cout << "Invalid input\n\n";
                cin.clear();
-               fflush(stdin);
             }
             break;
 
@@ -61,7 +62,6 @@ int main() {
          default:
             choice = 0;
             cin.clear();
-            fflush(stdin);
             cout << "You did not select a valid response\n\n";
       }
    }
