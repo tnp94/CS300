@@ -6,8 +6,28 @@
 #include <iostream>
 #include <fstream>
 #include "../include/Member.h"
+#include "../include/test.h"
 
 using namespace std;
+
+#ifdef TEST
+int valid_login_provider() {
+
+   return 0;
+}
+int invalid_login_provider() {
+   return 0;
+}
+int valid_verify_member() {
+   return 0;
+}
+int invalid_verify_member() {
+   return 0;
+}
+int provide_service() {
+   return 0;
+}
+#endif
 
 int ProviderModule::init(string id) {
    if (data.providers.find(id) == data.providers.end())

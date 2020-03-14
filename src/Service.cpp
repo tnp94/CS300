@@ -187,7 +187,7 @@ int Service::build(string prov_id) {
 }
 
 string Service::to_csv() {
-   return member_id + "|" + provider_id + "|" + to_string(date_added) + "|" + to_string(service_date) + "|" + to_string(service_code) + "|" + comments;
+   return member_id + "|" + provider_id + "|" + to_string(date_added) + "|" + to_string(service_date) + "|" + to_string(service_code) + "|" + to_string(fee) + "|" + comments;
 }
 
 string Service::member_report() {

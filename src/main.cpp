@@ -1,11 +1,39 @@
 #include "../include/ProviderModule.h"
 #include "../include/ManagerModule.h"
 #include "../include/InteractiveModule.h"
+#include "../include/test.h"
 #include <iostream>
 #include <climits>
 
 using namespace std;
+#ifdef TEST
+int main() {
+   cout << "Running tests.....\n\n";
 
+   int failed = 13;
+
+   failed += valid_login_provider();
+   failed += invalid_login_provider();
+   failed += valid_verify_member();
+   failed += invalid_verify_member();
+   failed += search_valid_provider();
+   failed += search_invalid_provider();
+   failed += remove_valid_provider();
+   failed += remove_valid_member();
+   failed += remove_invalid_provider();
+   failed += remove_invalid_member();
+   failed += add_valid_provider();
+   failed += add_valid_member();
+   failed += provide_service();
+
+   if(failed)
+      cout << "\n\nALL TESTS PASS\n\n";
+   else
+      cout << failed << " tests failed.";
+
+   return 0;
+}
+#else
 int main() {
    int choice = 0;
    string id = "0";
@@ -70,3 +98,4 @@ int main() {
    }
    return 0;
 }
+#endif

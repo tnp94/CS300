@@ -4,13 +4,40 @@
 
 using namespace std;
 
+#ifdef TEST
+int search_valid_provider() {
+   return 0;
+}
+int search_invalid_provider() {
+   return 0;
+}
+int remove_valid_provider() {
+   return 0;
+}
+int remove_valid_member() {
+   return 0;
+}
+int remove_invalid_provider() {
+   return 0;
+}
+int remove_invalid_member() {
+   return 0;
+}
+int add_valid_provider() {
+   return 0;
+}
+int add_valid_member() {
+   return 0;
+}
+#endif
+
 Database data;
 
 Database::Database() {
-      read_service_info();
-      read_members();
-      read_providers();
-      read_services();
+   read_service_info();
+   read_members();
+   read_providers();
+   read_services();
 }
 
 Database::~Database() {}
