@@ -205,8 +205,8 @@ int InteractiveModule::add_person(Person* to_add, PersonType type) {
    bool id_exists = false;
 
    while (!correct) {
-      cin.clear();
-      fflush(stdin);
+      //cin.clear();
+      //fflush(stdin);
       cout << "Add new member...\n\n";
       cout << "Enter new member name:\n";
       cin >> name;
@@ -214,10 +214,9 @@ int InteractiveModule::add_person(Person* to_add, PersonType type) {
 
       do {
          cin.clear();
-         fflush(stdin);
+         cin.ignore(INT_MAX, '\n');
          cout << "Enter new member id:\n";
          cin >> id;
-         fflush(stdin);
          id_exists = (data.members.find(id) != data.members.end());
          if (id_exists) {
             cout << "A member already exists with that id number\n\n";
@@ -226,23 +225,20 @@ int InteractiveModule::add_person(Person* to_add, PersonType type) {
 
       cout << "Enter new member city:\n";
       cin >> city;
-      fflush(stdin);
       cout << "Enter new member state:\n";
       cin >> state;
-      fflush(stdin);
 
       do {
          cin.clear();
-         fflush(stdin);
+         cin.ignore(INT_MAX, '\n');
          cout << "Enter new member zip:\n";
          cin >> zip;
-         fflush(stdin);
       } while (cin.fail());
 
 
       do {
          cin.clear();
-         fflush(stdin);
+         cin.ignore(INT_MAX, '\n');
          cout << "The following member ready to add:\n"
             << "Name: " << name
             << "\nID: " << id
@@ -252,7 +248,6 @@ int InteractiveModule::add_person(Person* to_add, PersonType type) {
             << "\n\nIs this information correct? (y/n): ";
 
          cin >> verification;
-         fflush(stdin);
          if (verification == "y") {
             cout << "Adding member...\n\n";
             correct = true;
