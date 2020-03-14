@@ -206,8 +206,6 @@ int InteractiveModule::add_person(Person* to_add, PersonType type) {
    bool id_exists = false;
 
    while (!correct) {
-     cin.ignore(INT_MAX, '\n');
-     cin.clear();
       cout << "Add new member...\n\n";
       cout << "Enter new member name:\n";
       getline(cin, name);
@@ -224,17 +222,27 @@ int InteractiveModule::add_person(Person* to_add, PersonType type) {
       } while (cin.fail() || id_exists || !id_is_valid(id));
 
       cout << "Enter new member street address:\n";
-      getline(std::cin, city);
+      getline(std::cin, street);
       cout << "Enter new member city:\n";
       getline(std::cin, city);
-      cout << "Enter new member state:\n";
-      getline(cin, state);
+      do
+      {
+        cout << "Enter new member state (2 letter code):\n";
+        getline(cin, state);
+        if (state.length() != 2)
+        {
+          cout << "Please enter only 2 letters\n";
+        }
+      } while (state.length() != 2);
 
       do {
+          if (cin.fail())
+          {
+           cin.clear();
+           cin.ignore(INT_MAX, '\n');
+          }
          cout << "Enter new member zip:\n";
          cin >> zip;
-         cin.clear();
-         cin.ignore(INT_MAX, '\n');
       } while (cin.fail());
 
 
@@ -244,7 +252,7 @@ int InteractiveModule::add_person(Person* to_add, PersonType type) {
             cout << "The following member ready to add:\n"
             << "Name: " << name
             << "\nID: " << id
-            << "\nStreet: " << id
+            << "\nStreet: " << street
             << "\nCity: " << city
             << "\nState: " << state
             << "\nZip: " << zip
@@ -389,8 +397,16 @@ int InteractiveModule::edit_person(string id, PersonType type) {
 
          case 5: {
                     string new_state=" ";
-                    cout<<"Please input new state: "<<endl;
-                    getline(cin, new_state);
+                    do
+                    {
+                      cout<<"Please input new state (2 letter code): "<<endl;
+                      getline(cin, new_state);
+
+                      if (new_state.length() != 2)
+                      {
+                        cout << "Please enter only 2 letters\n";
+                      }
+                    } while (new_state.length() != 2);
                     target -> set_state(new_state);
                     break;
                  }
