@@ -57,7 +57,7 @@ int InteractiveModule::init() {
          << "9. Exit\n";
 
       cin >> choice;
-      fflush(stdin);
+      cin.ignore(INT_MAX, '\n');
       cout << "\n\n";
 
       switch(choice) {
@@ -329,7 +329,7 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                     do {
                        cout << "Please input new member id: " << endl;
                        cin >> new_id;
-                       fflush(stdin);
+                       cin.ignore(INT_MAX, '\n');
                     } while(id_is_valid(new_id));
 
                     if(type == PROVIDER) {
@@ -401,7 +401,7 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                        uint new_zip = 0;
                        cout << "Please input new zip id:\n";
                        cin >> new_zip;
-                       fflush(stdin);
+                       cin.ignore(INT_MAX, '\n');
 
                        if(cin.fail()) {
                           cout << "Please enter a valid zip\n";
@@ -445,7 +445,7 @@ int InteractiveModule::remove_person(string id, PersonType type) {
          cout << "2.Exit" << endl;
 
          cin >> choice;
-         fflush(stdin);
+         cin.ignore(INT_MAX, '\n');
 
          switch(choice) {
             case 1:
@@ -456,7 +456,7 @@ int InteractiveModule::remove_person(string id, PersonType type) {
                break;
             default:
                cin.clear();
-               fflush(stdin);
+               cin.ignore(INT_MAX, '\n');
                cout << "You did not select a valid response" << endl;
          }
       }
@@ -480,7 +480,7 @@ int InteractiveModule::remove_person(string id, PersonType type) {
       cout << "2.Exit" << endl;
 
       cin >> choice;
-      fflush(stdin);
+      cin.ignore(INT_MAX, '\n');
 
       switch(choice) {
          case 1:
@@ -491,7 +491,7 @@ int InteractiveModule::remove_person(string id, PersonType type) {
             break;
          default:
             cin.clear();
-            fflush(stdin);
+            cin.ignore(INT_MAX, '\n');
             cout << "You did not select a valid response" << endl;
       }
    }
