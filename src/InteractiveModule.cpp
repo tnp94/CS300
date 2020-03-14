@@ -303,22 +303,22 @@ int InteractiveModule::edit_person(string id, PersonType type) {
       target = &(i -> second);
    }
 
-   cout<<"Found the person, the information is: "<<endl;
+   cout << "Found the person, the information is: " << endl;
    target -> display_info();
 
    int choice=0;
 
    while(choice!=7) {
-      cout<<"Which part of information you want to edit? Input 6 to exit and save."<<endl;
-      cout<<"1.id"<<endl;
-      cout<<"2.Name"<<endl;
-      cout<<"3.Street"<<endl;
-      cout<<"4.City"<<endl;
-      cout<<"5.State"<<endl;
-      cout<<"6.Zip"<<endl;
-      cout<<"7.Exit"<<endl;
+      cout << "Which part of information you want to edit? Input 6 to exit and save." << endl;
+      cout << "1.id"     <<endl;
+      cout << "2.Name"   <<endl;
+      cout << "3.Street" <<endl;
+      cout << "4.City"   <<endl;
+      cout << "5.State"  <<endl;
+      cout << "6.Zip"    <<endl;
+      cout << "7.Exit"   <<endl;
 
-      cin>>choice;
+      cin >> choice;
       cin.ignore(INT_MAX, '\n');
       cin.clear();
 
@@ -388,9 +388,9 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                  }
 
          case 5: {
-                    string new_state=" ";
-                    cout<<"Please input new state: "<<endl;
-                    cin>>new_state;
+                    string new_state = " ";
+                    cout << "Please input new state: (TWO letter code)" << endl;
+                    cin >> new_state;
                     target -> set_state(new_state);
                     break;
                  }
