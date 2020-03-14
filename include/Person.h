@@ -7,6 +7,7 @@ class Person {
    public:
       void set_name(std::string name);
       void set_id(std::string id);
+      void set_street(std::string street);
       void set_city(std::string city);
       void set_state(std::string state);
       void set_zip(uint zip);

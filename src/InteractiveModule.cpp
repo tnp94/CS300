@@ -176,70 +176,77 @@ bool InteractiveModule::id_is_valid(string id) {
 //add_member(): add a member into map, use the member_id as primary key.
 int InteractiveModule::add_person(Person* to_add, PersonType type) {
    uint zip;
-   std::string name, city, state, verification, id;
+   std::string name, state, verification, id;
+   std::string city, street;
    bool correct = false;
    bool id_exists = false;
 
    while (!correct) {
-      //cin.clear();
-      //fflush(stdin);
+     cin.ignore(INT_MAX, '\n');
+     cin.clear();
       cout << "Add new member...\n\n";
       cout << "Enter new member name:\n";
-      cin >> name;
-      fflush(stdin);
+      getline(cin, name);
 
       do {
-         cin.clear();
-         cin.ignore(INT_MAX, '\n');
          cout << "Enter new member id:\n";
          cin >> id;
+         cin.clear();
+         cin.ignore(INT_MAX, '\n');
          id_exists = (data.members.find(id) != data.members.end());
          if (id_exists) {
             cout << "A member already exists with that id number\n\n";
          }
       } while (cin.fail() || id_exists || !id_is_valid(id));
 
+      cout << "Enter new member street address:\n";
+      getline(std::cin, city);
       cout << "Enter new member city:\n";
-      cin >> city;
+      getline(std::cin, city);
       cout << "Enter new member state:\n";
-      cin >> state;
+      getline(cin, state);
 
       do {
-         cin.clear();
-         cin.ignore(INT_MAX, '\n');
          cout << "Enter new member zip:\n";
          cin >> zip;
+         cin.clear();
+         cin.ignore(INT_MAX, '\n');
       } while (cin.fail());
 
 
       do {
-         cin.clear();
-         cin.ignore(INT_MAX, '\n');
-         cout << "The following member ready to add:\n"
+         do
+         {
+            cout << "The following member ready to add:\n"
             << "Name: " << name
             << "\nID: " << id
+            << "\nStreet: " << id
             << "\nCity: " << city
             << "\nState: " << state
             << "\nZip: " << zip
             << "\n\nIs this information correct? (y/n): ";
 
-         cin >> verification;
-         if (verification == "y") {
-            cout << "Adding member...\n\n";
-            correct = true;
-         }
-         else if (verification == "n") {
-            cout << "Information rejected...\n";
-            return -1;
-         }
-         else {
-            cout << "Invalid input...\n";
-         }
+            cin >> verification;
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+           if (verification == "y") {
+              cout << "Adding member...\n\n";
+              correct = true;
+           }
+           else if (verification == "n") {
+              cout << "Information rejected...\n";
+              return -1;
+           }
+           else {
+              cout << "Invalid input...\n";
+           }
+         } while(!(verification == "y" || verification == "n"));
       } while(cin.fail());
    }
 
    to_add -> set_name(name);
    to_add -> set_id(id);
+   to_add -> set_street(street);
    to_add -> set_city(city);
    to_add -> set_state(state);
    to_add -> set_zip(zip);
@@ -281,10 +288,11 @@ int InteractiveModule::edit_person(string id, PersonType type) {
       cout<<"Which part of information you want to edit? Input 6 to exit and save."<<endl;
       cout<<"1.id"<<endl;
       cout<<"2.Name"<<endl;
-      cout<<"3.City"<<endl;
-      cout<<"4.State"<<endl;
-      cout<<"5.Zip"<<endl;
-      cout<<"6.Exit"<<endl;
+      cout<<"3.Street"<<endl;
+      cout<<"4.City"<<endl;
+      cout<<"5.State"<<endl;
+      cout<<"6.Zip"<<endl;
+      cout<<"7.Exit"<<endl;
 
       cin>>choice;
       fflush(stdin);
@@ -334,12 +342,20 @@ int InteractiveModule::edit_person(string id, PersonType type) {
          case 2: {
                     string new_name = " ";
                     cout << "Please input new name: " << endl;
-                    cin >> new_name;
+                    getline(cin, new_name);
                     target -> set_name(new_name);
                     break;
                  }
 
          case 3: {
+                    string new_street = " ";
+                    cout << "Please input new name: " << endl;
+                    cin >> new_street;
+                    target -> set_street(new_street);
+                    break;
+                 }
+
+         case 4: {
                     string new_city = " ";
                     cout << "Please input new city: " << endl;
                     cin >> new_city;
@@ -347,7 +363,7 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                     break;
                  }
 
-         case 4: {
+         case 5: {
                     string new_state=" ";
                     cout<<"Please input new state: "<<endl;
                     cin>>new_state;
@@ -355,7 +371,7 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                     break;
                  }
 
-         case 5: {
+         case 6: {
                     do {
                        cin.clear();
                        uint new_zip = 0;
@@ -372,13 +388,11 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                     break;
                  }
 
-         case 6: {
+         case 7: {
                     break;
                  }
 
          default: {
-                     cin.clear();
-                     fflush(stdin);
                      cout << "You did not select a valid response"<<endl;
                   }
       }

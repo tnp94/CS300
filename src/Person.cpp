@@ -23,6 +23,10 @@ void Person::set_id(std::string id){
    this->id=id;
 }
 
+void Person::set_street(std::string street){
+   this->street=street;
+}
+
 void Person::set_city(std::string city){
    this->city=city;
 }
