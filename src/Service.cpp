@@ -29,80 +29,114 @@ int Service::build(string prov_id) {
    string mem_id = " ";
    time_t added = 0;
    time_t serv_d = 0;
-   struct tm ser;
+   struct tm ser, add;
    fee = -1.0;
+   bool valid = false;
 
    do {
-   cout<<"What is the member ID?\n";
-   cin>> mem_id;
-   cin.ignore(INT_MAX,'\n');
-   if (cin.fail()) {
-      cin.clear();
-      cin.ignore(INT_MAX, '\n');
-      cout << "Invalid input...\n\n";
-   }
-   } while(1);
-
-   bool good_code = false;
-   do {
-      cout<<"What is the service code?\n";
-      cin>> serv_code;
+      cout<<"What is the member ID?\n";
+      cin>> mem_id;
       cin.ignore(INT_MAX,'\n');
       if (cin.fail()) {
          cin.clear();
          cin.ignore(INT_MAX, '\n');
          cout << "Invalid input...\n\n";
+      } else {
+         if(data.members.find(mem_id) == data.members.end())
+            cout << "Member not found.\n";
+         else
+            valid = true;
       }
-      auto serv_i = data.service_codes.find(serv_code);
+   } while(!valid);
 
-      if(serv_i == data.service_codes.end())
-         cout << "thats not a valid code\n";
+   valid = false;
+   do {
+      cout << "What is the service code?\n";
+      cin >> serv_code;
+      cin.ignore(INT_MAX,'\n');
+      if (cin.fail()) {
+         cin.clear();
+         cin.ignore(INT_MAX, '\n');
+         cout << "Invalid input...\n\n";
+      } else {
+         auto serv_i = data.service_codes.find(serv_code);
+         if(serv_i == data.service_codes.end())
+            cout << "thats not a valid code\n";
+         else {
+            valid = true;
+            serv_name = serv_i -> second;
+         }
+      }
+   } while(!valid);
+   valid = false;
+
+   do {
+      cout<<"What are the comments?\n";
+      cin >> comm;
+      cin.ignore(INT_MAX,'\n');
+      if (cin.fail()) {
+         cin.clear();
+         cin.ignore(INT_MAX, '\n');
+         cout << "Invalid input...\n\n";
+      } else if(comm.length() > 100)
+         cout << "Comments can only be 100 characters\n";
+      else
+         valid = true;
+   } while(!valid);
+   valid = false;
+
+   added = time(0);
+   add = *gmtime(&added);
+
+   do {
+      cout<<"What was the year the service was provided?\n";
+      cin >> ser.tm_year;
+      cin.ignore(INT_MAX,'\n');
+      if (cin.fail()) {
+         cin.clear();
+         cin.ignore(INT_MAX, '\n');
+         cout << "Invalid input...\n\n";
+      } else if(ser.tm_year < 1980 || ser.tm_year > add.tm_year + 1900) {
+         cout << "Please enter a year after 1980 or before the current year.\n";
+      } else {
+         ser.tm_year-=1900;
+         valid = true;
+      }
+   } while(!valid);
+   valid = false;
+
+   do {
+      cout << "What was the month the service was provided (1-12)?\n";
+      cin >> ser.tm_mon;
+      cin.ignore(INT_MAX,'\n');
+      if (cin.fail()) {
+         cin.clear();
+         cin.ignore(INT_MAX, '\n');
+         cout << "Invalid input...\n\n";
+      } else if(ser.tm_mon < 1 || ser.tm_mon > 12) 
+         cout << "Please enter a valid month.\n";
       else {
-         good_code = true;
-         serv_name = serv_i -> second;
+         ser.tm_mon-=1;
+         valid = true;
       }
-   } while(!good_code);
+   } while(!valid);
+   valid = false;
 
-   cout<<"What are the comments?\n";
-   cin >> comm;
-   cin.ignore(INT_MAX,'\n');
-   if (cin.fail()) {
-      cin.clear();
-      cin.ignore(INT_MAX, '\n');
-      cout << "Invalid input...\n\n";
-   }
-
-   added= time(0);
-
-   cout<<"What was the year the service was provided?\n";
-   cin>> ser.tm_year;
-   cin.ignore(INT_MAX,'\n');
-   if (cin.fail()) {
-      cin.clear();
-      cin.ignore(INT_MAX, '\n');
-      cout << "Invalid input...\n\n";
-   }
-
-   ser.tm_year-=1900;
-
-   cout<<"What was the month the service was provided?\n";
-   cin>> ser.tm_mon;
-   cin.ignore(INT_MAX,'\n');
-   if (cin.fail()) {
-      cin.clear();
-      cin.ignore(INT_MAX, '\n');
-      cout << "Invalid input...\n\n";
-   }
-   ser.tm_mon-=1;
-
-   cout<<"What was the day the service was provided?\n";
-   cin>> ser.tm_mday;
-   cin.ignore(INT_MAX,'\n');
-   if (cin.fail()) {
-      cin.clear();
-      cin.ignore(INT_MAX, '\n');
-      cout << "Invalid input...\n\n";
-   }
+   do {
+      cout<<"What was the day the service was provided?\n";
+      cin>> ser.tm_mday;
+      cin.ignore(INT_MAX,'\n');
+      if (cin.fail()) {
+         cin.clear();
+         cin.ignore(INT_MAX, '\n');
+         cout << "Invalid input...\n\n";
+      } else if(ser.tm_mday > 31 ||  ser.tm_mday < 1) {
+         cout << "please enter a valid day of the month.\n";
+      } else {
+         valid = true;
+      }
+   } while(!valid);
+   valid = false;
 
    ser.tm_hour=0;
    ser.tm_min=0;
@@ -116,27 +150,37 @@ int Service::build(string prov_id) {
       cout << "What is the fee for this service?\n";
       cin >> fee;
       cin.ignore(INT_MAX,'\n');
-      cin.clear();
+      if (cin.fail()) {
+         cin.clear();
+         cin.ignore(INT_MAX, '\n');
+         cout << "Invalid input...\n\n";
+      }
    } while(fee < 0 || fee > 999.99);
 
-   cout<<"Member ID: "<<mem_id<<"\n"
-      <<"Service Name: "<<serv_name<<"\n"
-      <<"Service Code: \n"
-      <<"Comments: "<<comm<<"\n"
-      <<"Service Added: "<<ctime(&added)<<"\n"
-      <<"Service Provided: "<<ctime(&serv_d)<<"\n"
-      <<"Fee: " << fee << "\n";
-   cout<<"Is this correct? (Y/N)";
+   do {
+      cout << "Member ID: "      << mem_id         << "\n"
+         << "Service Name: "     << serv_name      << "\n"
+         << "Service Code: "     << serv_code      << "\n"
+         << "Comments: "         << comm           << "\n"
+         << "Service Added: "    << ctime(&added)  << "\n"
+         << "Service Provided: " << ctime(&serv_d) << "\n"
+         << "Fee: "              << fee            << "\n"
+         <<"Is this correct? (Y/N)";
 
-   cin >> ans;
-   cin.ignore(INT_MAX,'\n');
-
-   if (cin.fail()) {
-      cin.clear();
-      cin.ignore(INT_MAX, '\n');
-      cout << "Invalid input...\n\n";
-   } else if(ans == 'N')
-      return -1;
+      cin >> ans;
+      cin.ignore(INT_MAX,'\n');
+      if (cin.fail()) {
+         cin.clear();
+         cin.ignore(INT_MAX, '\n');
+         cout << "Invalid input...\n\n";
+      } else if(ans == 'N') {
+         return -1;
+      } else if(ans == 'Y') {
+         valid = true;
+      } else {
+         cout << "must be a capital Y or N response\n";
+      }
+   } while(!valid);
 
    Service(mem_id, prov_id, serv_name, added, serv_d, serv_code, comm, fee);
    return 0;
