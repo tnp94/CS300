@@ -24,21 +24,35 @@ void Service::display_info() {
 int Service::build(string prov_id) {
    uint serv_code = -1;
    char ans = 'N';
-   string serv_name, comm, mem_id;
-   time_t added,serv_d;
+   string serv_name = " ";
+   string comm = " ";
+   string mem_id = " ";
+   time_t added = 0;
+   time_t serv_d = 0;
    struct tm ser;
    fee = -1.0;
 
+   do {
    cout<<"What is the member ID?\n";
    cin>> mem_id;
    cin.ignore(INT_MAX,'\n');
+   if (cin.fail()) {
+      cin.clear();
+      cin.ignore(INT_MAX, '\n');
+      cout << "Invalid input...\n\n";
+   }
+   } while(1);
 
    bool good_code = false;
    do {
       cout<<"What is the service code?\n";
       cin>> serv_code;
       cin.ignore(INT_MAX,'\n');
-      cin.clear();
+      if (cin.fail()) {
+         cin.clear();
+         cin.ignore(INT_MAX, '\n');
+         cout << "Invalid input...\n\n";
+      }
       auto serv_i = data.service_codes.find(serv_code);
 
       if(serv_i == data.service_codes.end())
@@ -52,22 +66,43 @@ int Service::build(string prov_id) {
    cout<<"What are the comments?\n";
    cin >> comm;
    cin.ignore(INT_MAX,'\n');
+   if (cin.fail()) {
+      cin.clear();
+      cin.ignore(INT_MAX, '\n');
+      cout << "Invalid input...\n\n";
+   }
 
    added= time(0);
 
    cout<<"What was the year the service was provided?\n";
    cin>> ser.tm_year;
    cin.ignore(INT_MAX,'\n');
+   if (cin.fail()) {
+      cin.clear();
+      cin.ignore(INT_MAX, '\n');
+      cout << "Invalid input...\n\n";
+   }
+
    ser.tm_year-=1900;
 
    cout<<"What was the month the service was provided?\n";
    cin>> ser.tm_mon;
    cin.ignore(INT_MAX,'\n');
+   if (cin.fail()) {
+      cin.clear();
+      cin.ignore(INT_MAX, '\n');
+      cout << "Invalid input...\n\n";
+   }
    ser.tm_mon-=1;
 
    cout<<"What was the day the service was provided?\n";
    cin>> ser.tm_mday;
    cin.ignore(INT_MAX,'\n');
+   if (cin.fail()) {
+      cin.clear();
+      cin.ignore(INT_MAX, '\n');
+      cout << "Invalid input...\n\n";
+   }
 
    ser.tm_hour=0;
    ser.tm_min=0;
@@ -92,14 +127,18 @@ int Service::build(string prov_id) {
       <<"Service Provided: "<<ctime(&serv_d)<<"\n"
       <<"Fee: " << fee << "\n";
    cout<<"Is this correct? (Y/N)";
+
    cin >> ans;
    cin.ignore(INT_MAX,'\n');
 
-   if(ans == 'N')
+   if (cin.fail()) {
+      cin.clear();
+      cin.ignore(INT_MAX, '\n');
+      cout << "Invalid input...\n\n";
+   } else if(ans == 'N')
       return -1;
 
    Service(mem_id, prov_id, serv_name, added, serv_d, serv_code, comm, fee);
-
    return 0;
 }
 

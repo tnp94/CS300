@@ -25,20 +25,22 @@ int ProviderModule::init(string id) {
          << "3. Provider directory\n"
          << "4. Exit\n";
       cin >> choice;
+      cin.ignore(INT_MAX, '\n');
       cout << "\n\n";
       switch(choice)
       {
          case 1: {
                     int isSuspended;
                     cout << "What is the member ID you wish to validate?\n";
+                    cin >> sel;
+
                     if (cin.fail()) {
-                       fflush(stdin);
                        cin.clear();
+                       cin.ignore(INT_MAX, '\n');
                        cout << "Invalid input...\n\n";
-                    } else {
-                       cin >> sel;
-                    }
-                    isSuspended = validate_member(sel);
+                    } else 
+                       isSuspended = validate_member(sel);
+
                     if (isSuspended == 1) {
                        cout << "Member ID " << sel << " status: SUSPENDED\n";
                     } else if (isSuspended == 0) {
@@ -65,8 +67,10 @@ int ProviderModule::init(string id) {
                  }
 
          default: {
-                     cin.clear();
-                     fflush(stdin);
+                     if(cin.fail()) {
+                        cin.clear();
+                        cin.ignore(INT_MAX, '\n');
+                     }
                      cout << "You did not select a valid response\n\n";
                   }
       }

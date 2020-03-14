@@ -16,7 +16,6 @@ int main() {
    cout << "Welcome to the ChocAn application!\n\n";
 
    while (choice != 4) {
-      cin.clear();
       cout << "\n\nWhat terminal would you like to log into?\n"
          << "1. Provider Module\n"
          << "2. Manager Module\n"
@@ -40,6 +39,7 @@ int main() {
             } else {
                cout << "Invalid input\n\n";
                cin.clear();
+               cin.ignore(INT_MAX, '\n');
             }
             break;
 
@@ -63,7 +63,7 @@ int main() {
             choice = 0;
             if (cin.fail()) {
               cin.clear();
-              cin.ignore();
+              cin.ignore(INT_MAX, '\n');
             }
             cout << "You did not select a valid response\n\n";
       }

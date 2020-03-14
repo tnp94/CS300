@@ -40,9 +40,10 @@ int InteractiveModule::init() {
          case 1: {
                     cout << "What is the member ID of the member you would like to display: ";
                     cin >> id;
-                    fflush(stdin);
+                    cin.ignore(INT_MAX, '\n');
 
                     if (cin.fail()) {
+                       cin.ignore(INT_MAX, '\n');
                        cin.clear();
                        cout << "Invalid input...\n\n";
                     } else
@@ -61,10 +62,11 @@ int InteractiveModule::init() {
          case 3: {
                     cout << "Please enter the member ID";
                     cin >> id;
-                    fflush(stdin);
+                    cin.ignore(INT_MAX, '\n');
 
                     if (cin.fail()) {
                        cin.clear();
+                       cin.ignore(INT_MAX, '\n');
                        cout << "Invalid input...\n\n";
                     } else 
                        edit_person(id, MEMBER);
@@ -75,10 +77,11 @@ int InteractiveModule::init() {
          case 4: {
                     cout << "Please enter the id you want remove:\n";
                     cin >> id;
-                    fflush(stdin);
+                    cin.ignore(INT_MAX, '\n');
 
                     if (cin.fail()) {
                        cin.clear();
+                       cin.ignore(INT_MAX, '\n');
                        cout << "Invalid input...\n\n";
                     } else
                        remove_person(id, MEMBER);
@@ -89,10 +92,11 @@ int InteractiveModule::init() {
          case 5: {
                     cout << "What is the provider ID of the provider you would like to display: ";
                     cin >> id;
-                    fflush(stdin);
+                    cin.ignore(INT_MAX, '\n');
 
                     if (cin.fail()) {
                        cin.clear();
+                       cin.ignore(INT_MAX, '\n');
                        cout << "Invalid input...\n\n";
                     } else
                        display_person(id, PROVIDER);
@@ -109,10 +113,11 @@ int InteractiveModule::init() {
          case 7: {
                     cout << "What is the provider ID of the provider you would like to edit: ";
                     cin >> id;
-                    fflush(stdin);
+                    cin.ignore(INT_MAX, '\n');
 
                     if (cin.fail()) {
                        cin.clear();
+                       cin.ignore(INT_MAX, '\n');
                        cout << "Invalid input...\n\n";
                     } else
                        edit_person(id, PROVIDER);
@@ -123,10 +128,11 @@ int InteractiveModule::init() {
          case 8: {
                     cout << "What is the provider number of the provider you would like to remove: ";
                     cin >> id;
-                    fflush(stdin);
+                    cin.ignore(INT_MAX, '\n');
 
                     if (cin.fail()) {
                        cin.clear();
+                       cin.ignore(INT_MAX, '\n');
                        cout << "Invalid input...\n\n";
                     } else
                        remove_person(id, PROVIDER);
@@ -140,8 +146,10 @@ int InteractiveModule::init() {
                  }
 
          default: {
-                     cin.clear();
-                     fflush(stdin);
+                     if(cin.fail()) {
+                        cin.clear();
+                        cin.ignore(INT_MAX, '\n');
+                     }
                      cout << "You did not select a valid response\n\n";
                   }
       }

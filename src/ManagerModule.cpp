@@ -18,14 +18,13 @@ int ManagerModule::init() {
    string id_number;
 
    while (choice != 4) {
-      cin.clear();
       cout << "\n\n\nWhat is your purpose?\n\n"
          << "1. Generate Summary Report\n"
          << "2. Generate Provider Report\n"
          << "3. Generate Member report\n"
          << "4. Exit\n";
       cin >> choice;
-      fflush(stdin);
+      cin.ignore(INT_MAX, '\n');
 
       switch(choice) {
          case 1:
@@ -38,8 +37,12 @@ int ManagerModule::init() {
             cout << "\nGenerate Provider Report\n\n"
                << "What is the provider number of the provider you want a report for?\n";
             cin >> id_number;
-            fflush(stdin);
-            if(provider_report(id_number))
+            cin.ignore(INT_MAX, '\n');
+
+            if(cin.fail()) {
+               cin.clear();
+               cin.ignore(INT_MAX, '\n');
+            } else if(provider_report(id_number))
                cout << "Provider report failed!\n\n";
             break;
 
@@ -47,8 +50,12 @@ int ManagerModule::init() {
             cout<<"\nGenerate Member report\n\n"
                << "What is the member number of the member you want a report for?\n";
             cin >> id_number;
-            fflush(stdin);
-            if(member_report(id_number))
+            cin.ignore(INT_MAX, '\n');
+
+            if(cin.fail()) {
+               cin.clear();
+               cin.ignore(INT_MAX, '\n');
+            } else if(member_report(id_number))
                cout << "Member report failed!\n\n";
             break;
 
@@ -57,8 +64,10 @@ int ManagerModule::init() {
 
          default:
             cout << "You did not select a valid response\n\n";
-            fflush(stdin);
-            cin.clear();
+            if(cin.fail()) {
+               cin.clear();
+               cin.ignore(INT_MAX, '\n');
+            }
       }
    }
    return 0;
