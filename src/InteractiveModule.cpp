@@ -331,14 +331,12 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                        cin.ignore(INT_MAX, '\n');
                     } while(id_is_valid(new_id));
 
-                    if(type == PROVIDER) {
+                    if(type == PROVIDER && data.providers.find(new_id) != data.providers.end()) {
                        cout << "A provider already exists with that id\n\n";
-                       if(data.providers.find(new_id) != data.providers.end())
-                          valid = true;
-                    } else {
+                    } else if(type == MEMBER && data.members.find(new_id) != data.members.end()) {
                        cout << "A member already exists with that id\n\n";
-                       if(data.members.find(new_id) != data.members.end())
-                          valid = true;
+                    } else {
+                       valid = false;
                     }
 
                     if(valid) {
