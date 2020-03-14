@@ -327,36 +327,38 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                     string new_id = "0";
                     bool valid = false;
                     do {
-                       cout << "Please input new member id: " << endl;
-                       cin >> new_id;
-                       cin.ignore(INT_MAX, '\n');
-                    } while(id_is_valid(new_id));
+                       do {
+                          cout << "Please input new member id: " << endl;
+                          cin >> new_id;
+                          cin.ignore(INT_MAX, '\n');
+                       } while(id_is_valid(new_id));
 
-                    if(type == PROVIDER && data.providers.find(new_id) != data.providers.end()) {
-                       cout << "A provider already exists with that id\n\n";
-                    } else if(type == MEMBER && data.members.find(new_id) != data.members.end()) {
-                       cout << "A member already exists with that id\n\n";
-                    } else {
-                       valid = true;
-                    }
-
-                    if(valid) {
-                       if(type == PROVIDER) {
-                          Provider new_person = *static_cast<Provider*>(target);
-                          new_person.set_id(new_id);
-                          data.providers.insert(make_pair(new_id, new_person));
-                          data.providers.erase(data.providers.find(id));
-                          id = new_id;
-                          target = &data.providers.find(new_id) -> second;
+                       if(type == PROVIDER && data.providers.find(new_id) != data.providers.end()) {
+                          cout << "A provider already exists with that id\n\n";
+                       } else if(type == MEMBER && data.members.find(new_id) != data.members.end()) {
+                          cout << "A member already exists with that id\n\n";
                        } else {
-                          Member new_person = *static_cast<Member*>(target);
-                          new_person.set_id(new_id);
-                          data.members.insert(make_pair(new_id, new_person));
-                          data.members.erase(data.members.find(id));
-                          id = new_id;
-                          target = &data.providers.find(new_id) -> second;
+                          valid = true;
                        }
-                    }
+
+                       if(valid) {
+                          if(type == PROVIDER) {
+                             Provider new_person = *static_cast<Provider*>(target);
+                             new_person.set_id(new_id);
+                             data.providers.insert(make_pair(new_id, new_person));
+                             data.providers.erase(data.providers.find(id));
+                             id = new_id;
+                             target = &data.providers.find(new_id) -> second;
+                          } else {
+                             Member new_person = *static_cast<Member*>(target);
+                             new_person.set_id(new_id);
+                             data.members.insert(make_pair(new_id, new_person));
+                             data.members.erase(data.members.find(id));
+                             id = new_id;
+                             target = &data.providers.find(new_id) -> second;
+                          }
+                       }
+                    } while(!valid);
 
                     break;
                  }
