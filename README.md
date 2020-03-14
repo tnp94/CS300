@@ -7,3 +7,15 @@
 - Thomas Pollard
 - Xiaoran Ge
 - Xingjian Wang
+
+## To Run:
+```
+make chocan
+./out/chocan
+```
+
+## To Test:
+```
+./test.sh
+```
+

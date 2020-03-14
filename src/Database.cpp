@@ -6,27 +6,88 @@ using namespace std;
 
 #ifdef TEST
 int search_valid_provider() {
-   return 0;
+   cout << "searching for procider test - valid\n";
+      if(data.providers.find(string("123456789")) != data.providers.end()) {
+         cout << "success\n"; 
+         return 0;
+      } 
+
+   cout << "failed\n";
+   return -1;
 }
 int search_invalid_provider() {
+   cout << "searching for procider test - valid\n";
+   if(data.providers.find(string("123888789")) != data.providers.end()) {
+      cout << "failed\n";
+      return -1;
+   } 
+   cout << "success\n"; 
    return 0;
 }
 int remove_valid_provider() {
+   cout << "removing provider test - valid\n";
+   data.providers.erase(string("123456789"));
+   if(data.providers.find(string("123456789")) != data.providers.end()) {
+      cout << "failed\n";
+      return -1;
+   } 
+   cout << "success\n"; 
    return 0;
 }
 int remove_valid_member() {
+   cout << "removing member test - valid\n";
+   data.members.erase(string("123456789"));
+   if(data.members.find(string("123456789")) != data.members.end()) {
+      cout << "failed\n";
+      return -1;
+   } 
+   cout << "success\n"; 
    return 0;
 }
 int remove_invalid_provider() {
+   cout << "removing provider test - invalid\n";
+   data.providers.erase(string("1234789"));
+   if(data.providers.find(string("1234789")) != data.providers.end()) {
+      cout << "failed\n";
+      return -1;
+   } 
+   cout << "success\n"; 
    return 0;
 }
 int remove_invalid_member() {
+   cout << "removing member test - invalid\n";
+   data.members.erase(string("1234789"));
+   if(data.members.find(string("1234789")) != data.members.end()) {
+      cout << "failed\n";
+      return -1;
+   } 
+   cout << "success\n"; 
    return 0;
 }
 int add_valid_provider() {
+   cout << "adding provider test\n";
+   Provider test;
+   test.set_id(string("111"));
+   data.providers.insert(pair<string, Provider>(string("111"), test));
+
+   if(data.providers.find(string("111")) == data.providers.end()) {
+      cout << "failed\n";
+      return -1;
+   } 
+   cout << "success\n"; 
    return 0;
 }
 int add_valid_member() {
+   cout << "adding member test\n";
+   Member test;
+   test.set_id(string("111"));
+   data.members.insert(pair<string, Member>(string("111"), test));
+
+   if(data.members.find(string("111")) == data.members.end()) {
+      cout << "failed\n";
+      return -1;
+   } 
+   cout << "success\n"; 
    return 0;
 }
 #endif

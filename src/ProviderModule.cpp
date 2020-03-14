@@ -12,19 +12,77 @@ using namespace std;
 
 #ifdef TEST
 int valid_login_provider() {
+   cout << "testing login to provider module - valid login\n";
+
+   ProviderModule mod;
+   if(mod.init(string("123456789"))) {
+      cout << "test failed\n";
+      return -1;
+   } else
+      cout << "success\n";
 
    return 0;
 }
 int invalid_login_provider() {
+   cout << "testing login to provider module - invalid login\n";
+
+   ProviderModule mod;
+   if(mod.init(string("111456789"))) {
+      cout << "success\n";
+   } else {
+      cout << "test failed\n";
+      return -1;
+   }
+
    return 0;
 }
 int valid_verify_member() {
+   cout << "testing validate member - valid\n";
+
+   ProviderModule mod;
+   if(!mod.validate_member(string("123456789"))) {
+      cout << "success\n";
+   } else {
+      cout << "test failed\n";
+      return -1;
+   }
    return 0;
 }
 int invalid_verify_member() {
+   cout << "testing validate member - valid\n";
+
+   ProviderModule mod;
+   if(mod.validate_member(string("77777"))) {
+      cout << "success\n";
+   } else {
+      cout << "test failed\n";
+      return -1;
+   }
+   return 0;
+}
+int suspended_member() {
+   cout << "testing validate member - valid\n";
+
+   ProviderModule mod;
+   if(mod.validate_member(string("123456787"))) {
+      cout << "success\n";
+   } else {
+      cout << "test failed\n";
+      return -1;
+   }
    return 0;
 }
 int provide_service() {
+   cout << "provide service test\n";
+   Service test;
+   time_t test_time = time(0);
+
+   data.services.insert(pair<time_t, Service>(test_time, test));
+   if(data.services.find(test_time) == data.services.end()) {
+      cout << "failed\n";
+      return -1;
+   } 
+   cout << "success\n";
    return 0;
 }
 #endif
