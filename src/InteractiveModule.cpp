@@ -337,7 +337,7 @@ int InteractiveModule::edit_person(string id, PersonType type) {
                     } else if(type == MEMBER && data.members.find(new_id) != data.members.end()) {
                        cout << "A member already exists with that id\n\n";
                     } else {
-                       valid = false;
+                       valid = true;
                     }
 
                     if(valid) {
