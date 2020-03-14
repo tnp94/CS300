@@ -62,6 +62,7 @@ int main() {
          default:
             choice = 0;
             cin.clear();
+            cin.ignore();
             cout << "You did not select a valid response\n\n";
       }
    }
